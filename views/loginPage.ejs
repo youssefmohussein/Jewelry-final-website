@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/Css/signup.css" />
+    <link rel="stylesheet" href="/Css/HeadFoot.css" />
+    <title>Login Page</title>
+    <script src="/js/header.js" defer></script>
+  </head>
+
+  <body>
+    <div id="header"></div>
+    <div class="container" id="container">
+      <div class="form-container sign-up">
+        <!-- Sign Up Form -->
+        <form id="signUpForm" action="/users/register" method="POST">
+          <h1>Create Account</h1>
+          <span>or use your email for registration</span>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Name"
+            required
+          />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+            required
+          />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="password"
+            required
+          />
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            required
+          />
+          <button>Sign Up</button>
+        </form>
+      </div>
+
+      <div class="form-container sign-in">
+        <!-- Sign In Form -->
+        <form id="signInForm" action="/users/login" method="POST">
+          <h1>Sign In</h1>
+          <span>or use your email and password</span>
+          <input
+            type="email"
+            id="loginEmail"
+            name="email"
+            placeholder="Email"
+            required
+          />
+          <input
+            type="password"
+            id="loginPassword"
+            name="password"
+            placeholder="Password"
+            required
+          />
+          <a href="/forgetpassword">Forget Your Password?</a>
+          <button>Sign In</button>
+        </form>
+      </div>
+
+      <div class="toggle-container">
+        <div class="toggle">
+          <div class="toggle-panel toggle-left">
+            <h1>Welcome Back!</h1>
+            <p>Enter your personal details to use all site features</p>
+            <button class="hidden" id="login">Sign In</button>
+          </div>
+          <div class="toggle-panel toggle-right">
+            <h1>Hello, Friend!</h1>
+            <p>Register with your personal details to use all site features</p>
+            <button class="hidden" id="register">Sign Up</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/javasScript/authentcation.js"></script>
+  </body>
+</html>

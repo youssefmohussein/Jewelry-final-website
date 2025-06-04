@@ -1,0 +1,345 @@
+* {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+
+}
+
+/***/
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    justify-content: space-between;
+    transition: background-color .5s ease-in-out;
+    border-style: outset;
+    border-width: 1px;
+    border-top: 5px;
+    border-right: 5px;
+    border-color: white;
+    z-index: 10;
+}
+
+.navbar:hover {
+    background-color: white;
+}
+
+.navbar.scrolled {
+    background-color: white;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+}
+
+.navigation a {
+    font-family: 'Cormorant Garamond', serif;
+    text-decoration: none;
+    padding: 10px 20px;
+    color: rgb(9, 9, 9);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.dropdown {
+    position: relative ;
+   
+}
+
+/* Main Navigation Links */
+.dropdown>a {
+    font-family: 'Cormorant Garamond', serif;
+    text-decoration: none;
+    color: rgb(9, 9, 9);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    display: inline-block;
+    transition: background-color 0.3s;
+    margin-bottom: 4px;
+}
+
+.dropdown>a:hover {
+    background-color: #f0f0f0;
+    color: rgb(9, 9, 9);
+}
+
+/* Dropdown Content */
+.dropdown-content {
+    display: none;
+    /* Hide by default */
+    position: absolute;
+    top: 117%;
+    left: 0;
+    width: 1000px;
+    height: auto;
+    background-color: white;
+    z-index: 1000;
+    padding: 10px;
+    justify-content: space-around;
+  
+}
+
+/* Show on Hover */
+.dropdown:hover .dropdown-content {
+    display: flex;
+}
+
+/* Mega Menu Columns */
+.mega-menu-column {
+    flex: 1;
+    padding: 10px;
+    
+}
+.mega-menu-column1{
+    display:flex;
+    flex-wrap:wrap;
+    gap: 20;
+}
+
+.mega-menu-column1 img{
+    display:flex;
+    flex-wrap:wrap;
+    gap: 30;
+    width: 300px;
+    height:auto;
+}
+.mega-menu-column h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 10px;
+    text-align: center;
+
+}
+
+.mega-menu-column a {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    text-decoration: none;
+    color: rgb(9, 9, 9);
+    font-size: 14px;
+    padding: 8px 0;
+    transition: color 0.3s;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.mega-menu-column a:hover {
+    color: rgb(9, 9, 9);
+    background-color: transparent;
+}
+
+.logo h1 {
+    font-family:'Times New Roman', Times, serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-align: center;
+    font-size: 35px;
+    padding-right: 70px;
+    letter-spacing: 5px;
+    word-spacing: 10px;
+    margin-right: 120px;
+    color: rgb(9, 9, 9);
+    /* text-shadow: 1px 1px 3px rgb(9, 9, 9); */
+}
+
+.logo h2 {
+    font-family:'Times New Roman', Times, serif;
+    font-weight: lighter;
+    text-align: center;
+    font-size: 25px;
+    letter-spacing: 2px;
+    color: rgb(9, 9, 9);
+    /* text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); */
+    padding-right: 60px;
+    margin-right: 110px;
+}
+
+.logo {
+    text-decoration: none;
+}
+
+.icons a {
+    padding-left: 30px;
+    font-size: 25px;
+    color:  rgb(9, 9, 9);
+}
+
+.icons a:hover {
+    color: rgb(9, 9, 9); /* darker shade on hover */
+}
+
+.content {
+    margin-top: 100vh;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    background-color: white;
+    padding: 40px 0;
+    padding-left: 19px;
+}
+
+
+.menu-image{
+   
+    gap: 15px;
+    padding: 20px;
+}
+
+/* Footer */
+
+
+/* footer  */
+footer {
+    margin: 0;
+    font-family: "Didot", serif;
+    line-height: 1.6;
+    color: #F5F1EA;
+    background: black;
+    text-align: center;
+}
+
+.footer {
+    padding: 60px 20px;
+}
+
+.heritage .logo {
+    font-size: 36px;
+    color: white;
+}
+
+.brand {
+    font-size: 32px;
+    letter-spacing: 8px;
+    font-weight: 400;
+}
+
+.tagline {
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: white;
+}
+
+.separator span {
+    color: white;
+    font-size: 12px;
+    display: inline-block;
+    position: relative;
+    margin: 30px auto;
+}
+
+.separator span::before,
+.separator span::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 100px;
+    height: 1px;
+    background: white;
+}
+
+.separator span::before {
+    right: 30px;
+}
+
+.separator span::after {
+    left: 30px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    text-align: left;
+}
+
+.footer-section h3 {
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section a {
+    color: inherit;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-section a:hover {
+    color: rgb(9, 9, 9);
+}
+
+.newsletter-form input,
+.newsletter-form button {
+    width: 100%;
+    padding: 12px;
+    font-family: inherit;
+    border: 1px solid rgb(9, 9, 9);
+    background: transparent;
+    color: white;
+}
+
+.newsletter-form button {
+    background: rgb(9, 9, 9);
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.newsletter-form button:hover {
+    background: rgb(9, 9, 9);
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 60px auto 0;
+    padding-top: 30px;
+    border-top: 1px solid rgba(212, 183, 143, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.social-links a,
+.legal-links a {
+    color: inherit;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.copyright {
+    font-size: 14px;
+    color: white;
+}

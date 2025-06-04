@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/Css/dashboard.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>Velora</h2>
+      <hr />
+      <ul>
+        <a href="/admin-dashboard/dashboard"><li>Dashboard</li></a>
+        <a href="/customers-dashboard"><li>Customers</li></a>
+        <a href="/admin-dashboard/orders"><li>Orders</li></a>
+        <a href="/admin-dashboard/products"><li>Products</li></a>
+      </ul>
+    </div>
+
+    <div class="main">
+      <div class="top">
+        <h1>Customer Dashboard</h1>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <h3>New Users</h3>
+          <p><%= users.length %></p>
+          <!-- Displaying the number of users dynamically -->
+        </div>
+      </div>
+
+      <!-- Users Table -->
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Password</th>
+              <th>Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.forEach(user => { %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+              <td>***********</td>
+              <td><%= user.role %></td>
+              <td>
+                <button onclick="editRole('<%= user._id %>')">Edit Role</button>
+                <button onclick="deleteUser('<%= user._id %>')">Delete</button>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Include JavaScript file -->
+    <script src="../public/js/dashboard.js"></script>
+  </body>
+</html>

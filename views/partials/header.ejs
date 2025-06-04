@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>VELORA JEWEL</title>
+    <link rel="stylesheet" href="/Css/HeadFoot.css" />
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="navigation">
+        <!-- Shop Dropdown -->
+        <div class="dropdown">
+          <a href="#">Shop</a>
+          <div class="dropdown-content mega-menu">
+            <div class="mega-menu-column">
+              <h3>Categories</h3>
+              <a href="#">Rings</a>
+              <a href="#">Earrings</a>
+              <a href="#">Necklaces</a>
+              <a href="#">Bangles and Bracelets</a>
+            </div>
+            <div class="mega-menu-column1">
+              <img src="/images/nav1.png" alt="Jewelry 1" class="menu-image" />
+              <img src="/images/nav2.png" alt="Jewelry 2" class="menu-image" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Collections Dropdown -->
+        <div class="dropdown">
+          <a href="#">Collections</a>
+          <div class="dropdown-content mega-menu">
+            <div class="mega-menu-column">
+              <h3>Collection</h3>
+              <% if (collections && collections.length > 0) { %> <%
+              collections.forEach(function(collection) { %>
+              <a href="/collections/<%= collection.name %>">
+                <%= collection.name %>
+              </a>
+              <% }) %> <% } else { %>
+              <p>No collections available.</p>
+              <% } %>
+            </div>
+            <div class="mega-menu-column1">
+              <img src="/images/nav1.png" alt="Jewelry 1" class="menu-image" />
+              <img src="/images/nav2.png" alt="Jewelry 2" class="menu-image" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Static Link -->
+        <a href="/about-us">About Us</a>
+      </div>
+
+      <!-- Logo -->
+      <a href="/" class="logo">
+        <h1>VELORA JEWEL</h1>
+        <h2>Paris</h2>
+      </a>
+
+      <!-- Icons -->
+      <div class="icons">
+        <a href="/login"><i class="fas fa-user"></i></a>
+        <a href="/cart"><i class="fas fa-bag-shopping"></i></a>
+      </div>
+    </nav>
+    <script>
+      const dropdown = document.querySelector(".dropdown");
+
+      // Get the dropdown content
+      const dropdownContent = document.querySelector(".dropdown-content");
+
+      // Show dropdown content on mouseover
+      dropdown.addEventListener("mouseover", function () {
+        dropdownContent.style.display = "flex"; // Show the dropdown content
+      });
+
+      // Hide dropdown content on mouseout
+      dropdown.addEventListener("mouseout", function () {
+        dropdownContent.style.display = "none"; // Hide the dropdown content
+      });
+    </script>
+  </body>
+</html>
