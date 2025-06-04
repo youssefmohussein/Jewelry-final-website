@@ -12,7 +12,7 @@ const app = express();
 //Routes
 const userRoutes = require("./routes/userRoute");
 const dashboardRoutes = require("./routes/dashboardRoutes");
-
+const homepageRoutes = require("./routes/homepageRoutes");
 // Middleware to parse form data
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -30,16 +30,13 @@ const MONGO_URI = process.env.MONGO_URI;
 //route usage
 app.use("/users", userRoutes);
 app.use("/", dashboardRoutes);
-
+app.use("/", homepageRoutes);
 mongoose
   .connect(MONGO_URI)
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 // Example route (optional, just to test it's working)
-app.get("/", (req, res) => {
-  res.send("Hello, your server is running!");
-});
 
 // Start the server
 const PORT = process.env.PORT;

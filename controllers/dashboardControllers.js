@@ -1,18 +1,15 @@
 // for all Admin functianlity Customers/ orders/ products / collection / category
-const User = require("../models/usersDB");
-//                                          start of customer controller
 
-// Get all users and render customers-dashboard view
+//------------------------------------start of customer controller-----------------------------------------------------
+const User = require("../models/usersDB");
 exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
-    res.render("dashboard/customers-dashboard", { users }); // Note folder if you use subfolder
+    res.render("dashboard/customers-dashboard", { users });
   } catch (err) {
     res.status(500).send("Server Error");
   }
 };
-
-// Edit User Role (Admin only)
 exports.editUserRole = async (req, res) => {
   const { role } = req.body;
   if (role !== "admin" && role !== "customer") {
@@ -35,8 +32,6 @@ exports.editUserRole = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
-
-// Delete a User
 exports.deleteUser = async (req, res) => {
   try {
     const deletedUser = await User.findByIdAndDelete(req.params.id);
@@ -51,12 +46,12 @@ exports.deleteUser = async (req, res) => {
   }
 };
 
-//                                       End of customer controller
+//----------------------------------------End of customer controller-----------------------------------------------------
 
-//                                      Start Managing Product in Dashboard
+//----------------------------------------Start Managing Product in Dashboard-----------------------------------------------------
+
 const Product = require("../models/productDB");
 
-// Create
 exports.createProduct = async (req, res) => {
   try {
     const existingProduct = await Product.findOne({
@@ -75,7 +70,6 @@ exports.createProduct = async (req, res) => {
   }
 };
 
-// Get product by productNumber
 exports.getProductById = async (req, res) => {
   try {
     const product = await Product.findOne({
@@ -93,7 +87,7 @@ exports.getProductById = async (req, res) => {
 exports.getAllProducts = async (req, res) => {
   try {
     const products = await Product.find();
-    res.render("dashboard/product-dashboard", { products }); // ✅ correct
+    res.render("dashboard/product-dashboard", { products });
   } catch (err) {
     res.status(500).send("Server Error");
   }
@@ -128,3 +122,58 @@ exports.deleteProduct = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+//----------------------------------------------------End of products-----------------------------------------------------
+
+//-----------------------------------------------Start of Collection-----------------------------------------------------
+const Collection = require("../models/collectionDB");
+
+exports.createCollection = async (req, res) => {
+  try {
+    const { name, image } = req.body;
+
+    // Basic validation
+    if (!name || !image) {
+      return res
+        .status(400)
+        .json({ message: "Both name and image are required." });
+    }
+
+    // Create and save the new collection
+    const newCollection = new Collection({ name, image });
+    await newCollection.save();
+
+    res.status(201).json({
+      message: "Collection created successfully",
+      collection: newCollection,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+exports.viewCollection = async (req, res) => {
+  const { collectionName } = req.params;
+
+  try {
+    const collection = await Collection.findOne({ name: collectionName });
+    const collections = await Collection.find(); // for header
+
+    if (!collection) {
+      return res.status(404).send("Collection not found");
+    }
+
+    const products = await Product.find({ collection: collection.name });
+
+    res.render("collectionPage", {
+      collection,
+      collections,
+      products, // ✅ send this to the view
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
+};
+
+//-----------------------------------------------------End of Collection -----------------------------------------------------

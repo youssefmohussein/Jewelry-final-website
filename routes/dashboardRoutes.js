@@ -3,18 +3,17 @@ const express = require("express");
 const router = express.Router();
 const dashboardController = require("../controllers/dashboardControllers");
 
+//-----------------------------------------------Start of Customers dashboard Routes
 // Get all users and render customers dashboard page
 router.get("/customers-dashboard", dashboardController.getAllUsers);
-
 // Edit user role by ID
 router.put("/users/:id/edit", dashboardController.editUserRole);
-
 // Delete user by ID
 router.delete("/users/:id/delete", dashboardController.deleteUser);
 
-//              End of customers dashboard Routes
+//-----------------------------------------------End of customers dashboard Routes-----------------------------------------------
 
-//             Start of products dashboard routes
+//-----------------------------------------------Start of products dashboard routes-----------------------------------------------
 router.get("/product-dashboard", dashboardController.getAllProducts);
 // Create product
 router.post("/products", dashboardController.createProduct);
@@ -27,6 +26,15 @@ router.put("/products/:productNumber", dashboardController.updateProduct);
 // Delete product
 router.delete("/products/:productNumber", dashboardController.deleteProduct);
 
-// (You can add orders, collections, categories below following the same pattern)
+//-----------------------------------------------End of products dashboard routes -----------------------------------------------
+
+//-----------------------------------------------Start of collection routes -----------------------------------------------
+// Create collection
+router.post("/create", dashboardController.createCollection);
+
+// Render collection by name
+router.get("/collections/:collectionName", dashboardController.viewCollection);
+
+//-----------------------------------------------End of collection routes -----------------------------------------------
 
 module.exports = router;

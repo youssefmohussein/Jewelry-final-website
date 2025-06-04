@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/Css/homePage.css" />
+    <link rel="stylesheet" href="/Css/HeadFoot.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playwrite+NO:wght@100..400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong"
+    />
+    <!-- <link rel="stylesheet" href="/css/chatbot.css" /> -->
+    <title>Velora Jewel</title>
+  </head>
+
+  <body class="homepage">
+    <%- include('partials/header') %>
+
+    <!-- HERO VIDEO -->
+    <div class="video-container">
+      <video autoplay loop muted playsinline>
+        <source src="/videos/header background.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <!-- EXPLORE SECTION -->
+    <section class="content">
+      <p class="Explore">Explore...</p>
+
+      <div class="product-container">
+        <!-- Product 1 -->
+        <div class="product-item1">
+          <a href="/product-details/necklace1-dh.html">
+            <img class="image-1" src="/images/necklace.png" alt="Necklace" />
+          </a>
+          <p class="product-title1">Oval Link Necklace</p>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-item2">
+          <a href="/product-details/bracelet-dh.html">
+            <img
+              class="image-2"
+              src="/images/Untitled design (8).png"
+              alt="Bracelet"
+              width="250"
+            />
+          </a>
+          <p class="product-title2">Bubble Mod Cuff</p>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-item3">
+          <a href="/product-details/earings-dh.html">
+            <img
+              class="image-3"
+              src="/images/Untitled design (7).png"
+              alt="Earrings"
+            />
+          </a>
+          <p class="product-title3">Serenade Earrings</p>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product-item4">
+          <a href="/product-details/rings-dh.html">
+            <img class="image-4" src="/images/rings/darkgreen.png" alt="Ring" />
+          </a>
+          <p class="product-title4">Oval Buckle Gold Ring</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODEL SECTION -->
+    <section class="model-content">
+      <h1 class="heading-text">The World of Velora</h1>
+      <div class="images">
+        <div class="zoom-container">
+          <img src="/images/model 1.jpg" alt="Model 1" class="video-image" />
+        </div>
+        <div class="zoom-container">
+          <img src="/images/model 2.jpg" alt="Model 2" class="video-image" />
+        </div>
+      </div>
+    </section>
+
+    <!-- COLLECTIONS -->
+    <div class="container">
+      <p class="collection">Collections</p>
+      <div class="jewelry-grid">
+        <div class="jewelry-item">
+          <a href="/products-page/ring-page.html">
+            <img src="/images/rings-page/background.jpg" alt="Rings" />
+          </a>
+          <p class="name">Rings</p>
+        </div>
+        <div class="jewelry-item">
+          <a href="/products-page/necklace-page.html">
+            <img
+              src="/images/necklace-page/necklace-background2.jpg"
+              alt="Necklace"
+            />
+          </a>
+          <p class="name">Necklace</p>
+        </div>
+        <div class="jewelry-item">
+          <a href="/products-page/earings-page.html">
+            <img
+              src="/images/earrings-page/earrings background.jpg"
+              alt="Earrings"
+            />
+          </a>
+          <p class="name">Earrings</p>
+        </div>
+        <div class="jewelry-item">
+          <a href="/products-page/bracelets-page.html">
+            <img src="/images/bracelet-page/background3.jpg" alt="Bracelet" />
+          </a>
+          <p class="name">Bracelet</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- WORKSHOP SECTION -->
+    <section class="Workshop">
+      <div class="container-workshop">
+        <h1>VELORA JEWEL</h1>
+        <p>
+          "I believe the things I make have museum quality and hopefully, will
+          last as long as the originals that inspired them."
+        </p>
+        <div class="workshop-content">
+          <img
+            src="/images/qoute 1 img.jpg"
+            alt="Workshop"
+            class="workshop-img"
+          />
+          <div class="workshop-text">
+            <h2>Workshop</h2>
+            <p>
+              The VELORA JEWEL workshop proudly sits above our Madison Avenue
+              Flagship Boutique, and provides the house with unparalleled access
+              to jewelry as it is being created. Every VELORA JEWEL jewel is
+              meticulously handcrafted by our master jewelers, from stone
+              setting and gold hammering, to hard stone carving and enameling.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="workshop-content">
+        <div class="workshop-text1">
+          <h2>Archive</h2>
+          <p>
+            VELORA JEWEL holds a collection of past designs and collections,
+            showcasing the brand’s evolution over time. It allows customers to
+            explore timeless pieces and learn about the craftsmanship behind
+            each creation.
+          </p>
+        </div>
+        <img src="/images/qoute 2 img.jpg" alt="Archive" class="workshop-img" />
+      </div>
+    </section>
+
+    <!-- CHATBOT -->
+    <button id="openChatBtn" class="open-chat-btn">Chat with us</button>
+    <div class="chat-container" id="chatContainer">
+      <div class="chat-header">
+        <h3>Chatbot</h3>
+        <button id="closeChatBtn" class="close-chat-btn">X</button>
+      </div>
+      <div class="chat-window" id="chatWindow"></div>
+      <form id="chatForm">
+        <input
+          type="text"
+          id="userInput"
+          placeholder="Type a message..."
+          required
+        />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+
+    <script src="/chatbot.js"></script>
+
+    <%- include('partials/footer') %>
+  </body>
+</html>
