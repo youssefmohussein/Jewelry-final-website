@@ -12,6 +12,21 @@ router.put("/users/:id/edit", dashboardController.editUserRole);
 // Delete user by ID
 router.delete("/users/:id/delete", dashboardController.deleteUser);
 
-module.exports = router;
-
 //              End of customers dashboard Routes
+
+//             Start of products dashboard routes
+router.get("/product-dashboard", dashboardController.getAllProducts);
+// Create product
+router.post("/products", dashboardController.createProduct);
+// Get all products
+router.get("/products", dashboardController.getAllProducts);
+// Get product by productNumber
+router.get("/products/:productNumber", dashboardController.getProductById);
+// Update product
+router.put("/products/:productNumber", dashboardController.updateProduct);
+// Delete product
+router.delete("/products/:productNumber", dashboardController.deleteProduct);
+
+// (You can add orders, collections, categories below following the same pattern)
+
+module.exports = router;

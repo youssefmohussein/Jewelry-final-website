@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Products | Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/Css/dashboard.css" />
+  </head>
+<body>
+  <div class="sidebar">
+      <h2>Velora</h2>
+      <hr />
+      <ul>
+        <a href="/admin-dashboard/dashboard"><li>Dashboard</li></a>
+        <a href="/customers-dashboard"><li>Customers</li></a>
+        <a href="/admin-dashboard/orders"><li>Orders</li></a>
+        <a href="/product-dashboard"><li>Products</li></a>
+      </ul>
+    </div>
+    <div class="main">
+      <div class="top">
+        <h1>Product Management</h1>
+      </div>
+
+      <div class="cards">
+        <div class="card1">
+          <h3>Total Products</h3>
+          <p>120</p>
+        </div>
+        <div class="card2">
+          <h3>Categories</h3>
+          <p>4</p>
+        </div>
+        <div class="card3">
+          <h3>New Arrivals</h3>
+          <p>5 This Week</p>
+        </div>
+      </div>
+
+      <div class="search-bar">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search products..."
+          onkeyup="searchTable()"
+        />
+        <select id="category-select">
+          <option>All Categories</option>
+          <!-- Categories will be populated dynamically -->
+        </select>
+      </div>
+
+      <!-- Add Collection Button -->
+      <div class="buttons-container">
+          <div style="margin-bottom: 20px">
+            <button class="add-collection-btn" onclick="openForm()">
+            + Add Collection
+            </button>
+          </div>
+     <!-- Button to open product modal -->
+        <div style="margin-bottom: 20px;">
+            <button class="add-product-btn" onclick="openProductForm()">
+            + Add Product
+            </button>
+        </div>
+      </div>
+
+<!-- Collection Modal -->
+<div id="collectionModal" class="modal">
+  <div class="modal-content">
+    <label for="collectionName">Collection Name</label>
+    <input type="text" id="collectionName" required />
+
+    <label for="collectionImage">Image URL</label>
+    <input type="text" id="collectionImage" required />
+
+    <button type="button" onclick="addCollection()">Add Collection</button>
+    <button type="button" onclick="closeCollectionForm()">Close</button>
+  </div>
+</div>
+
+<!-- Product Modal -->
+<div id="productModal" class="modal">
+  <div class="modal-content">
+    <h2>New Product</h2>
+
+    <label for="productNumber">productNumber </label>
+    <input type="text" id="productNumber" required />
+
+    <label for="productName">Product Name</label>
+    <input type="text" id="productName" required />
+
+    <label for="description">Description</label>
+    <textarea id="description" maxlength="500"></textarea>
+
+    <label for="colors">Colors </label>
+    <input type="text" id="colors" required />
+
+    <label for="category">Category</label>
+    <input type="text" id="category" required />
+
+    <label for="collection">Collection</label>
+    <input type="text" id="collection" required />
+
+    <label for="stock">Stock</label>
+    <input type="number" id="stock" required min="0" />
+
+    <label for="price">Price</label>
+    <input type="number" id="price" required min="0" step="0.01" />
+
+    <label for="imageUrls">Image URLs (comma separated)</label>
+    <textarea id="imageUrls" required></textarea>
+
+    <div class="form-buttons">
+      <button type="button" onclick="addProduct()">Add Product</button>
+      <button type="button" onclick="closeProductForm()">Close</button>
+    </div>
+  </div>
+</div>  
+
+
+<div class="table">
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Stock</th>
+      <th>Category</th>
+      <th>Collection</th>
+      <th>Colors</th>
+    </tr>
+  </thead>
+<tbody>
+  <% products.forEach(product => { %>
+    <tr>
+      <td><%= product.productNumber %></td>
+      <td><%= product.name %></td>
+      <td>$<%= product.price ? product.price.toFixed(2) : 'N/A' %></td>
+      <td><%= product.stock %></td>
+      <td><%= product.category %></td>
+      <td><%= product.collection %></td>
+      <td><%= product.colors ? product.colors.join(', ') : '' %></td>
+    </tr>
+  <% }) %>
+</tbody>
+
+
+</table>
+
+</div>
+
+    <script src="/javasScript/productManagment.js"></script>
+  </body>
+</html>
