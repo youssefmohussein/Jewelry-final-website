@@ -9,6 +9,9 @@ const path = require("path");
 // Initialize the app
 const app = express();
 
+
+
+
 //Routes
 const userRoutes = require("./routes/userRoute");
 const dashboardRoutes = require("./routes/dashboardRoutes");
@@ -26,7 +29,6 @@ app.set("views", path.join(__dirname, "views"));
 
 // MongoDB connection
 const MONGO_URI = process.env.MONGO_URI;
-
 //route usage
 app.use("/users", userRoutes);
 app.use("/", dashboardRoutes);

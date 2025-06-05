@@ -46,10 +46,14 @@ const productSchema = new mongoose.Schema({
     required: true,
     min: 0,
   },
-  image: {
-    type: [String], // URL
-    required: true,
-  },
+ 
+   image: {
+  data: Buffer,         
+  contentType: String,  
+ 
+},
+   
+  
   salesCount: {
     type: Number,
     default: 0,

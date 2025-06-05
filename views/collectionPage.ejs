@@ -13,13 +13,14 @@
     <ul>
       <% products.forEach(product => { %>
       <li>
-        <img src="<%= product.image %>" alt="<%= product.name %>" width="100" />
+        <img src="<%= product.imageSrc %>" alt="<%= product.name %>" width="100" />
         <strong><%= product.name %></strong> - $<%= product.price %>
       </li>
       <% }) %>
     </ul>
     <% } else { %>
     <p>No products in this collection.</p>
-    <% } %> <%- include('partials/footer') %>
+    <% } %> 
+    <%- include('partials/footer') %>
   </body>
 </html>

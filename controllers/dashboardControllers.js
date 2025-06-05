@@ -52,7 +52,8 @@ exports.deleteUser = async (req, res) => {
 
 const Product = require("../models/productDB");
 
-exports.createProduct = async (req, res) => {
+
+/*exports.createProduct = async (req, res) => {
   try {
     const existingProduct = await Product.findOne({
       productNumber: req.body.productNumber,
@@ -68,7 +69,53 @@ exports.createProduct = async (req, res) => {
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
+};*/
+
+const fs = require('fs');
+
+exports.createProduct = async (req, res) => {
+  try {
+    // 1. Check for duplicate product
+    const existingProduct = await Product.findOne({
+      productNumber: req.body.productNumber,
+    });
+
+    if (existingProduct) {
+      return res
+        .status(400)
+        .json({ error: 'Product with this productNumber already exists' });
+    }
+
+    // 2. Check for uploaded file
+    if (!req.file) {
+      return res.status(400).json({ error: 'Image file is required' });
+    }
+
+    // 3. Read image file
+    const imageData = fs.readFileSync(req.file.path);
+
+    // 4. Create product with image buffer
+    const product = new Product({
+      ...req.body, 
+      image: {
+        data: imageData,
+        contentType: req.file.mimetype,
+      },
+    });
+
+    await product.save();
+
+    // 5. Remove file from server after saving to DB
+    fs.unlinkSync(req.file.path);
+
+    res.status(200).json(product);
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ error: err.message });
+  }
 };
+
+////
 
 exports.getProductById = async (req, res) => {
   try {
@@ -120,8 +167,12 @@ exports.deleteProduct = async (req, res) => {
     res.status(200).json({ message: "Product deleted successfully" });
   } catch (err) {
     res.status(500).json({ error: err.message });
+
   }
 };
+
+
+
 //----------------------------------------------------End of products-----------------------------------------------------
 
 //-----------------------------------------------Start of Collection-----------------------------------------------------
@@ -152,7 +203,7 @@ exports.createCollection = async (req, res) => {
   }
 };
 
-exports.viewCollection = async (req, res) => {
+/*exports.viewCollection = async (req, res) => {
   const { collectionName } = req.params;
 
   try {
@@ -174,6 +225,41 @@ exports.viewCollection = async (req, res) => {
     console.error(error);
     res.status(500).send("Server error");
   }
+};*/
+exports.viewCollection = async (req, res) => {
+  const { collectionName } = req.params;
+
+  try {
+    const collection = await Collection.findOne({ name: collectionName });
+    const collections = await Collection.find(); // for header
+
+    if (!collection) {
+      return res.status(404).send("Collection not found");
+    }
+
+    
+    const products = await Product.find({ collection: collection.name }).lean();
+
+  
+    products.forEach(product => {
+      if (product.image && product.image.data) {
+        const base64 = product.image.data.toString('base64');
+        product.imageSrc = `data:${product.image.contentType};base64,${base64}`;
+      } else {
+        product.imageSrc = null; 
+      }
+    });
+
+    res.render("collectionPage", {
+      collection,
+      collections,
+      products, 
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
 };
+
 
 //-----------------------------------------------------End of Collection -----------------------------------------------------
