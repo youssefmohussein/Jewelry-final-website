@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const dashboardController = require("../controllers/dashboardControllers");
+const upload = require("../middleware/uploads");
 
 //-----------------------------------------------Start of Customers dashboard Routes
 // Get all users and render customers dashboard page
@@ -16,7 +17,8 @@ router.delete("/users/:id/delete", dashboardController.deleteUser);
 //-----------------------------------------------Start of products dashboard routes-----------------------------------------------
 router.get("/product-dashboard", dashboardController.getAllProducts);
 // Create product
-router.post("/products", dashboardController.createProduct);
+router.post('/products', upload.single('image'), dashboardController.createProduct);
+
 // Get all products
 router.get("/products", dashboardController.getAllProducts);
 // Get product by productNumber
@@ -25,6 +27,7 @@ router.get("/products/:productNumber", dashboardController.getProductById);
 router.put("/products/:productNumber", dashboardController.updateProduct);
 // Delete product
 router.delete("/products/:productNumber", dashboardController.deleteProduct);
+
 
 //-----------------------------------------------End of products dashboard routes -----------------------------------------------
 

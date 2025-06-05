@@ -110,7 +110,7 @@ function addCollection() {
 }
 // The addProduct function you already have looks fine.
 
-async function addProduct() {
+/*async function addProduct() {
   const product = {
     productNumber: document
       .getElementById("productNumber")
@@ -158,4 +158,48 @@ async function addProduct() {
     console.error("Error submitting product:", err);
     alert("An error occurred while adding the product.");
   }
+}*/
+
+
+async function addProduct() {
+  const formData = new FormData();
+
+  formData.append("productNumber", document.getElementById("productNumber").value.trim().toUpperCase());
+  formData.append("name", document.getElementById("productName").value.trim());
+  formData.append("description", document.getElementById("description").value.trim());
+  formData.append("category", document.getElementById("category").value.trim());
+  formData.append("collection", document.getElementById("collection").value.trim());
+  formData.append("stock", document.getElementById("stock").value);
+  formData.append("price", document.getElementById("price").value);
+  formData.append("totalSales", 0);
+
+  const colors = document.getElementById("colors").value.trim().split(',').map(c => c.trim());
+  formData.append("colors", JSON.stringify(colors));
+
+  // taking images 
+  const imageInput = document.getElementById("image");
+  if (imageInput.files.length > 0) {
+    formData.append("image", imageInput.files[0]);
+  }
+
+  try {
+    const response = await fetch("/products", {
+      method: "POST",
+      body: formData
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      alert("Product added successfully!");
+      closeProductForm();
+    } else {
+      alert(`Failed to add product: ${result.error || result.message || "Unknown error"}`);
+    }
+  } catch (err) {
+    console.error("Error:", err);
+    alert("Something went wrong while adding the product.");
+  }
 }
+
+
