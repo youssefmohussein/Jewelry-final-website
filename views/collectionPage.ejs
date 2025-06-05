@@ -3,24 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <title><%= collection.name %> | Collection</title>
+    <link rel="stylesheet" href="/Css/productsGrid.css" />
   </head>
   <body>
     <%- include('partials/header') %>
-    <img src="<%= collection.image %>" alt="<%= collection.name %> Image" />
-    <!-- Add products related to this collection if needed -->
-    <h3>Products</h3>
+
+    <div class="collection-header">
+      <img
+        class="collection-image"
+        src="<%= collection.image %>"
+        alt="<%= collection.name %> Image"
+      />
+    </div>
+
+    <h3 class="section-title">Products</h3>
+
     <% if (products && products.length > 0) { %>
-    <ul>
+    <ul class="product-grid">
       <% products.forEach(product => { %>
-      <li>
-        <img src="<%= product.imageSrc %>" alt="<%= product.name %>" width="100" />
-        <strong><%= product.name %></strong> - $<%= product.price %>
+      <li class="product-item">
+        <img
+          class="product-image"
+          src="<%= product.imageSrc %>"
+          alt="<%= product.name %>"
+        />
+        <strong class="product-name"><%= product.name %></strong>
+        <span class="product-price">$<%= product.price %></span>
       </li>
       <% }) %>
     </ul>
     <% } else { %>
-    <p>No products in this collection.</p>
-    <% } %> 
-    <%- include('partials/footer') %>
+    <p class="no-products-message">No products in this collection.</p>
+    <% } %> <%- include('partials/footer') %>
   </body>
 </html>
