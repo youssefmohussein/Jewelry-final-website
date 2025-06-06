@@ -24,7 +24,9 @@ router.get("/products", dashboardController.getAllProducts);
 // Get product by productNumber
 router.get("/products/:productNumber", dashboardController.getProductById);
 // Update product
-router.put("/products/:productNumber", dashboardController.updateProduct);
+//router.put("/products/:productNumber", dashboardController.updateProduct);
+
+router.put('/products/:productNumber', upload.single('image'), dashboardController.updateProduct);
 // Delete product
 router.delete("/products/:productNumber", dashboardController.deleteProduct);
 

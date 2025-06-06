@@ -526,7 +526,7 @@ th, td {
 
 
 /* Add Collection Button */
-.add-collection-btn, .add-product-btn {
+.add-collection-btn, .add-product-btn ,.edit-btn ,.delete-btn{
   display: inline-block;
   background-color: #6a5acd;
   color: white;
@@ -536,6 +536,7 @@ th, td {
   cursor: pointer;
   font-size: 16px;
   margin-right: 10px; 
+margin-top: 10px;
 }
 
 .buttons-container {
