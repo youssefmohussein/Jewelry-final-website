@@ -26,6 +26,7 @@ const productSchema = new mongoose.Schema({
   },
   category: {
     type: String,
+    enum: ["necklace", "earings", "bracelets", "rings"],
     required: true,
   },
   collection: {
@@ -46,14 +47,12 @@ const productSchema = new mongoose.Schema({
     required: true,
     min: 0,
   },
- 
-   image: {
-  data: Buffer,         
-  contentType: String,  
- 
-},
-   
-  
+
+  image: {
+    data: Buffer,
+    contentType: String,
+  },
+
   salesCount: {
     type: Number,
     default: 0,

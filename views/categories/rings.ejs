@@ -1,0 +1,21 @@
+<%- include('../partials/header') %>
+
+<div class="background-img">
+  <img src="/Images/rings-page/background.jpg" alt="Rings Background" />
+  <div class="background-text">Rings</div>
+  <div class="text">Discover our unique collection</div>
+</div>
+
+<div class="product-grid">
+  <% products.forEach((product, index) => { %>
+  <div class="product-preview product-<%= index + 1 %>">
+    <img src="<%= product.image %>" alt="<%= product.name %>" />
+    <div class="product-spacerow">
+      <p class="product<%= index + 1 %>-name"><%= product.name %></p>
+      <p class="product-price">$<%= product.price %></p>
+    </div>
+  </div>
+  <% }) %>
+</div>
+
+<%- include('../partials/footer') %>

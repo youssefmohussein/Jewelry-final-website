@@ -1,0 +1,22 @@
+<%- include('../partials/header') %>
+<img
+  src="/Images/necklace-page/necklace-background2.jpg"
+  alt="Rings Background"
+/>
+<div
+  class="category-page"
+  style="background-image: url('/images/necklace-bg.jpg')"
+>
+  <h1>Necklaces</h1>
+  <div class="product-grid">
+    <% products.forEach(product => { %>
+    <div class="product-card">
+      <img src="<%= product.image %>" alt="<%= product.name %>" />
+      <h3><%= product.name %></h3>
+      <p>$<%= product.price %></p>
+    </div>
+    <% }) %>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

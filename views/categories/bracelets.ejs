@@ -1,0 +1,19 @@
+<%- include('../partials/header') %>
+
+<div
+  class="category-page"
+  style="background-image: url('/images/bracelets-bg.jpg')"
+>
+  <h1>Bracelets</h1>
+  <div class="product-grid">
+    <% products.forEach(product => { %>
+    <div class="product-card">
+      <img src="<%= product.image %>" alt="<%= product.name %>" />
+      <h3><%= product.name %></h3>
+      <p>$<%= product.price %></p>
+    </div>
+    <% }) %>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

@@ -9,13 +9,11 @@ const path = require("path");
 // Initialize the app
 const app = express();
 
-
-
-
 //Routes
 const userRoutes = require("./routes/userRoute");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const homepageRoutes = require("./routes/homepageRoutes");
+const categoryRoutes = require("./routes/categoryRoutes");
 // Middleware to parse form data
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -33,6 +31,7 @@ const MONGO_URI = process.env.MONGO_URI;
 app.use("/users", userRoutes);
 app.use("/", dashboardRoutes);
 app.use("/", homepageRoutes);
+app.use("/categories", categoryRoutes);
 mongoose
   .connect(MONGO_URI)
   .then(() => console.log("✅ Connected to MongoDB"))
