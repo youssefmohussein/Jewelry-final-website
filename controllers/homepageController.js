@@ -18,7 +18,7 @@ exports.getLoginPage = (req, res) => {
 
 // Forget password page
 exports.getForgetPasswordPage = (req, res) => {
-  res.render("reset");
+  res.render("resetPasswordPage");
 };
 
 // Specific collection page
