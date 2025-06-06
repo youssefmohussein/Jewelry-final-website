@@ -26,7 +26,7 @@ const productSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ["necklace", "earings", "bracelets", "rings"],
+
     required: true,
   },
   collection: {

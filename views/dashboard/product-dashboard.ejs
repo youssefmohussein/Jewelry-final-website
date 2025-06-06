@@ -82,77 +82,119 @@
 <!-- Product Modal -->
 <div id="productModal" class="modal">
   <div class="modal-content">
-    <h2>New Product</h2>
+    <h2>Add New Product</h2>
 
-    <label for="productNumber">productNumber </label>
+<div class="form-grid">
+  <!-- Row 1: Number + Name -->
+  <div class="double">
+    <label for="productNumber">Product Number</label>
     <input type="text" id="productNumber" required />
-
+  </div>
+  <div class="double">
     <label for="productName">Product Name</label>
     <input type="text" id="productName" required />
+  </div>
 
+  <!-- Row 2: Description full-width -->
+  <div class="full">
     <label for="description">Description</label>
     <textarea id="description" maxlength="500"></textarea>
+  </div>
 
-    <label for="colors">Colors </label>
+  <!-- Row 3: Colors + Category -->
+  <div class="double">
+    <label for="colors">Colors</label>
     <input type="text" id="colors" required />
-
+  </div>
+  <div class="double">
     <label for="category">Category</label>
     <input type="text" id="category" required />
+  </div>
 
+  <!-- Row 4: Collection + Stock -->
+  <div class="double">
     <label for="collection">Collection</label>
     <input type="text" id="collection" required />
-
+  </div>
+  <div class="double">
     <label for="stock">Stock</label>
     <input type="number" id="stock" required min="0" />
+  </div>
 
+  <!-- Row 5: Price + Image -->
+  <div class="double">
     <label for="price">Price</label>
     <input type="number" id="price" required min="0" step="0.01" />
+  </div>
+  <div class="double">
+    <label for="image">Product Image</label>
+    <input type="file" id="image" name="image" accept="image/*" required />
+  </div>
+</div>
 
-    <!--<label for="imageUrls">Image URLs (comma separated)</label>
-    <textarea id="imageUrls" required></textarea>-->
-    <label>Product Image:</label><br>
-   <input type="file" id="image" name="image" accept="image/*" required><br><br>
+<div class="form-buttons">
+  <button type="button" onclick="addProduct()">Add Product</button>
+  <button type="button" onclick="closeProductForm()">Close</button>
+</div>
 
-    <div class="form-buttons">
-      <button type="button" onclick="addProduct()">Add Product</button>
-      <button type="button" onclick="closeProductForm()">Close</button>
-    </div>
   </div>
 </div>  
 
 
 
 <!-- Edit Product Modal -->
+<<!-- Edit Product Modal -->
 <div id="editProductModal" class="modal">
-  <div class="modal-content">
+  <div class="modal-content product-form-modal">
     <h2>Edit Product</h2>
 
-    <label for="editProductNumber">Product Number</label>
-    <input type="text" id="editProductNumber" disabled />
+    <div class="form-grid">
+      <!-- Row 1: Number + Name -->
+      <div class="double">
+        <label for="editProductNumber">Product Number</label>
+        <input type="text" id="editProductNumber" disabled />
+      </div>
+      <div class="double">
+        <label for="editProductName">Product Name</label>
+        <input type="text" id="editProductName" required />
+      </div>
 
-    <label for="editProductName">Product Name</label>
-    <input type="text" id="editProductName" required />
+      <!-- Row 2: Description -->
+      <div class="full">
+        <label for="editDescription">Description</label>
+        <textarea id="editDescription" maxlength="500"></textarea>
+      </div>
 
-    <label for="editDescription">Description</label>
-    <textarea id="editDescription" maxlength="500"></textarea>
+      <!-- Row 3: Colors + Category -->
+      <div class="double">
+        <label for="editColors">Colors</label>
+        <input type="text" id="editColors" required />
+      </div>
+      <div class="double">
+        <label for="editCategory">Category</label>
+        <input type="text" id="editCategory" required />
+      </div>
 
-    <label for="editColors">Colors</label>
-    <input type="text" id="editColors" required />
+      <!-- Row 4: Collection + Stock -->
+      <div class="double">
+        <label for="editCollection">Collection</label>
+        <input type="text" id="editCollection" required />
+      </div>
+      <div class="double">
+        <label for="editStock">Stock</label>
+        <input type="number" id="editStock" required min="0" />
+      </div>
 
-    <label for="editCategory">Category</label>
-    <input type="text" id="editCategory" required />
-
-    <label for="editCollection">Collection</label>
-    <input type="text" id="editCollection" required />
-
-    <label for="editStock">Stock</label>
-    <input type="number" id="editStock" required min="0" />
-
-    <label for="editPrice">Price</label>
-    <input type="number" id="editPrice" required min="0" step="0.01" />
-
-    <label>Change Image (Optional)</label>
-    <input type="file" id="editImage" name="image" accept="image/*" />
+      <!-- Row 5: Price + Image -->
+      <div class="double">
+        <label for="editPrice">Price</label>
+        <input type="number" id="editPrice" required min="0" step="0.01" />
+      </div>
+      <div class="double">
+        <label>Change Image (Optional)</label>
+        <input type="file" id="editImage" name="image" accept="image/*" />
+      </div>
+    </div>
 
     <div class="form-buttons">
       <button type="button" onclick="submitEditProduct()">Save Changes</button>
@@ -160,6 +202,7 @@
     </div>
   </div>
 </div>
+
 
 <div class="table">
   <table>
