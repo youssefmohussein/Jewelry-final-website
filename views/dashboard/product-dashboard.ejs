@@ -216,6 +216,8 @@
           <td><%= product.category %></td>
           <td><%= product.collection %></td>
           <td><%= product.colors ? product.colors.join(', ') : '' %></td>
+
+        
           <td>
          <button 
   class="edit-btn" 
@@ -223,6 +225,12 @@
   onclick="handleEditClick(this)">
   Edit
 </button>
+  <button
+    class="delete-btn"
+    data-product='<%- JSON.stringify(product).replace(/'/g, '&#39;') %>'
+    onclick="handleDeleteClick(this)">
+    Delete
+  </button>
 
           </td>
         </tr>
