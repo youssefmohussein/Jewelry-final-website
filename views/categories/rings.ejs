@@ -1,21 +1,37 @@
-<%- include('../partials/header') %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bracelets</title>
+    <link rel="stylesheet" href="/Css/productsGrid.css" />
+  </head>
+  <body>
+    <%- include('../partials/header') %>
 
-<div class="background-img">
-  <img src="/Images/rings-page/background.jpg" alt="Rings Background" />
-  <div class="background-text">Rings</div>
-  <div class="text">Discover our unique collection</div>
-</div>
-
-<div class="product-grid">
-  <% products.forEach((product, index) => { %>
-  <div class="product-preview product-<%= index + 1 %>">
-    <img src="<%= product.image %>" alt="<%= product.name %>" />
-    <div class="product-spacerow">
-      <p class="product<%= index + 1 %>-name"><%= product.name %></p>
-      <p class="product-price">$<%= product.price %></p>
+    <div class="collection-header">
+      <img
+        src="/Images/homepageImg/rings-bg.jpg"
+        class="collection-image"
+        alt="Bracelets"
+      />
     </div>
-  </div>
-  <% }) %>
-</div>
 
-<%- include('../partials/footer') %>
+    <h1 class="section-title">Rings</h1>
+
+    <div class="product-grid">
+      <% products.forEach(product => { %>
+      <div class="product-item">
+        <img
+          class="product-image"
+          src="<%= product.imageSrc %>"
+          alt="<%= product.name %>"
+        />
+        <span class="product-name"><%= product.name %></span>
+        <p class="product-price">$<%= product.price %></p>
+      </div>
+      <% }) %>
+    </div>
+
+    <%- include('../partials/footer') %>
+  </body>
+</html>

@@ -1,19 +1,37 @@
-<%- include('../partials/header') %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bracelets</title>
+    <link rel="stylesheet" href="/Css/productsGrid.css" />
+  </head>
+  <body>
+    <%- include('../partials/header') %>
 
-<div
-  class="category-page"
-  style="background-image: url('/images/bracelets-bg.jpg')"
->
-  <h1>Bracelets</h1>
-  <div class="product-grid">
-    <% products.forEach(product => { %>
-    <div class="product-card">
-      <img src="<%= product.image %>" alt="<%= product.name %>" />
-      <h3><%= product.name %></h3>
-      <p>$<%= product.price %></p>
+    <div class="collection-header">
+      <img
+        src="/Images/homepageImg/bracelet-bg.jpg"
+        class="collection-image"
+        alt="Bracelets"
+      />
     </div>
-    <% }) %>
-  </div>
-</div>
 
-<%- include('../partials/footer') %>
+    <h1 class="section-title">Bracelets</h1>
+
+    <div class="product-grid">
+      <% products.forEach(product => { %>
+      <div class="product-item">
+        <img
+          class="product-image"
+          src="<%= product.imageSrc %>"
+          alt="<%= product.name %>"
+        />
+        <span class="product-name"><%= product.name %></span>
+        <p class="product-price">$<%= product.price %></p>
+      </div>
+      <% }) %>
+    </div>
+
+    <%- include('../partials/footer') %>
+  </body>
+</html>
