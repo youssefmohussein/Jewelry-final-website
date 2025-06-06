@@ -202,4 +202,35 @@ async function addProduct() {
   }
 }
 
+// for opening the edit form 
 
+
+function handleEditClick(button) {
+  const productData = button.getAttribute("data-product");
+
+  try {
+    const product = JSON.parse(productData);
+    openEditForm(product);
+  } catch (error) {
+    console.error("Error parsing product data:", error);
+  }
+}
+
+function openEditForm(product) {
+  const modal = document.getElementById("editProductModal");
+  modal.style.display = "block";
+
+  document.getElementById("editProductNumber").value = product.productNumber;
+  document.getElementById("editProductName").value = product.name;
+  document.getElementById("editDescription").value = product.description || "";
+  document.getElementById("editColors").value = Array.isArray(product.colors)
+    ? product.colors.join(', ')
+    : product.colors;
+  document.getElementById("editCategory").value = product.category;
+  document.getElementById("editCollection").value = product.collection;
+  document.getElementById("editStock").value = product.stock;
+  document.getElementById("editPrice").value = product.price;
+}
+function closeEditProductForm() {
+  document.getElementById("editProductModal").style.display = "none";
+}
