@@ -85,8 +85,6 @@ exports.createProduct = async (req, res) => {
         .status(400)
         .json({ error: 'Product with this productNumber already exists' });
     }
-
-    // 2. Check for uploaded file
     if (!req.file) {
       return res.status(400).json({ error: 'Image file is required' });
     }
@@ -140,21 +138,46 @@ exports.getAllProducts = async (req, res) => {
   }
 };
 
+
 exports.updateProduct = async (req, res) => {
   try {
+    const productNumber = req.params.productNumber;
+
+    const updatedData = {
+      name: req.body.name,
+      description: req.body.description,
+      colors: req.body.colors ? req.body.colors.split(',').map(color => color.trim()) : [],
+      category: req.body.category,
+      collection: req.body.collection,
+      stock: req.body.stock,
+      price: req.body.price,
+    };
+
+   
+    if (req.file) {
+      updatedData.image = {
+        data: req.file.buffer,
+        contentType: req.file.mimetype,
+      };
+    }
+
     const product = await Product.findOneAndUpdate(
-      { productNumber: req.params.productNumber },
-      req.body,
+      { productNumber },
+      updatedData,
       { new: true }
     );
+
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
+
     res.status(200).json(product);
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: err.message });
   }
 };
+
 
 exports.deleteProduct = async (req, res) => {
   try {
@@ -249,7 +272,6 @@ exports.viewCollection = async (req, res) => {
         product.imageSrc = null; 
       }
     });
-
     res.render("collectionPage", {
       collection,
       collections,

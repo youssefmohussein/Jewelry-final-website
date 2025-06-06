@@ -237,52 +237,39 @@ function closeEditProductForm() {
   document.getElementById("editProductModal").style.display = "none";
 }
 
-
-
-
-
-
 function submitEditProduct() {
-  const productNumber = document.getElementById("editProductNumber").value;
-  const name = document.getElementById("editProductName").value;
-  const description = document.getElementById("editDescription").value;
-  const colors = document.getElementById("editColors").value.split(',').map(c => c.trim());
-  const category = document.getElementById("editCategory").value;
-  const collection = document.getElementById("editCollection").value;
-  const stock = document.getElementById("editStock").value;
-  const price = document.getElementById("editPrice").value;
+  const formData = new FormData();
 
-  const updatedProduct = {
-    name,
-    description,
-    colors,
-    category,
-    collection,
-    stock,
-    price
-  };
+  const productNumber = document.getElementById("editProductNumber").value;
+  formData.append("name", document.getElementById("editProductName").value);
+  formData.append("description", document.getElementById("editDescription").value);
+  formData.append("colors", document.getElementById("editColors").value);
+  formData.append("category", document.getElementById("editCategory").value);
+  formData.append("collection", document.getElementById("editCollection").value);
+  formData.append("stock", document.getElementById("editStock").value);
+  formData.append("price", document.getElementById("editPrice").value);
+
+  const imageFile = document.getElementById("editImage").files[0];
+  if (imageFile) {
+    formData.append("image", imageFile);
+  }
 
   fetch(`/products/${productNumber}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(updatedProduct)
+    method: "PUT",
+    body: formData
   })
     .then(res => {
       if (res.ok) {
-        alert('Product updated successfully');
+        alert("Product updated successfully");
         location.reload();
       } else {
-        alert('Failed to update product');
+        alert("Failed to update product");
       }
     })
     .catch(err => {
-      console.error('Update error:', err);
+      console.error("Update error:", err);
     });
 }
-
-
 
 
 
