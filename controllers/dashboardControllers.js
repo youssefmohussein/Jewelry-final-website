@@ -72,10 +72,14 @@ const Product = require("../models/productDB");
 };*/
 
 const fs = require('fs');
-
 exports.createProduct = async (req, res) => {
   try {
-    // 1. Check for duplicate product
+    // تحقق من وجود صورة
+    if (!req.file) {
+      return res.status(400).json({ error: 'Image file is required' });
+    }
+
+    // تحقق من وجود المنتج
     const existingProduct = await Product.findOne({
       productNumber: req.body.productNumber,
     });
@@ -85,26 +89,17 @@ exports.createProduct = async (req, res) => {
         .status(400)
         .json({ error: 'Product with this productNumber already exists' });
     }
-    if (!req.file) {
-      return res.status(400).json({ error: 'Image file is required' });
-    }
 
-    // 3. Read image file
-    const imageData = fs.readFileSync(req.file.path);
-
-    // 4. Create product with image buffer
+    // هنا نستخدم req.file.buffer بدل fs.readFileSync(req.file.path)
     const product = new Product({
-      ...req.body, 
+      ...req.body,
       image: {
-        data: imageData,
+        data: req.file.buffer,
         contentType: req.file.mimetype,
       },
     });
 
     await product.save();
-
-    // 5. Remove file from server after saving to DB
-    fs.unlinkSync(req.file.path);
 
     res.status(200).json(product);
   } catch (err) {
