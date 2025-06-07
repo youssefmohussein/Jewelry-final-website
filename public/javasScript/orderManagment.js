@@ -3,17 +3,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const statusFilter = document.getElementById("status-filter");
   const tableBody = document.querySelector(".orders-table tbody");
 
-  // Filter function (reuse your logic)
   function filterOrders() {
     const searchText = searchInput.value.toLowerCase().trim();
     const selectedStatus = statusFilter.value.toLowerCase().trim();
 
     [...tableBody.rows].forEach(row => {
-      const cells = row.cells;
-      if (cells.length === 0) return;
-      const orderId = cells[0].textContent.toLowerCase();
-      const customerName = cells[1].textContent.toLowerCase();
-      const statusText = cells[5].textContent.toLowerCase();
+      if (row.cells.length === 0) return;
+      const orderId = row.cells[0].textContent.toLowerCase();
+      const customerName = row.cells[1].textContent.toLowerCase();
+      const statusText = row.cells[5].textContent.toLowerCase();
 
       const matchesSearch = orderId.includes(searchText) || customerName.includes(searchText);
       const matchesStatus = !selectedStatus || statusText === selectedStatus;
@@ -22,13 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Attach filter events
   searchInput.addEventListener("input", filterOrders);
   statusFilter.addEventListener("change", filterOrders);
 
-// Define and immediately attach event listeners to delete buttons
-document.querySelectorAll(".btn.delete-btn").forEach(button => {
-  button.addEventListener("click", function(event) {
+  // Delete handler function
+  function handleDeleteClick(event) {
     if (!confirm("Are you sure you want to delete this order?")) return;
 
     const btn = event.currentTarget;
@@ -47,109 +43,127 @@ document.querySelectorAll(".btn.delete-btn").forEach(button => {
         console.error(err);
         alert("Error deleting order.");
       });
-  });
-});
-
-
-
-
-  // Handle Edit order - open inline form for status only (you can extend for more fields)
-  function openEditForm(row) {
-    // Prevent multiple edits simultaneously
-    if (row.querySelector(".edit-form")) return;
-
-    const cells = row.cells;
-    const currentStatus = cells[5].textContent.trim().toLowerCase();
-
-    // Create form element inline inside Status cell
-    const form = document.createElement("form");
-    form.className = "edit-form";
-
-    const statusSelect = document.createElement("select");
-    ["pending", "shipped", "delivered"].forEach(status => {
-      const option = document.createElement("option");
-      option.value = status;
-      option.textContent = status.charAt(0).toUpperCase() + status.slice(1);
-      if (status === currentStatus) option.selected = true;
-      statusSelect.appendChild(option);
-    });
-
-    const saveBtn = document.createElement("button");
-    saveBtn.type = "submit";
-    saveBtn.textContent = "Save";
-    saveBtn.className = "btn save";
-
-    const cancelBtn = document.createElement("button");
-    cancelBtn.type = "button";
-    cancelBtn.textContent = "Cancel";
-    cancelBtn.className = "btn cancel";
-
-    form.appendChild(statusSelect);
-    form.appendChild(saveBtn);
-    form.appendChild(cancelBtn);
-
-    // Replace status cell content with form
-    cells[5].textContent = "";
-    cells[5].appendChild(form);
-
-    // Disable Edit & Delete buttons while editing
-    cells[6].querySelector(".edit-btn").disabled = true;
-    cells[6].querySelector(".delete-btn").disabled = true;
-
-    // Cancel handler - restore original status display
-    cancelBtn.addEventListener("click", () => {
-      cells[5].textContent = currentStatus.charAt(0).toUpperCase() + currentStatus.slice(1);
-      cells[6].querySelector(".edit-btn").disabled = false;
-      cells[6].querySelector(".delete-btn").disabled = false;
-    });
-
-    // Submit handler - save changes to DB
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const newStatus = statusSelect.value;
-
-      if (newStatus === currentStatus) {
-        cancelBtn.click(); // No changes, cancel edit
-        return;
-      }
-
-      const orderId = row.dataset.orderId;
-
-      try {
-        const res = await fetch(`/orders/${orderId}`, {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ status: newStatus }),
-        });
-
-        if (res.ok) {
-          // Update UI
-          cells[5].textContent = newStatus.charAt(0).toUpperCase() + newStatus.slice(1);
-          cells[5].className = `status-${newStatus}`;
-          cells[6].querySelector(".edit-btn").disabled = false;
-          cells[6].querySelector(".delete-btn").disabled = false;
-          filterOrders(); // Re-filter in case status filter active
-        } else {
-          alert("Failed to update order status.");
-        }
-      } catch (err) {
-        console.error(err);
-        alert("Error updating order status.");
-      }
-    });
   }
 
-  // Attach event listeners on buttons
+  // Open edit modal & populate form
+  const editOrderModal = document.getElementById("editOrderModal");
+  const closeModalBtn = document.getElementById("closeModal");
+  const editOrderForm = document.getElementById("editOrderForm");
+
+  function openEditOrderForm(orderRow) {
+    editOrderModal.style.display = "block";
+
+    document.getElementById("orderId").value = orderRow.dataset.orderId || "";
+    document.getElementById("orderIDInput").value = orderRow.querySelector("td:nth-child(1)").innerText || "";
+    document.getElementById("userNameInput").value = orderRow.querySelector("td:nth-child(2)").innerText || "";
+    document.getElementById("phoneInput").value = orderRow.dataset.phone || "";
+    document.getElementById("productsInput").value = orderRow.querySelector("td:nth-child(3)").innerText || "";
+
+    const orderDateText = orderRow.querySelector("td:nth-child(4)").innerText;
+    const orderDate = new Date(orderDateText);
+    document.getElementById("orderDateInput").value = orderDate.toISOString().slice(0, 10) || "";
+
+    document.getElementById("quantityInput").value = orderRow.dataset.quantity || "";
+    document.getElementById("totalPriceInput").value = parseFloat(orderRow.querySelector("td:nth-child(5)").innerText.replace("$", "")) || "";
+
+    document.getElementById("addressInput").value = orderRow.dataset.address || "";
+    document.getElementById("cityInput").value = orderRow.dataset.city || "";
+    document.getElementById("stateInput").value = orderRow.dataset.state || "";
+    document.getElementById("postalCodeInput").value = orderRow.dataset.postalcode || "";
+    document.getElementById("countryInput").value = orderRow.dataset.country || "";
+
+    const statusSpan = orderRow.querySelector("td:nth-child(6) span");
+    document.getElementById("statusInput").value = statusSpan ? statusSpan.innerText.toLowerCase() : "";
+
+    document.getElementById("paymentMethodInput").value = orderRow.dataset.payment_method || "";
+  }
+
+  function closeEditOrderForm() {
+    editOrderModal.style.display = "none";
+  }
+
+  closeModalBtn.addEventListener("click", closeEditOrderForm);
+  window.addEventListener("click", (e) => {
+    if (e.target === editOrderModal) closeEditOrderForm();
+  });
+
+  editOrderForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    // Collect form data
+    const updatedOrder = {
+      orderId: document.getElementById("orderIDInput").value.trim(),
+      userName: document.getElementById("userNameInput").value.trim(),
+      phone: document.getElementById("phoneInput").value.trim(),
+      products: document.getElementById("productsInput").value.trim()
+        .split(",").map(p => p.trim()).filter(Boolean),
+      orderDate: document.getElementById("orderDateInput").value,
+      quantity: parseInt(document.getElementById("quantityInput").value, 10),
+      total_price: parseFloat(document.getElementById("totalPriceInput").value),
+      shippingAddress: {
+        address: document.getElementById("addressInput").value.trim(),
+        city: document.getElementById("cityInput").value.trim(),
+        state: document.getElementById("stateInput").value.trim(),
+        postalCode: document.getElementById("postalCodeInput").value.trim(),
+        country: document.getElementById("countryInput").value.trim(),
+      },
+      status: document.getElementById("statusInput").value,
+      Payment_method: document.getElementById("paymentMethodInput").value
+    };
+
+    const orderId = document.getElementById("orderId").value;
+
+    fetch(`/orders/${orderId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedOrder)
+    })
+    .then(res => {
+      if (!res.ok) throw new Error("Failed to update order");
+      return res.json();
+    })
+    .then(updatedData => {
+      // Find the row in the table and update it with new values
+      const row = document.querySelector(`tr[data-order-id="${orderId}"]`);
+      if (!row) return;
+
+      row.querySelector("td:nth-child(1)").innerText = updatedData.orderId || updatedOrder.orderId;
+      row.querySelector("td:nth-child(2)").innerText = updatedOrder.userName;
+      row.dataset.phone = updatedOrder.phone;
+      row.querySelector("td:nth-child(3)").innerText = updatedOrder.products.join(", ");
+      row.querySelector("td:nth-child(4)").innerText = new Date(updatedOrder.orderDate).toDateString();
+      row.dataset.quantity = updatedOrder.quantity;
+      row.querySelector("td:nth-child(5)").innerText = `$${updatedOrder.total_price.toFixed(2)}`;
+      row.querySelector("td:nth-child(6) span").innerText = updatedOrder.status.charAt(0).toUpperCase() + updatedOrder.status.slice(1);
+      row.querySelector("td:nth-child(6) span").className = `status-${updatedOrder.status.toLowerCase()}`;
+
+      row.dataset.address = updatedOrder.shippingAddress.address;
+      row.dataset.city = updatedOrder.shippingAddress.city;
+      row.dataset.state = updatedOrder.shippingAddress.state;
+      row.dataset.postalcode = updatedOrder.shippingAddress.postalCode;
+      row.dataset.country = updatedOrder.shippingAddress.country;
+      row.dataset.payment_method = updatedOrder.Payment_method;
+
+      closeEditOrderForm();
+    })
+    .catch(err => {
+      alert(err.message || "Error updating order.");
+      console.error(err);
+    });
+  });
+
+  // Attach event listeners for Edit and Delete buttons dynamically
   function attachListeners() {
-    tableBody.querySelectorAll(".delete-btn").forEach(btn => {
-      btn.onclick = () => handleDelete(btn);
+    document.querySelectorAll(".edit-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const orderRow = e.target.closest("tr");
+        if (!orderRow) return;
+        openEditOrderForm(orderRow);
+      });
     });
 
-    tableBody.querySelectorAll(".edit-btn").forEach(btn => {
-      btn.onclick = () => {
-        const row = btn.closest("tr");
-        openEditForm(row);
-      };
+    document.querySelectorAll(".delete-btn").forEach(btn => {
+      btn.addEventListener("click", handleDeleteClick);
     });
   }
 

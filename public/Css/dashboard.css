@@ -704,6 +704,56 @@ th, td {
 
 
 
+/* Close button */
 
+    #closeModal {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 6px 8px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .status-pending {
+      color: orange;
+      font-weight: bold;
+    }
+
+    .status-shipped {
+      color: blue;
+      font-weight: bold;
+    }
+
+    .status-delivered {
+      color: green;
+      font-weight: bold;
+    }
 
 
