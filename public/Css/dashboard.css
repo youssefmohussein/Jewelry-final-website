@@ -757,3 +757,17 @@ th, td {
     }
 
 
+.logout-btn {
+  background-color: #6a5acd;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: left;
+  margin-top: 20px;
+}
+.logout-btn:hover {
+  background-color: #6a5acd;
+}
