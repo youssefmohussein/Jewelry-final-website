@@ -282,3 +282,58 @@ exports.viewCollection = async (req, res) => {
 
 
 //-----------------------------------------------------End of Collection -----------------------------------------------------
+
+//-----------------------------------------------------Start of Order -----------------------------------------------------
+const Order = require("../models/orderDB");
+exports.getAllOrders = async (req, res) => {
+  try {
+    const orders = await Order.find()
+    res.render("dashboard/orders-dashboard", { orders });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
+};
+
+exports.updateOrder = async (req, res) => {
+  try {
+    const { status, shippingAddress, total_price, phone } = req.body;
+
+    const updatedOrder = await Order.findByIdAndUpdate(
+      req.params.id,
+      {
+        ...(status && { status }),
+        ...(shippingAddress && { shippingAddress }),
+        ...(total_price && { total_price }),
+        ...(phone && { phone }),
+      },
+      { new: true }
+    );
+
+    if (!updatedOrder) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    res.status(200).json({ message: "Order updated successfully", updatedOrder });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server Error", error: err.message });
+  }
+};
+
+exports.deleteOrder = async (req, res) => {
+  try {
+    const deletedOrder = await Order.findByIdAndDelete(req.params.id);
+    if (!deletedOrder) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    res.status(200).json({ message: "Order deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+//-----------------------------------------------------End of Orders -----------------------------------------------------
+
+
