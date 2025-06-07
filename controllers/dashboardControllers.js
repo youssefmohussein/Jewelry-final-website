@@ -32,9 +32,11 @@ exports.editUserRole = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
-exports.deleteUser = async (req, res) => {
+exports.deleteUserByEmail = async (req, res) => {
   try {
-    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    const email = req.params.email.toLowerCase();
+
+    const deletedUser = await User.findOneAndDelete({ email });
 
     if (!deletedUser) {
       return res.status(404).json({ message: "User not found" });

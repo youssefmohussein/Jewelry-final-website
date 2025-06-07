@@ -7,10 +7,10 @@ const upload = require("../middleware/uploads");
 //-----------------------------------------------Start of Customers dashboard Routes
 // Get all users and render customers dashboard page
 router.get("/customers-dashboard", dashboardController.getAllUsers);
-// Edit user role by ID
-router.put("/users/:id/edit", dashboardController.editUserRole);
-// Delete user by ID
-router.delete("/users/:id/delete", dashboardController.deleteUser);
+// Edit user role by email
+router.put("/users/:id/edit-role", dashboardController.editUserRole);
+// Delete user by email
+router.delete("/users/email/:email", dashboardController.deleteUserByEmail);
 
 //-----------------------------------------------End of customers dashboard Routes-----------------------------------------------
 

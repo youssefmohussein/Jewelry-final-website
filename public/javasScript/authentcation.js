@@ -130,3 +130,81 @@ resetForm.addEventListener("submit", async function (e) {
     alert("Something went wrong during password reset.");
   }
 });
+
+async function handleUserDelete(button) {
+  const user = JSON.parse(button.getAttribute('data-user'));
+  const email = encodeURIComponent(user.email);
+
+  if (!confirm(`Are you sure you want to delete user with email: ${user.email}?`)) {
+    return;
+  }
+
+  try {
+    const response = await fetch(`/users/email/${email}`, {
+      method: 'DELETE'
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      alert(result.message);
+      // Optionally remove the row from table without reload:
+      button.closest('tr').remove();
+    } else {
+      alert(result.message || 'Failed to delete user.');
+    }
+  } catch (error) {
+    console.error(error);
+    alert('Error deleting user.');
+  }
+}
+
+
+function handleUserEdit(button) {
+  const user = JSON.parse(button.getAttribute("data-user"));
+
+  // Populate modal fields
+  document.getElementById("editUserId").value = user._id; // hidden input for ID
+  document.getElementById("editUserEmail").innerText = user.email;
+  document.getElementById("editUserRole").value = user.role;
+
+  // Show modal
+  document.getElementById("editUserModal").style.display = "block";
+}
+
+// Function to close modal
+function closeUserModal() {
+  document.getElementById("editUserModal").style.display = "none";
+}
+
+// Function to submit the edit
+async function submitUserEdit() {
+  const userId = document.getElementById("editUserId").value;
+  const newRole = document.getElementById("editUserRole").value;
+
+  if (!userId || !newRole) {
+    alert("Missing user ID or role.");
+    return;
+  }
+
+  try {
+    const response = await fetch(`/users/${userId}/edit-role`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ role: newRole }),
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      alert(result.message);
+      // Reload to show updated data
+      window.location.reload();
+    } else {
+      alert(result.message || "Failed to update role.");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Error updating role.");
+  }
+}
