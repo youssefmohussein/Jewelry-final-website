@@ -52,43 +52,49 @@
             </tr>
           </thead>
           <tbody>
-            <% if (orders && orders.length > 0) { %> <% orders.forEach(order =>
-            { %>
-            <tr
-              data-order-id="<%= order._id %>"
-              data-phone="<%= order.phone %>"
-              data-quantity="<%= order.quantity %>"
-              data-payment_method="<%= order.Payment_method %>"
-              data-address="<%= order.shippingAddress.address %>"
-              data-city="<%= order.shippingAddress.city %>"
-              data-state="<%= order.shippingAddress.state %>"
-              data-postalcode="<%= order.shippingAddress.postalCode %>"
-              data-country="<%= order.shippingAddress.country %>"
-            >
-              <td><%= order.orderId %></td>
-              <td><%= order.user?.name || "Unknown" %></td>
-              <td>
-                <% if (order.product_ids && order.product_ids.length > 0) { %>
-                <% order.product_ids.forEach((product, i) => { %> <%=
-                product.name %><%= i < order.product_ids.length - 1 ? ", " : ""
-                %> <% }) %> <% } else { %> No products <% } %>
-              </td>
-              <td><%= order.orderDate.toDateString() %></td>
-              <td>$<%= order.total_price.toFixed(2) %></td>
-              <td>
-                <span class="status-<%= order.status.toLowerCase() %>"
-                  ><%= order.status %></span
+            <% if (orders && orders.length > 0) { %>
+              <% orders.forEach(order => { %>
+                <tr
+                  data-order-id="<%= order._id %>"
+                  data-phone="<%= order.phone %>"
+                  data-quantity="<%= order.quantity %>"
+                  data-payment_method="<%= order.Payment_method %>"
+                  data-address="<%= order.shippingAddress.address %>"
+                  data-city="<%= order.shippingAddress.city %>"
+                  data-state="<%= order.shippingAddress.state %>"
+                  data-postalcode="<%= order.shippingAddress.postalCode %>"
+                  data-country="<%= order.shippingAddress.country %>"
+                  data-user-name="<%= order.user?.name || 'Unknown' %>"
+                  data-order-date="<%= order.orderDate.toISOString().split('T')[0] %>"
+                  data-products-string="<%= order.product_ids && order.product_ids.length > 0 ? order.product_ids.map(p => p.name).join(', ') : 'No products' %>"
+                  data-total-price="<%= order.total_price.toFixed(2) %>"
                 >
-              </td>
-              <td>
-                <button class="btn edit-btn">Edit</button>
-                <button class="btn delete-btn">Delete</button>
-              </td>
-            </tr>
-            <% }); %> <% } else { %>
-            <tr>
-              <td colspan="7">No orders found.</td>
-            </tr>
+                  <td><%= order.orderId %></td>
+                  <td><%= order.user?.name || "Unknown" %></td>
+                  <td>
+                    <% if (order.product_ids && order.product_ids.length > 0) { %>
+                      <% order.product_ids.forEach((product, i) => { %>
+                        <%= product.name %><%= i < order.product_ids.length - 1 ? ", " : "" %>
+                      <% }) %>
+                    <% } else { %>
+                      No products
+                    <% } %>
+                  </td>
+                  <td><%= order.orderDate.toDateString() %></td>
+                  <td>$<%= order.total_price.toFixed(2) %></td>
+                  <td>
+                    <span class="status-<%= order.status.toLowerCase() %>"><%= order.status %></span>
+                  </td>
+                  <td>
+                    <button class="btn edit-btn">Edit</button>
+                    <button class="btn delete-btn">Delete</button>
+                  </td>
+                </tr>
+              <% }); %>
+            <% } else { %>
+              <tr>
+                <td colspan="7">No orders found.</td>
+              </tr>
             <% } %>
           </tbody>
         </table>
@@ -96,95 +102,55 @@
     </div>
 
     <!-- Edit Order Modal -->
-    <div id="editOrderModal" class="modal">
-      <div class="modal-content">
-        <span id="closeModal">&times;</span>
-        <h2>Edit Order</h2>
-        <form id="editOrderForm">
-          <input type="hidden" name="_id" id="orderId" />
-          <label
-            >Order ID:
-            <input type="text" name="orderId" id="orderIDInput" required
-          /></label>
-          <label
-            >User Name:
-            <input type="text" name="userName" id="userNameInput" required
-          /></label>
-          <label
-            >Phone: <input type="text" name="phone" id="phoneInput" required
-          /></label>
-          <label
-            >Products (comma separated):
-            <input type="text" name="products" id="productsInput" required
-          /></label>
-          <label
-            >Order Date:
-            <input type="date" name="orderDate" id="orderDateInput" required
-          /></label>
-          <label
-            >Quantity:
-            <input
-              type="number"
-              name="quantity"
-              id="quantityInput"
-              min="1"
-              required
-          /></label>
-          <label
-            >Total Price:
-            <input
-              type="number"
-              name="total_price"
-              id="totalPriceInput"
-              min="0"
-              step="0.01"
-              required
-          /></label>
-          <fieldset>
-            <legend>Shipping Address</legend>
-            <label
-              >Address:
-              <input type="text" name="address" id="addressInput" required
-            /></label>
-            <label
-              >City: <input type="text" name="city" id="cityInput" required
-            /></label>
-            <label
-              >State: <input type="text" name="state" id="stateInput" required
-            /></label>
-            <label
-              >Postal Code:
-              <input
-                type="text"
-                name="postalCode"
-                id="postalCodeInput"
-                required
-            /></label>
-            <label
-              >Country:
-              <input type="text" name="country" id="countryInput" required
-            /></label>
-          </fieldset>
-          <label
-            >Status:
-            <select name="status" id="statusInput" required>
-              <option value="pending">Pending</option>
-              <option value="shipped">Shipped</option>
-              <option value="delivered">Delivered</option>
-            </select>
-          </label>
-          <label
-            >Payment Method:
-            <select name="Payment_method" id="paymentMethodInput" required>
-              <option value="credit_card">Credit Card</option>
-              <option value="debit_card">Debit Card</option>
-              <option value="cash_on_delivery">Cash on Delivery</option>
-            </select>
-          </label>
-          <button type="submit">Save Changes</button>
-        </form>
+  <!-- Edit Order Modal -->
+<div id="editOrderModal" class="modal" style="display:none;">
+  <div class="modal-content order-form-modal">
+    <h2>Edit Order Status</h2>
+    <form id="editOrderForm">
+      <div class="form-grid">
+        <div class="double">
+          <label for="editOrderId">Order ID</label>
+          <input type="text" id="editOrderId" disabled />
+        </div>
+
+        <div class="double">
+          <label for="editCustomerName">Customer Name</label>
+          <input type="text" id="editCustomerName" disabled />
+        </div>
+
+        <div class="double">
+          <label for="editProducts">Product(s)</label>
+          <input type="text" id="editProducts" disabled />
+        </div>
+
+        <div class="double">
+          <label for="editTotalPrice">Total Price</label>
+          <input type="text" id="editTotalPrice" disabled />
+        </div>
+
+        <div class="full">
+          <label for="editShippingAddress">Shipping Address</label>
+          <textarea id="editShippingAddress" disabled></textarea>
+        </div>
+
+        <div class="double">
+          <label for="editStatus">Status</label>
+          <select id="editStatus" required>
+            <option value="shipped">Shipped</option>
+            <option value="delivered">Delivered</option>
+          </select>
+        </div>
       </div>
-    </div>
+
+      <div class="form-buttons">
+        <button type="submit">Save Changes</button>
+        <button type="button" onclick="closeEditOrderForm()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
     <script src="/javasScript/orderManagment.js"></script>
   </body>
 </html>
