@@ -1,93 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Orders</title>
     <link rel="stylesheet" href="/Css/dashboard.css" />
-</head>
+  </head>
 
-<body>
-    <script src="orders.js"></script>
+  <body>
     <div class="sidebar">
-        <h2>Velora</h2>
-        <hr>
-        <ul>
-            <a href="/admin-dashboard/dashboard"><li>Dashboard</li></a>
-            <a href="/customers-dashboard"><li>Customers</li></a>
-            <a href="/orders-dashboard"><li>Orders</li></a>
-            <a href="/product-dashboard"><li>Products</li></a>
-        </ul>
+      <h2>Velora</h2>
+      <hr />
+      <ul>
+        <a href="/admin-dashboard/dashboard"><li>Dashboard</li></a>
+        <a href="/customers-dashboard"><li>Customers</li></a>
+        <a href="/orders-dashboard"><li>Orders</li></a>
+        <a href="/product-dashboard"><li>Products</li></a>
+        <li>
+          <button onclick="logout()" class="logout-btn">Logout</button>
+        </li>
+      </ul>
     </div>
 
     <div class="main">
-        <div class="top">
-            <h1>Orders</h1>
-        </div>
+      <div class="top">
+        <h1>Orders</h1>
+      </div>
 
-        <div class="search-container">
-            <input type="text" id="search" placeholder="Search orders...">
-            <select id="status-filter">
-                <option value="">All Status</option>
-                <option value="pending">Pending</option>
-                <option value="shipped">Shipped</option>
-                <option value="delivered">Delivered</option>
-            </select>
-        </div>
+      <div class="search-container">
+        <input type="text" id="search" placeholder="Search orders..." />
+        <select id="status-filter">
+          <option value="">All Status</option>
+          <option value="shipped">Shipped</option>
+          <option value="delivered">Delivered</option>
+          <option value="pending">Pending</option>
+        </select>
+      </div>
 
-        <div class="orders-container">
-            <h2>Recent Orders</h2>
-            <table class="orders-table">
-                <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Products</th>
-                        <th>Date</th>
-                        <th>Amount</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% if (orders && orders.length > 0) { %>
-                        <% orders.forEach(function(order) { %>
-                            <tr>
-                                <td><%= order.orderId %></td>
-                                <td>
-                                    <% if (order.user && order.user.name) { %>
-                                        <%= order.user.name %>
-                                    <% } else { %>
-                                        Unknown
-                                    <% } %>
-                                </td>
-                                <td>
-                                    <% if (order.product_ids && order.product_ids.length > 0) { %>
-                                        <% order.product_ids.forEach(function(product, index) { %>
-                                            <%= product.name %><% if (index < order.product_ids.length - 1) { %>, <% } %>
-                                        <% }); %>
-                                    <% } else { %>
-                                        No products
-                                    <% } %>
-                                </td>
-                                <td><%= order.orderDate.toDateString() %></td>
-                                <td>$<%= order.total_price.toFixed(2) %></td>
-                                <td><span class="status-<%= order.status.toLowerCase() %>"><%= order.status %></span></td>
-                                <td><span class="delete" onclick="deleteRow(this)">Delete</span></td>
-                            </tr>
-                        <% }); %>
+      <div class="orders-container">
+        <h2>Recent Orders</h2>
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Products</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (orders && orders.length > 0) { %>
+              <% orders.forEach(order => { %>
+                <tr
+                  data-order-id="<%= order._id %>"
+                  data-phone="<%= order.phone %>"
+                  data-quantity="<%= order.quantity %>"
+                  data-payment_method="<%= order.Payment_method %>"
+                  data-address="<%= order.shippingAddress.address %>"
+                  data-city="<%= order.shippingAddress.city %>"
+                  data-state="<%= order.shippingAddress.state %>"
+                  data-postalcode="<%= order.shippingAddress.postalCode %>"
+                  data-country="<%= order.shippingAddress.country %>"
+                  data-user-name="<%= order.user?.name || 'Unknown' %>"
+                  data-order-date="<%= order.orderDate.toISOString().split('T')[0] %>"
+                  data-products-string="<%= order.product_ids && order.product_ids.length > 0 ? order.product_ids.map(p => p.name).join(', ') : 'No products' %>"
+                  data-total-price="<%= order.total_price.toFixed(2) %>"
+                >
+                  <td><%= order.orderId %></td>
+                  <td><%= order.user?.name || "Unknown" %></td>
+                  <td>
+                    <% if (order.product_ids && order.product_ids.length > 0) { %>
+                      <% order.product_ids.forEach((product, i) => { %>
+                        <%= product.name %><%= i < order.product_ids.length - 1 ? ", " : "" %>
+                      <% }) %>
                     <% } else { %>
-                        <tr>
-                            <td colspan="7">No orders found.</td>
-                        </tr>
+                      No products
                     <% } %>
-                </tbody>
-            </table>
-        </div>
+                  </td>
+                  <td><%= order.orderDate.toDateString() %></td>
+                  <td>$<%= order.total_price.toFixed(2) %></td>
+                  <td>
+                    <span class="status-<%= order.status.toLowerCase() %>"><%= order.status %></span>
+                  </td>
+                  <td>
+                    <button class="btn edit-btn">Edit</button>
+                    <button class="btn delete-btn">Delete</button>
+                  </td>
+                </tr>
+              <% }); %>
+            <% } else { %>
+              <tr>
+                <td colspan="7">No orders found.</td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <script src="/javasScript/orderManagment.js"></script>
-</body>
+    <!-- Edit Order Modal -->
+  <!-- Edit Order Modal -->
+<div id="editOrderModal" class="modal" style="display:none;">
+  <div class="modal-content order-form-modal">
+    <h2>Edit Order Status</h2>
+    <form id="editOrderForm">
+      <div class="form-grid">
+        <div class="double">
+          <label for="editOrderId">Order ID</label>
+          <input type="text" id="editOrderId" disabled />
+        </div>
 
+        <div class="double">
+          <label for="editCustomerName">Customer Name</label>
+          <input type="text" id="editCustomerName" disabled />
+        </div>
+
+        <div class="double">
+          <label for="editProducts">Product(s)</label>
+          <input type="text" id="editProducts" disabled />
+        </div>
+
+        <div class="double">
+          <label for="editTotalPrice">Total Price</label>
+          <input type="text" id="editTotalPrice" disabled />
+        </div>
+
+        <div class="full">
+          <label for="editShippingAddress">Shipping Address</label>
+          <textarea id="editShippingAddress" disabled></textarea>
+        </div>
+
+        <div class="double">
+          <label for="editStatus">Status</label>
+          <select id="editStatus" required>
+            <option value="shipped">Shipped</option>
+            <option value="delivered">Delivered</option>
+            <option value="pending">Pending</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-buttons">
+        <button type="submit">Save Changes</button>
+        <button type="button" onclick="closeEditOrderForm()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+    <script src="/javasScript/orderManagment.js"></script>
+  </body>
 </html>

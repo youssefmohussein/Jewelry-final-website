@@ -160,23 +160,35 @@ function addCollection() {
   }
 }*/
 
-
 async function addProduct() {
   const formData = new FormData();
 
-  formData.append("productNumber", document.getElementById("productNumber").value.trim().toUpperCase());
+  formData.append(
+    "productNumber",
+    document.getElementById("productNumber").value.trim().toUpperCase()
+  );
   formData.append("name", document.getElementById("productName").value.trim());
-  formData.append("description", document.getElementById("description").value.trim());
+  formData.append(
+    "description",
+    document.getElementById("description").value.trim()
+  );
   formData.append("category", document.getElementById("category").value.trim());
-  formData.append("collection", document.getElementById("collection").value.trim());
+  formData.append(
+    "collection",
+    document.getElementById("collection").value.trim()
+  );
   formData.append("stock", document.getElementById("stock").value);
   formData.append("price", document.getElementById("price").value);
   formData.append("totalSales", 0);
 
-  const colors = document.getElementById("colors").value.trim().split(',').map(c => c.trim());
+  const colors = document
+    .getElementById("colors")
+    .value.trim()
+    .split(",")
+    .map((c) => c.trim());
   formData.append("colors", JSON.stringify(colors));
 
-  // taking images 
+  // taking images
   const imageInput = document.getElementById("image");
   if (imageInput.files.length > 0) {
     formData.append("image", imageInput.files[0]);
@@ -185,7 +197,7 @@ async function addProduct() {
   try {
     const response = await fetch("/products", {
       method: "POST",
-      body: formData
+      body: formData,
     });
 
     const result = await response.json();
@@ -194,7 +206,11 @@ async function addProduct() {
       alert("Product added successfully!");
       closeProductForm();
     } else {
-      alert(`Failed to add product: ${result.error || result.message || "Unknown error"}`);
+      alert(
+        `Failed to add product: ${
+          result.error || result.message || "Unknown error"
+        }`
+      );
     }
   } catch (err) {
     console.error("Error:", err);
@@ -203,8 +219,7 @@ async function addProduct() {
 }
 
 //----------------------------------------updata button----------------------------------------
-// for opening the edit form 
-
+// for opening the edit form
 
 function handleEditClick(button) {
   const productData = button.getAttribute("data-product");
@@ -226,7 +241,7 @@ function openEditForm(product) {
   document.getElementById("editProductName").value = product.name;
   document.getElementById("editDescription").value = product.description || "";
   document.getElementById("editColors").value = Array.isArray(product.colors)
-    ? product.colors.join(', ')
+    ? product.colors.join(", ")
     : product.colors;
   document.getElementById("editCategory").value = product.category;
   document.getElementById("editCollection").value = product.collection;
@@ -242,10 +257,16 @@ function submitEditProduct() {
 
   const productNumber = document.getElementById("editProductNumber").value;
   formData.append("name", document.getElementById("editProductName").value);
-  formData.append("description", document.getElementById("editDescription").value);
+  formData.append(
+    "description",
+    document.getElementById("editDescription").value
+  );
   formData.append("colors", document.getElementById("editColors").value);
   formData.append("category", document.getElementById("editCategory").value);
-  formData.append("collection", document.getElementById("editCollection").value);
+  formData.append(
+    "collection",
+    document.getElementById("editCollection").value
+  );
   formData.append("stock", document.getElementById("editStock").value);
   formData.append("price", document.getElementById("editPrice").value);
 
@@ -256,9 +277,9 @@ function submitEditProduct() {
 
   fetch(`/products/${productNumber}`, {
     method: "PUT",
-    body: formData
+    body: formData,
   })
-    .then(res => {
+    .then((res) => {
       if (res.ok) {
         alert("Product updated successfully");
         location.reload();
@@ -266,33 +287,62 @@ function submitEditProduct() {
         alert("Failed to update product");
       }
     })
-    .catch(err => {
+    .catch((err) => {
       console.error("Update error:", err);
     });
 }
 
-
-
+//----------------------------------------------------end---------------------------------
+//---------------------------------------delete product -------------------------
+function handleDeleteClick(button) {
+  const product = JSON.parse(button.getAttribute("data-product"));
+  if (
+    confirm(`Are you sure you want to delete the product: ${product.name}?`)
+  ) {
+    fetch(`/products/${product.productNumber}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Product deleted successfully");
+          location.reload();
+        } else {
+          alert("Failed to delete the product");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("An error occurred while deleting");
+      });
+  }
+}
 
 //----------------------------------------------------end---------------------------------
 //---------------------------------------delete product -------------------------
 function handleDeleteClick(button) {
-  const product = JSON.parse(button.getAttribute('data-product'));
-  if (confirm(`Are you sure you want to delete the product: ${product.name}?`)) {
+  const product = JSON.parse(button.getAttribute("data-product"));
+  if (
+    confirm(`Are you sure you want to delete the product: ${product.name}?`)
+  ) {
     fetch(`/products/${product.productNumber}`, {
-      method: 'DELETE'
+      method: "DELETE",
     })
-    .then(response => {
-      if (response.ok) {
-        alert('Product deleted successfully');
-        location.reload(); 
-      } else {
-        alert('Failed to delete the product');
-      }
-    })
-    .catch(err => {
-      console.error(err);
-      alert('An error occurred while deleting');
-    });
+      .then((response) => {
+        if (response.ok) {
+          alert("Product deleted successfully");
+          location.reload();
+        } else {
+          alert("Failed to delete the product");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("An error occurred while deleting");
+      });
   }
+}
+
+function logout() {
+  // Redirect to login page
+  window.location.href = "/login";
 }

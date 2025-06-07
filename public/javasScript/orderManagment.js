@@ -1,56 +1,97 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const searchInput = document.getElementById("search");
-    const statusFilter = document.getElementById("status-filter");
-    const tableRows = document.querySelectorAll(".orders-table tbody tr");
+document.addEventListener("DOMContentLoaded", () => {
+  const editOrderModal = document.getElementById("editOrderModal");
+  const editOrderForm = document.getElementById("editOrderForm");
 
-    // Function to filter orders based on search input and status filter
-    function filterOrders() {
-        const searchText = searchInput.value.toLowerCase().trim();
-        const selectedStatus = statusFilter.value.toLowerCase().trim();
+  function openEditOrderForm(orderRow) {
+    editOrderModal.style.display = "block";
 
-        tableRows.forEach(row => {
-            const cells = row.querySelectorAll("td");
+    document.getElementById("editOrderId").value = orderRow.querySelector("td:nth-child(1)").innerText || "";
+    document.getElementById("editCustomerName").value = orderRow.querySelector("td:nth-child(2)").innerText || "";
+    document.getElementById("editProducts").value = orderRow.querySelector("td:nth-child(3)").innerText || "";
+    document.getElementById("editTotalPrice").value = orderRow.querySelector("td:nth-child(5)").innerText || "";
 
-            if (cells.length > 0) {
-                const orderId = cells[0]?.textContent.toLowerCase().trim();
-                const customerName = cells[1]?.textContent.toLowerCase().trim();
-                const statusText = cells[5]?.textContent.toLowerCase().trim();
+    // Combine shipping address fields into one textarea
+    const addressParts = [
+      orderRow.dataset.address,
+      orderRow.dataset.city,
+      orderRow.dataset.state,
+      orderRow.dataset.postalcode,
+      orderRow.dataset.country,
+    ].filter(Boolean);
 
-                const matchesSearch = orderId.includes(searchText) || customerName.includes(searchText);
-                const matchesStatus = selectedStatus === "" || statusText === selectedStatus;
+    document.getElementById("editShippingAddress").value = addressParts.join(", ");
 
-                row.style.display = matchesSearch && matchesStatus ? "" : "none";
-            }
-        });
+    // Set status dropdown, only allow "shipped" or "delivered"
+    let currentStatus = orderRow.querySelector("td:nth-child(6) span").innerText.toLowerCase();
+    if (currentStatus !== "shipped" && currentStatus !== "delivered") {
+      currentStatus = "shipped"; // default if not shipped/delivered
+    }
+    document.getElementById("editStatus").value = currentStatus;
+
+    editOrderForm.dataset.orderId = orderRow.dataset.orderId;
+  }
+
+  window.closeEditOrderForm = function () {
+    editOrderModal.style.display = "none";
+    editOrderForm.dataset.orderId = "";
+    editOrderForm.reset();
+  };
+
+  window.addEventListener("click", (e) => {
+    if (e.target === editOrderModal) window.closeEditOrderForm();
+  });
+
+  editOrderForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const orderId = editOrderForm.dataset.orderId;
+    if (!orderId) {
+      alert("Invalid order ID.");
+      return;
     }
 
-    // Function to cycle through order statuses on click
-    function handleStatusClick(event) {
-        const span = event.target;
-        const statuses = ["pending", "shipped", "delivered"];
-        const current = span.textContent.toLowerCase().trim();
-        const nextIndex = (statuses.indexOf(current) + 1) % statuses.length;
-        const next = statuses[nextIndex];
+    const updatedStatus = document.getElementById("editStatus").value;
 
-        // Update the span text and styling class
-        span.textContent = next;
-        statuses.forEach(status => span.classList.remove(`status-${status}`));
-        span.classList.add(`status-${next}`);
+    fetch(`/orders/${orderId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: updatedStatus }),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to update order status");
+        return res.json();
+      })
+      .then((updatedData) => {
+        const row = document.querySelector(`tr[data-order-id="${orderId}"]`);
+        if (!row) return;
 
-        // Re-filter if necessary
-        filterOrders();
-    }
+        row.querySelector("td:nth-child(6) span").innerText =
+          updatedStatus.charAt(0).toUpperCase() + updatedStatus.slice(1);
+        row.querySelector("td:nth-child(6) span").className = `status-${updatedStatus}`;
 
-    // Bind input and dropdown change events to filtering
-    searchInput.addEventListener("input", filterOrders);
-    statusFilter.addEventListener("change", filterOrders);
+        window.closeEditOrderForm();
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  });
 
-    // Bind click event to each status cell to cycle status
-    tableRows.forEach(row => {
-        const statusSpan = row.querySelector("td:nth-child(6) span");
-        if (statusSpan) {
-            statusSpan.style.cursor = "pointer";
-            statusSpan.addEventListener("click", handleStatusClick);
-        }
+  // Attach edit button event listeners (you should add this part in your existing JS)
+  function attachEditButtons() {
+    document.querySelectorAll(".edit-btn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const row = e.target.closest("tr");
+        openEditOrderForm(row);
+      });
     });
+  }
+
+  attachEditButtons();
 });
+
+
+function logout() {
+  // Redirect to login page
+  window.location.href = "/login";
+
+}
