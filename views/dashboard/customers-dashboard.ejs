@@ -33,35 +33,60 @@
 
       <!-- Users Table -->
       <div class="table">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Password</th>
-              <th>Role</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% users.forEach(user => { %>
-            <tr>
-              <td><%= user.name %></td>
-              <td><%= user.email %></td>
-              <td>***********</td>
-              <td><%= user.role %></td>
-              <td>
-                <button onclick="editRole('<%= user._id %>')">Edit Role</button>
-                <button onclick="deleteUser('<%= user._id %>')">Delete</button>
-              </td>
-            </tr>
-            <% }) %>
-          </tbody>
-        </table>
-      </div>
+       <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach(user => { %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td>**********</td>
+          <td><%= user.role %></td>
+         <td>
+  <button 
+    class="edit-btn"
+    data-user='<%- JSON.stringify(user).replace(/'/g, "&#39;") %>'
+    onclick="handleUserEdit(this)">Edit Role</button>
+
+  <button 
+  class="delete-btn"
+  data-user='<%- JSON.stringify(user).replace(/'/g, "&#39;") %>'
+  onclick="handleUserDelete(this)">Delete</button>
+</td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <!-- Edit User Role Modal -->
+  <div id="editUserModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <h2>Edit User Role</h2>
+    <input type="hidden" id="editUserId" />
+    <p>Email: <span id="editUserEmail"></span></p>
+    <label for="editUserRole">Role</label>
+    <select id="editUserRole">
+      <option value="customer">Customer</option>
+      <option value="admin">Admin</option>
+    </select>
+
+    <div class="form-buttons">
+      <button onclick="submitUserEdit()">Save</button>
+      <button onclick="closeUserModal()">Cancel</button>
     </div>
+  </div>
+</div>
+
 
     <!-- Include JavaScript file -->
-    <script src="../public/js/dashboard.js"></script>
+      <script src="/javasScript/authentcation.js"></script>
   </body>
 </html>
