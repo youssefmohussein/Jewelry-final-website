@@ -393,7 +393,7 @@ a:hover {
 /* .delete:hover {
   background-color: red;
   color: white;
-<<<<<<< HEAD
+
 }
 
 
@@ -759,6 +759,7 @@ th, td {
 
 
 
+
 /* Modal Overlay */
 #editOrderModal.modal {
   display: none; /* Hidden by default */
@@ -895,4 +896,18 @@ th, td {
 
 #editOrderModal .form-buttons button:last-child:hover {
   background-color: #bbb;
+
+.logout-btn {
+  background-color: #6a5acd;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: left;
+  margin-top: 20px;
+}
+.logout-btn:hover {
+  background-color: #6a5acd;
 }

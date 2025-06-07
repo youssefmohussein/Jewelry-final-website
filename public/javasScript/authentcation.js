@@ -132,16 +132,18 @@ resetForm.addEventListener("submit", async function (e) {
 });
 
 async function handleUserDelete(button) {
-  const user = JSON.parse(button.getAttribute('data-user'));
+  const user = JSON.parse(button.getAttribute("data-user"));
   const email = encodeURIComponent(user.email);
 
-  if (!confirm(`Are you sure you want to delete user with email: ${user.email}?`)) {
+  if (
+    !confirm(`Are you sure you want to delete user with email: ${user.email}?`)
+  ) {
     return;
   }
 
   try {
     const response = await fetch(`/users/email/${email}`, {
-      method: 'DELETE'
+      method: "DELETE",
     });
 
     const result = await response.json();
@@ -149,16 +151,15 @@ async function handleUserDelete(button) {
     if (response.ok) {
       alert(result.message);
       // Optionally remove the row from table without reload:
-      button.closest('tr').remove();
+      button.closest("tr").remove();
     } else {
-      alert(result.message || 'Failed to delete user.');
+      alert(result.message || "Failed to delete user.");
     }
   } catch (error) {
     console.error(error);
-    alert('Error deleting user.');
+    alert("Error deleting user.");
   }
 }
-
 
 function handleUserEdit(button) {
   const user = JSON.parse(button.getAttribute("data-user"));
@@ -207,4 +208,8 @@ async function submitUserEdit() {
     console.error(error);
     alert("Error updating role.");
   }
+}
+function logout() {
+  // Redirect to login page
+  window.location.href = "/login";
 }

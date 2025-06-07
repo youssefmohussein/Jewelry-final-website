@@ -29,11 +29,7 @@ const usersManagementSchema = new mongoose.Schema({
         `Password must contain at least one letter, one number, and be at least 8 characters long.`,
     },
   },
-  gender: {
-    type: String,
-    enum: ["male", "female"],
-    required: false,
-  },
+  
   role: {
     type: String,
     enum: ["admin", "customer"],
