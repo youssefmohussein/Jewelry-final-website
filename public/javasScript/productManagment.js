@@ -222,60 +222,34 @@ async function addProduct() {
 // for opening the edit form
 
 function handleEditClick(button) {
-  const orderData = button.getAttribute("data-order");
+  const productData = button.getAttribute("data-product");
 
   try {
-    const order = JSON.parse(orderData);
-    openEditOrderForm(order);
+    const product = JSON.parse(productData);
+    openEditForm(product);
   } catch (error) {
-    console.error("Error parsing order data:", error);
+    console.error("Error parsing product data:", error);
   }
 }
+// update button fourm
 
-function openEditOrderForm(order) {
-  const modal = document.getElementById("editOrderModal");
+function openEditForm(product) {
+  const modal = document.getElementById("editProductModal");
   modal.style.display = "block";
 
-  document.getElementById("editOrderId").value = order.orderId || "";
-  document.getElementById("editUserName").value = order.user?.name || "";
-  document.getElementById("editPhone").value = order.phone || "";
-  document.getElementById("editProducts").value = Array.isArray(
-    order.product_ids
-  )
-    ? order.product_ids.map((p) => p.name || p).join(", ")
-    : "";
-  document.getElementById("editOrderDate").value = order.orderDate
-    ? new Date(order.orderDate).toISOString().slice(0, 10)
-    : "";
-  document.getElementById("editQuantity").value = order.quantity || "";
-  document.getElementById("editTotalPrice").value = order.total_price || "";
-  document.getElementById("editStatus").value = order.status || "";
-  document.getElementById("editPaymentMethod").value =
-    order.Payment_method || "";
-
-  // Shipping address fields
-  if (order.shippingAddress) {
-    document.getElementById("editAddress").value =
-      order.shippingAddress.address || "";
-    document.getElementById("editCity").value =
-      order.shippingAddress.city || "";
-    document.getElementById("editState").value =
-      order.shippingAddress.state || "";
-    document.getElementById("editPostalCode").value =
-      order.shippingAddress.postalCode || "";
-    document.getElementById("editCountry").value =
-      order.shippingAddress.country || "";
-  } else {
-    document.getElementById("editAddress").value = "";
-    document.getElementById("editCity").value = "";
-    document.getElementById("editState").value = "";
-    document.getElementById("editPostalCode").value = "";
-    document.getElementById("editCountry").value = "";
-  }
+  document.getElementById("editProductNumber").value = product.productNumber;
+  document.getElementById("editProductName").value = product.name;
+  document.getElementById("editDescription").value = product.description || "";
+  document.getElementById("editColors").value = Array.isArray(product.colors)
+    ? product.colors.join(", ")
+    : product.colors;
+  document.getElementById("editCategory").value = product.category;
+  document.getElementById("editCollection").value = product.collection;
+  document.getElementById("editStock").value = product.stock;
+  document.getElementById("editPrice").value = product.price;
 }
-
-function closeEditOrderForm() {
-  document.getElementById("editOrderModal").style.display = "none";
+function closeEditProductForm() {
+  document.getElementById("editProductModal").style.display = "none";
 }
 
 function submitEditProduct() {
@@ -316,6 +290,31 @@ function submitEditProduct() {
     .catch((err) => {
       console.error("Update error:", err);
     });
+}
+
+//----------------------------------------------------end---------------------------------
+//---------------------------------------delete product -------------------------
+function handleDeleteClick(button) {
+  const product = JSON.parse(button.getAttribute("data-product"));
+  if (
+    confirm(`Are you sure you want to delete the product: ${product.name}?`)
+  ) {
+    fetch(`/products/${product.productNumber}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Product deleted successfully");
+          location.reload();
+        } else {
+          alert("Failed to delete the product");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("An error occurred while deleting");
+      });
+  }
 }
 
 //----------------------------------------------------end---------------------------------
