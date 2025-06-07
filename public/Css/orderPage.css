@@ -1,0 +1,109 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background-color: #fdfaf5;
+  color: #1a1a1a;
+  padding: 0;
+  margin: 0;
+}
+
+.right {
+  text-align: center;
+  margin: 5px;
+  padding: 150px 20px 20px;
+}
+
+.right h1 {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #111;
+}
+
+.form {
+  max-width: 600px;
+  background-color: white;
+  margin: 0 auto;
+  padding: 32px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.group {
+  margin-bottom: 24px;
+}
+
+.group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: #444;
+}
+
+.group input,
+.group select {
+  width: 100%;
+  padding: 14px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: border 0.2s;
+}
+
+.group input:focus,
+.group select:focus {
+  border-color: #000;
+  outline: none;
+}
+
+.return {
+  margin-top: 40px;
+  border-top: 1px solid #eee;
+  padding-top: 24px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.buttonCheckout {
+    display: block;
+    width: 100%;
+    background: black;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 20px;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s linear;
+    text-decoration: none; 
+    text-align: center;    
+}
+
+.buttonCheckout:hover {
+    background-color: #222;
+    letter-spacing: 2px;
+    opacity: .8;
+}
+
+.input-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 40px;
+}
+
