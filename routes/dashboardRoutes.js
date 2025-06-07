@@ -42,4 +42,9 @@ router.get("/collections/:collectionName", dashboardController.viewCollection);
 
 //-----------------------------------------------End of collection routes -----------------------------------------------
 
+// Orders
+router.get("/orders-dashboard", dashboardController.getAllOrders);
+router.put("/orders/:id", dashboardController.updateOrder);
+router.delete("/orders/:id", dashboardController.deleteOrder);
+
 module.exports = router;
