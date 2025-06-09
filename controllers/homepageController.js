@@ -3,6 +3,20 @@ const Collection = require("../models/collectionDB");
 // Homepage logic
 exports.getHomePage = async (req, res) => {
   try {
+    if (req.session.userId) {
+      // User is logged in, redirect them based on their role
+      if (req.session.role === "admin") {
+        return res.redirect("/customers-dashboard"); // Redirect admin to admin dashboard
+      } else
+        console.log(
+          `User ${req.session.userId} with role '${req.session.role}' tried to access homepage when not admin.`
+        ); // For debugging
+      return res
+        .status(403)
+        .send(
+          "Access Denied: You do not have administrator privileges to access this area."
+        );
+    }
     const collections = await Collection.find();
     res.render("homePage", { collections });
   } catch (error) {
