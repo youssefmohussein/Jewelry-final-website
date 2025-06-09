@@ -3,6 +3,18 @@ const Collection = require("../models/collectionDB");
 // Homepage logic
 exports.getHomePage = async (req, res) => {
   try {
+    if (req.session.userId) {
+      // User is logged in, redirect them based on their role
+      if (req.session.role === "admin") {
+        return res.redirect("/customers-dashboard"); // Redirect admin to admin dashboard
+      } else if (req.session.role === "customer") {
+        // If it's a customer, redirect to their specific authenticated home/dashboard.
+        // The '/home' route is already protected by 'isUser' middleware.
+        return res.redirect("/home");
+      }
+      // Fallback for unexpected roles, redirect to customer home
+      return res.redirect("/home");
+    }
     const collections = await Collection.find();
     res.render("homePage", { collections });
   } catch (error) {
