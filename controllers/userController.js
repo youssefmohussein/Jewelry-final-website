@@ -15,7 +15,7 @@ exports.registerUser = async (req, res) => {
 
     const newUser = new User({ name, email, password });
     await newUser.save();
-   res.status(201).json({ message: "User registered successfully" });
+    res.status(201).json({ message: "User registered successfully" });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -41,7 +41,10 @@ exports.loginUser = async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid credentials." });
     }
-
+    // --- Session Management: Set session data upon successful login ---
+    req.session.userId = user._id; // Store user ID in session
+    req.session.role = user.role; // Store user role in session for authorization checks
+    // You can store any other relevant user data in the session here
     res.status(200).json({
       message: "Login successful!",
       role: user.role,
@@ -71,11 +74,30 @@ exports.resetPassword = async (req, res) => {
       return res.status(404).json({ message: "User not found." });
     }
 
- user.password = password; // Let schema middleware hash it
-await user.save();
+    user.password = password; // Let schema middleware hash it
+    await user.save();
 
     res.status(200).json({ message: "Password reset successful." });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
+};
+
+exports.logoutUser = (req, res) => {
+  // Destroy the session associated with the current request.
+  // This removes the session data from the server's session store.
+  req.session.destroy((err) => {
+    if (err) {
+      // If an error occurs during session destruction, log it and send a 500 response
+      console.error("Error destroying session:", err);
+      return res
+        .status(500)
+        .json({ message: "Could not log out, please try again." });
+    }
+    // Clear the session cookie from the client's browser.
+    // "connect.sid" is the default name for the session cookie used by express-session.
+    res.clearCookie("connect.sid");
+    // Send a success response upon successful logout
+    res.status(200).json({ message: "Logged out successfully!" });
+  });
 };

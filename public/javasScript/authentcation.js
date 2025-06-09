@@ -209,7 +209,21 @@ async function submitUserEdit() {
     alert("Error updating role.");
   }
 }
-function logout() {
-  // Redirect to login page
-  window.location.href = "/login";
+async function logout() {
+  try {
+    const response = await fetch("/users/logout", {
+      method: "POST", // Sends a POST request
+      headers: { "Content-Type": "application/json" },
+    });
+
+    const result = await response.json();
+    alert(result.message);
+
+    if (response.ok) {
+      window.location.href = "/login"; // Redirects to the login page
+    }
+  } catch (err) {
+    console.error("Error during logout:", err);
+    alert("Something went wrong during logout.");
+  }
 }
