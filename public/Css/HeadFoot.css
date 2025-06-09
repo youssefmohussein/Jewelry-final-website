@@ -215,6 +215,21 @@ footer {
     text-align: center;
 }
 
+.logout-icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgb(9, 9, 9); /* matches other icons */
+  font-size: 25px;     /* matches .icons a size */
+  padding-left: 30px;  /* consistent with other icons */
+  transition: color 0.3s;
+}
+
+.logout-icon-btn:hover {
+  color: #b30000; /* red tint on hover to indicate logout action */
+}
+
+
 .footer {
     padding: 60px 20px;
 }
