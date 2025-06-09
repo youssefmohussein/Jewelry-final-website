@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Account</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/userprofile.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-content">
+      <div class="brand">NEW YORK</div>
+      <div class="logout">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> <a href="/logout">LOGOUT</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <h1> My account</h1>
+    <p class="welcome">Welcome back, <strong><%= user.name %></strong>!</p>
+
+    <div class="dashboard">
+      <div class="orders-section">
+        <div class="orders-header">
+          <span>MY ORDERS</span>
+          <a href="#" class="view-all-btn">View all ▸</a>
+        </div>
+        <div class="orders-box">
+          <div class="order-status">
+            <div class="order-icon"></div>
+            <p>You haven't placed any orders yet</p>
+            <button class="browse-btn">BROWSE PRODUCTS</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="email-section">
+        <span class="email-header"> PRIMARY EMAIL</span>
+        <div class="email-details">
+          <p><strong><%= user.name %></strong></p>
+          <p class="email-address"><%= user.Email %></p>
+        </div>
+        <button class="edit-btn"> EDIT EMAIL</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 Fashion Brand. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </footer>
+</body>
+</html>
