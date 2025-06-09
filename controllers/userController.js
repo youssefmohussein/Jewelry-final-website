@@ -101,3 +101,22 @@ exports.logoutUser = (req, res) => {
     res.status(200).json({ message: "Logged out successfully!" });
   });
 };
+
+exports.getUserProfile = async (req, res) => {
+  try {
+    // Ensure user is logged in
+    if (!req.session.userId) {
+      return res.redirect("/login");
+    }
+
+    const user = await User.findById(req.session.userId);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    res.render("userProfile", { user });
+  } catch (error) {
+    console.error("Error loading profile:", error);
+    res.status(500).send("Server error");
+  }
+};

@@ -47,7 +47,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 // Routes
-app.use("/users", userRoutes);
+app.use("/", userRoutes);
 app.use("/", dashboardRoutes);
 app.use("/", homepageRoutes);
 app.use("/categories", categoryRoutes);
@@ -55,7 +55,8 @@ app.use("/", orderRoutes);
 
 // MongoDB
 const MONGO_URI = process.env.MONGO_URI;
-mongoose.connect(MONGO_URI)
+mongoose
+  .connect(MONGO_URI)
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 

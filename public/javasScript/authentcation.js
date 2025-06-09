@@ -37,7 +37,7 @@ signUpForm.addEventListener("submit", async function (e) {
   }
 
   try {
-    const response = await fetch("/users/register", {
+    const response = await fetch("/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password }), // FIXED key names
@@ -68,7 +68,7 @@ signInForm.addEventListener("submit", async function (e) {
   }
 
   try {
-    const response = await fetch("/users/login", {
+    const response = await fetch("/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }), // FIXED key names
@@ -113,7 +113,7 @@ resetForm.addEventListener("submit", async function (e) {
   }
 
   try {
-    const response = await fetch("/users/resetpassword", {
+    const response = await fetch("/resetpassword", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password, confirmPassword }), // FIXED key names
@@ -211,7 +211,7 @@ async function submitUserEdit() {
 }
 async function logout() {
   try {
-    const response = await fetch("/users/logout", {
+    const response = await fetch("/logout", {
       method: "POST", // Sends a POST request
       headers: { "Content-Type": "application/json" },
     });

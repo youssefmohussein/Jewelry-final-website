@@ -343,3 +343,14 @@ footer {
     font-size: 14px;
     color: white;
 }
+
+.logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit; /* match navbar icon color */
+  font-size: 1.2rem;
+}
+.logout-btn:hover {
+  color: #f00; /* or any hover color */
+}
