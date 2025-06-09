@@ -7,13 +7,15 @@ exports.getHomePage = async (req, res) => {
       // User is logged in, redirect them based on their role
       if (req.session.role === "admin") {
         return res.redirect("/customers-dashboard"); // Redirect admin to admin dashboard
-      } else if (req.session.role === "customer") {
-        // If it's a customer, redirect to their specific authenticated home/dashboard.
-        // The '/home' route is already protected by 'isUser' middleware.
-        return res.redirect("/home");
-      }
-      // Fallback for unexpected roles, redirect to customer home
-      return res.redirect("/home");
+      } else
+        console.log(
+          `User ${req.session.userId} with role '${req.session.role}' tried to access homepage when not admin.`
+        ); // For debugging
+      return res
+        .status(403)
+        .send(
+          "Access Denied: You do not have administrator privileges to access this area."
+        );
     }
     const collections = await Collection.find();
     res.render("homePage", { collections });
