@@ -220,7 +220,7 @@ async function logout() {
     alert(result.message);
 
     if (response.ok) {
-      window.location.href = "/login"; // Redirects to the login page
+      window.location.href = "/"; // Redirects to the login page
     }
   } catch (err) {
     console.error("Error during logout:", err);

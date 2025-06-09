@@ -135,6 +135,40 @@ h1 {
   cursor: pointer;
 }
 
+.logout-icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #111827;
+  padding: 0;
+}
+
+.logout-icon-btn:hover {
+  color: #dc2626; /* Optional: red on hover */
+}
+
+  .modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+  }
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+    position: relative;
+  }
+  .close-btn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 24px;
+    cursor: pointer;
+  }
 .footer {
   text-align: center;
   font-size: 14px;
