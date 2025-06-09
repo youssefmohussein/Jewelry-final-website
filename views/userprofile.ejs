@@ -12,7 +12,7 @@
   <body>
     <header class="topbar">
       <div class="topbar-content">
-        <div class="brand">Ehna Toppppppppppp</div>
+        <div class="brand">Paris</div>
         <div class="logout">
 
   <button onclick="logout()" class="logout-icon-btn" title="Logout">
@@ -35,7 +35,7 @@
             <div class="order-status">
               <div class="order-icon"></div>
               <p>You haven't placed any orders yet</p>
-              <button class="browse-btn">BROWSE PRODUCTS</button>
+              <a href="/" class="browse-btn">BROWSE PRODUCTS</a>
             </div>
           </div>
         </div>
@@ -44,12 +44,22 @@
           <span class="email-header"> PRIMARY EMAIL</span>
           <div class="email-details">
             <p><strong><%= user.name %></strong></p>
-            <p class="email-address"><%= user.Email %></p>
+            <p class="email-address"><%= user.email %></p>
           </div>
-          <button class="edit-btn">EDIT EMAIL</button>
+          <button class="edit-btn" onclick="handleEmailEdit()">EDIT EMAIL</button>
         </div>
       </div>
     </main>
+    <div id="editEmailModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <span onclick="closeEmailModal()" class="close-btn">&times;</span>
+        <h3>Edit Email</h3>
+        <input type="hidden" id="editEmailUserId" value="<%= user._id %>" />
+        <label for="newEmail">New Email:</label>
+        <input type="email" id="newEmail" placeholder="Enter new email" required />
+        <button onclick="submitEmailEdit()">Save Changes</button>
+      </div>
+    </div>
 
     <footer class="footer">
       <p>© 2025 Fashion Brand. All rights reserved.</p>
@@ -58,6 +68,7 @@
         <a href="#">Terms of Service</a>
       </div>
     </footer>
-     <script src="/javasScript/productManagment.js"></script>
+     <!-- <script src="/javasScript/productManagment.js"></script> -->
+     <script src="/javasScript/authentcation.js"></script>
   </body>
 </html>

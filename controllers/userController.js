@@ -120,3 +120,28 @@ exports.getUserProfile = async (req, res) => {
     res.status(500).send("Server error");
   }
 };
+exports.updateUserEmail = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const existingUser = await User.findOne({ email: email });
+    if (existingUser && existingUser._id.toString() !== req.params.id) {
+      return res.status(400).json({ message: "Email is already in use." });
+    }
+
+    // Update the user by ID
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      { email: email },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    res.status(200).json({ message: "Email updated successfully", updatedUser });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};

@@ -8,4 +8,5 @@ router.post("/login", userController.loginUser);
 router.post("/resetpassword", userController.resetPassword);
 router.post("/logout", userController.logoutUser); // New route to handle user logout
 router.get("/profile", isAuthenticated, userController.getUserProfile);
+router.put("/users/:id/edit-email", userController.updateUserEmail);
 module.exports = router;
