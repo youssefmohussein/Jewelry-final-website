@@ -227,3 +227,43 @@ async function logout() {
     alert("Something went wrong during logout.");
   }
 }
+
+function handleEmailEdit() {
+  document.getElementById("editEmailModal").style.display = "block";
+}
+
+// Close modal when user clicks close button
+function closeEmailModal() {
+  document.getElementById("editEmailModal").style.display = "none";
+}
+
+      // Submit email update
+      async function submitEmailEdit() {
+        const userId = document.getElementById("editEmailUserId").value;
+        const newEmail = document.getElementById("newEmail").value;
+
+        if (!userId || !newEmail) {
+          alert("Missing user ID or email.");
+          return;
+        }
+
+        try {
+          const response = await fetch(`/users/${userId}/edit-email`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: newEmail }),
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            alert(result.message);
+            window.location.reload();
+          } else {
+            alert(result.message || "Failed to update email.");
+          }
+        } catch (error) {
+          console.error(error);
+          alert("Error updating email.");
+        }
+      }

@@ -1,11 +1,11 @@
-  function openEmailModal() {
-    document.getElementById('editEmailModal').style.display = 'flex';
-    document.getElementById('newEmail').value = '<%= user.Email %>';
-  }
+  // function openEmailModal() {
+  //   document.getElementById('editEmailModal').style.display = 'flex';
+  //   document.getElementById('newEmail').value = '<%= user.Email %>';
+  // }
 
-  function closeEmailModal() {
-    document.getElementById('editEmailModal').style.display = 'none';
-  }
+  // function closeEmailModal() {
+  //   document.getElementById('editEmailModal').style.display = 'none';
+  // }
 // orderProfile.js
 
 // Example: Fetch and display user's past orders on profile page
