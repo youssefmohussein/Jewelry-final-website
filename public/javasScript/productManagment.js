@@ -8,26 +8,23 @@ function closeForm() {
 }
 
 async function addCollection() {
-  const collectionName = document.getElementById("collectionName").value;
-  const collectionImage = document.getElementById("collectionImage").value;
+  const formData = new FormData();
 
-  // Validate the fields
-  if (!collectionName || !collectionImage) {
-    alert("Please fill in both fields.");
+  const collectionName = document.getElementById("collectionName").value.trim();
+  const collectionImageInput = document.getElementById("collectionImage");
+
+  if (!collectionName || collectionImageInput.files.length === 0) {
+    alert("Please enter a collection name and select an image.");
     return;
   }
 
+  formData.append("name", collectionName);
+  formData.append("collectionImage", collectionImageInput.files[0]);
+
   try {
-    // Send a POST request to create the collection
-    const response = await fetch("/collections/create", {
+    const response = await fetch("/create", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: collectionName,
-        image: collectionImage,
-      }),
+      body: formData,
     });
 
     const data = await response.json();
@@ -36,13 +33,14 @@ async function addCollection() {
       alert("Collection added successfully!");
       closeForm();
     } else {
-      alert(`Error: ${data.message}`);
+      alert(`Failed to add collection: ${data.message || "Unknown error"}`);
     }
   } catch (error) {
     console.error("Error adding collection:", error);
-    alert("There was an error adding the collection.");
+    alert("Something went wrong while adding the collection.");
   }
 }
+
 
 function openProductForm() {
   document.getElementById("productModal").style.display = "block";
@@ -75,39 +73,39 @@ window.onclick = function (event) {
 };
 
 // Add Collection function
-function addCollection() {
-  const name = document.getElementById("collectionName").value;
-  const image = document.getElementById("collectionImage").value;
+// function addCollection() {
+//   const name = document.getElementById("collectionName").value;
+//   const image = document.getElementById("collectionImage").value;
 
-  // Basic validation
-  if (!name || !image) {
-    alert("Please provide both Collection Name and Image URL.");
-    return;
-  }
+//   // Basic validation
+//   if (!name || !image) {
+//     alert("Please provide both Collection Name and Image URL.");
+//     return;
+//   }
 
-  // Send POST request to the server
-  fetch("/admin/create", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ name, image }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.message === "Collection created successfully") {
-        alert("Collection added successfully!");
-        closeCollectionForm(); // Close modal after successful creation
-        // Optionally, refresh or update the page content
-      } else {
-        alert("Something went wrong. Try again.");
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      alert("Failed to add collection.");
-    });
-}
+//   // Send POST request to the server
+//   fetch("/admin/create", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({ name, image }),
+//   })
+//     .then((response) => response.json())
+//     .then((data) => {
+//       if (data.message === "Collection created successfully") {
+//         alert("Collection added successfully!");
+//         closeCollectionForm(); // Close modal after successful creation
+//         // Optionally, refresh or update the page content
+//       } else {
+//         alert("Something went wrong. Try again.");
+//       }
+//     })
+//     .catch((error) => {
+//       console.error("Error:", error);
+//       alert("Failed to add collection.");
+//     });
+// }
 // The addProduct function without img
 
 /*async function addProduct() {

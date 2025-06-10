@@ -54,34 +54,15 @@ exports.deleteUserByEmail = async (req, res) => {
 
 const Product = require("../models/productDB");
 
-
-/*exports.createProduct = async (req, res) => {
-  try {
-    const existingProduct = await Product.findOne({
-      productNumber: req.body.productNumber,
-    });
-    if (existingProduct) {
-      return res
-        .status(400)
-        .json({ error: "Product with this productNumber already exists" });
-    }
-    const product = new Product(req.body);
-    await product.save();
-    res.status(200).json(product);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-};*/
-
 const fs = require('fs');
 exports.createProduct = async (req, res) => {
   try {
-    // تحقق من وجود صورة
+    
     if (!req.file) {
       return res.status(400).json({ error: 'Image file is required' });
     }
 
-    // تحقق من وجود المنتج
+    
     const existingProduct = await Product.findOne({
       productNumber: req.body.productNumber,
     });
@@ -92,7 +73,6 @@ exports.createProduct = async (req, res) => {
         .json({ error: 'Product with this productNumber already exists' });
     }
 
-    // هنا نستخدم req.file.buffer بدل fs.readFileSync(req.file.path)
     const product = new Product({
       ...req.body,
       image: {
@@ -198,7 +178,46 @@ exports.deleteProduct = async (req, res) => {
 //-----------------------------------------------Start of Collection-----------------------------------------------------
 const Collection = require("../models/collectionDB");
 
+
+
+
+
+
+
+
 exports.createCollection = async (req, res) => {
+  try {
+    const { name } = req.body;
+
+    // Basic validation
+    if (!name || !req.file) {
+      return res.status(400).json({ message: "Both name and image are required." });
+    }
+
+    // Create and save the new collection
+    const newCollection = new Collection({
+      name,
+      image: {
+        data: req.file.buffer,
+        contentType: req.file.mimetype,
+      },
+    });
+
+    await newCollection.save();
+
+    res.status(201).json({
+      message: "Collection created successfully",
+      collection: newCollection,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+
+
+/*/*exports.createCollection = async (req, res) => {
   try {
     const { name, image } = req.body;
 
@@ -221,31 +240,11 @@ exports.createCollection = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Server error" });
   }
-};
-
-/*exports.viewCollection = async (req, res) => {
-  const { collectionName } = req.params;
-
-  try {
-    const collection = await Collection.findOne({ name: collectionName });
-    const collections = await Collection.find(); // for header
-
-    if (!collection) {
-      return res.status(404).send("Collection not found");
-    }
-
-    const products = await Product.find({ collection: collection.name });
-
-    res.render("collectionPage", {
-      collection,
-      collections,
-      products, // ✅ send this to the view
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Server error");
-  }
 };*/
+
+
+
+
 exports.viewCollection = async (req, res) => {
   const { collectionName } = req.params;
 
@@ -257,18 +256,26 @@ exports.viewCollection = async (req, res) => {
       return res.status(404).send("Collection not found");
     }
 
-    
+    //  Generate base64 image for collection
+    if (collection.image && collection.image.data) {
+      const base64 = collection.image.data.toString('base64');
+      collection.imageSrc = `data:${collection.image.contentType};base64,${base64}`;
+    } else {
+      collection.imageSrc = null;
+    }
+
+    //  Generate base64 image for each product
     const products = await Product.find({ collection: collection.name }).lean();
 
-  
     products.forEach(product => {
       if (product.image && product.image.data) {
         const base64 = product.image.data.toString('base64');
         product.imageSrc = `data:${product.image.contentType};base64,${base64}`;
       } else {
-        product.imageSrc = null; 
+        product.imageSrc = null;
       }
     });
+
     res.render("collectionPage", {
       collection,
       collections,
@@ -279,6 +286,7 @@ exports.viewCollection = async (req, res) => {
     res.status(500).send("Server error");
   }
 };
+
 
 
 //-----------------------------------------------------End of Collection -----------------------------------------------------
