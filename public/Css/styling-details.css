@@ -1,0 +1,343 @@
+/* ========== Global Styles ========== */
+* {
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+button,
+.add-to-cart {
+    background-color: #b76e79;
+    color: white;
+    width: 300px;
+    height: 45px;
+    font-size: 19px;
+    border: #8C6F54;
+}
+
+/* ========== Navbar ========== */
+.Bracelet .navbar,
+.earings .navbar,
+.necklace .navbar,
+.rings .navbar {
+    background-color: white;
+    z-index: 1000;
+}
+
+/* ========== Product Section ========== */
+.Product {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 150px;
+    background-color: white;
+    padding: 100px 50px;
+}
+
+/* ========== Image Containers ========== */
+.product-bracelet-img,
+.product-earings-image,
+.product-ring-image,
+.product-necklace-image,
+.product-minimal-image,
+.product-motif-image {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 80px;
+}
+
+.product-necklace-image {
+    width: 35%;
+}
+
+.product-bracelet-img img,
+.product-earings-image img,
+.product-ring-image img,
+.product-necklace-image img,
+.product-minimal-image img,
+.product-motif-image img {
+    width: auto;
+    display: block;
+    position: relative;
+    top: -50px;
+}
+
+/* ========== Product Details ========== */
+.pdetails {
+    max-width: 400px;
+    color: black;
+    position: relative;
+    top: -50px;
+}
+
+.pdetails h2 {
+    font-family: 'SAOLDISPLAY-MEDIUM';
+    font-size: 28px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    font-weight: 200;
+}
+
+.pdetails p {
+    font-size: 18px;
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    color: #45474EA6;
+    font-family: initial;
+}
+
+.pdetails details {
+    padding-top: 20px;
+}
+
+/* ========== Details / Summary Styling ========== */
+.Product details {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.05);
+    /* slightly darker so it shows */
+    border-radius: 5px;
+    color: rgb(45, 41, 41);
+    font-family: 'adobe-caslon-pro', sans-serif;
+    word-spacing: 1px;
+}
+
+.Product details summary {
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px 0;
+    transition: color 0.3s ease;
+    font-family: 'SAOLDISPLAY-MEDIUM';
+    letter-spacing: 1px;
+    word-spacing: 1px;
+}
+
+.Product details summary:hover {
+    color: black;
+}
+
+.pdetails details p {
+    font-family: 'SAOLDISPLAY-MEDIUM';
+    font-size: 14px;
+    color: #555;
+    margin: 10px 0;
+    padding: 10px;
+    line-height: 1.6;
+    background: #f9f9f9;
+}
+
+details[open] {
+    animation: expand 0.4s ease-out;
+}
+
+@keyframes expand {
+    from {
+        max-height: 0;
+        opacity: 0;
+    }
+
+    to {
+        max-height: 200px;
+        opacity: 1;
+    }
+}
+
+/* ========== Quantity Controls ========== */
+.quantity-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: fit-content;
+}
+
+.quantity-btn {
+    width: 40px;
+    height: 40px;
+    background-color: #b76e79;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-input {
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    border: none;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    font-size: 16px;
+}
+
+/* ========== Color Swatches ========== */
+.color-options {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.color-swatch {
+    width: 25px;
+    height: 25px;
+    border-radius: 0px;
+    border: 2px solid black;
+    transition: 0.3s;
+}
+
+.white,
+.WOBR,
+.Wlane {
+    background: white;
+}
+
+.green {
+    background: darkgreen;
+}
+
+.BOBR,
+.black,
+.Blane {
+    background: black;
+}
+
+.BLOBR,
+.BLlane {
+    background: turquoise;
+}
+
+.Plane {
+    background: #a94f58;
+}
+
+.color-swatch.active {
+    border: 2px solid #333;
+}
+
+/* YOU MAY ALSO LIKE */
+.like {
+    text-align: center;
+    font-family: 'SAOLDISPLAY-MEDIUM';
+    font-size: 35px;
+    font-weight: 200;
+
+}
+
+.related-products {
+    margin-top: -150px;
+}
+
+.product-spacerow {
+    width: 100%;
+    padding-left: 34px;
+    margin-bottom: 5px;
+}
+
+.product1-name,
+.product2-name,
+.product3-name {
+    font-size: 17px;
+    margin: auto;
+    font-weight: 500;
+    line-height: 20px;
+    color: black;
+    padding-left: 0px;
+    margin-left: 0px;
+    font-family: 'SAOLDISPLAY-MEDIUM';
+
+}
+
+.product-price {
+    color: #45474EA6;
+    padding-left: 165px;
+    text-decoration: none !important;
+}
+
+.product-price:hover {
+    background: none !important;
+    box-shadow: none !important;
+}
+
+.product-preview {
+    width: 400px;
+    display: inline-block;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.product-1,
+.product-2,
+.product-3 {
+    padding-left: 0px;
+    width: 400px;
+    padding-right: 40px;
+    margin-right: 0%;
+}
+
+.product-info p {
+    width: 100%;
+    margin-left: 0px;
+    padding-left: 5px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.product-info {
+    margin-bottom: 80px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 50px;
+    row-gap: 40px;
+
+}
+
+.product-grid .product-spacerow {
+    padding-left: 70px;
+}
+
+
+/* products change */
+.product-gallery {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.thumbnails {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.thumbnails .thumb {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border 0.3s;
+}
+
+.thumbnails .thumb.active {
+    border: 2px solid #a94f58;
+}
+
+.main-image img {
+    width: 650px;
+    height: auto;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+}
