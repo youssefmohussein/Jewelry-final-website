@@ -83,32 +83,53 @@
       </div>
     </section>
 
-    <section class="related-products">
-      <h2 class="like">You May Also Like</h2>
-      <div class="product-grid">
-        <% relatedProducts.forEach(rp => { %>
-        <div class="product-preview">
-          <div class="product-spacerow">
-            <a href="/product/<%= rp._id %>">
-              <% if (rp.images && rp.images.length > 0) { %>
-              <img src="<%= rp.images[0].full %>" alt="<%= rp.name %>" />
-              <% } else { %>
-              <p>No image</p>
-              <% } %>
-            </a>
-          </div>
-          <div class="product-info">
-            <p class="product-name"><%= rp.name %></p>
-            <p class="product-price">LE <%= rp.price.toLocaleString() %></p>
-          </div>
+    <div class="related-products">
+      <div class="like">You May Also Like</div>
+
+      <div class="related-wrapper">
+        <button class="scroll-btn left">&#10094;</button>
+
+        <div class="product-grid-scroll" id="related-scroll">
+          <% relatedProducts.forEach(product => { %>
+          <a href="/product/<%= product._id %>" class="product-preview">
+            <img
+              src="<%= product.images[0]?.thumb %>"
+              alt="<%= product.name %>"
+            />
+            <div class="product-info">
+              <span class="product-name"><%= product.name %></span>
+              <p class="product-price">$<%= product.price %></p>
+            </div>
+          </a>
+          <% }) %>
         </div>
-        <% }) %>
+
+        <button class="scroll-btn right">&#10095;</button>
       </div>
-    </section>
+    </div>
 
     <div id="footer"></div>
     <script src="/javasScript/color.js"></script>
     <script src="/javasScript/thumbnail.js"></script>
     <script src="/javasScript/productdetails.js"></script>
+    <script>
+      document
+        .querySelector(".scroll-btn.left")
+        .addEventListener("click", () => {
+          document.getElementById("related-scroll").scrollBy({
+            left: -220,
+            behavior: "smooth",
+          });
+        });
+
+      document
+        .querySelector(".scroll-btn.right")
+        .addEventListener("click", () => {
+          document.getElementById("related-scroll").scrollBy({
+            left: 220,
+            behavior: "smooth",
+          });
+        });
+    </script>
   </body>
 </html>
