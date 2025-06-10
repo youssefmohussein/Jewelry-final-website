@@ -41,7 +41,6 @@ async function addCollection() {
   }
 }
 
-
 function openProductForm() {
   document.getElementById("productModal").style.display = "block";
 }
@@ -340,7 +339,21 @@ function handleDeleteClick(button) {
   }
 }
 
-// function logout() {
-//   // Redirect to login page
-//   window.location.href = "/login";
-// }
+async function logout() {
+  try {
+    const response = await fetch("/logout", {
+      method: "POST", // Sends a POST request
+      headers: { "Content-Type": "application/json" },
+    });
+
+    const result = await response.json();
+    alert(result.message);
+
+    if (response.ok) {
+      window.location.href = "/"; // Redirects to the login page
+    }
+  } catch (err) {
+    console.error("Error during logout:", err);
+    alert("Something went wrong during logout.");
+  }
+}
