@@ -57,7 +57,7 @@ router.delete("/products/:productNumber", dashboardController.deleteProduct);
 
 //-----------------------------------------------Start of collection routes -----------------------------------------------
 // Create collection
-router.post("/create", dashboardController.createCollection);
+router.post("/create",upload.single("collectionImage"), dashboardController.createCollection);
 
 // Render collection by name
 router.get("/collections/:collectionName", dashboardController.viewCollection);

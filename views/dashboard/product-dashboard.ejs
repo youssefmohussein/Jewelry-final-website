@@ -74,8 +74,9 @@
     <label for="collectionName">Collection Name</label>
     <input type="text" id="collectionName" required />
 
-    <label for="collectionImage">Image URL</label>
-    <input type="text" id="collectionImage" required />
+<label for="collectionImage">Upload Image</label>
+<input type="file" id="collectionImage" name="collectionImage" accept="image/*" required />
+
 
     <button type="button" onclick="addCollection()">Add Collection</button>
     <button type="button" onclick="closeCollectionForm()">Close</button>
