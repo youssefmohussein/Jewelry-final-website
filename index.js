@@ -13,6 +13,7 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 const homepageRoutes = require("./routes/homepageRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const orderRoutes = require("./routes/orderRoutes");
+const productdetailsRoute = require("./routes/productdetailsRoutes");
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -39,7 +40,7 @@ app.use(
     },
   })
 );
-//collection w category ashan mybozosh m3 el sessions 
+//collection w category ashan mybozosh m3 el sessions
 app.use((req, res, next) => {
   res.locals.isLoggedIn = req.session.isLoggedIn || false;
   res.locals.role = req.session.role || null;
@@ -58,7 +59,7 @@ app.use("/", dashboardRoutes);
 app.use("/", homepageRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/", orderRoutes);
-
+app.use("/", productdetailsRoute);
 // MongoDB
 const MONGO_URI = process.env.MONGO_URI;
 mongoose

@@ -50,4 +50,7 @@ exports.getCollectionPage = async (req, res) => {
     console.error("Error fetching collection:", error);
     res.status(500).send("Server error");
   }
+
 };
+
+
