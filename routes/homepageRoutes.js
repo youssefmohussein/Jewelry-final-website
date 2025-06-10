@@ -11,6 +11,5 @@ router.get(
   "/collections/:collectionName",
   homepageController.getCollectionPage
 );
-router.get("/product/:id", homepageController.getProductDetails);
 
 module.exports = router;
