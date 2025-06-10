@@ -39,6 +39,12 @@ app.use(
     },
   })
 );
+//collection w category ashan mybozosh m3 el sessions 
+app.use((req, res, next) => {
+  res.locals.isLoggedIn = req.session.isLoggedIn || false;
+  res.locals.role = req.session.role || null;
+  next();
+});
 
 // Serve static files from /public
 app.use(express.static(path.join(__dirname, "public")));
