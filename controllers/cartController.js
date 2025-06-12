@@ -65,7 +65,26 @@ exports.addToCart = (req, res) => {
   res.json({ success: true, cart });
 };
 exports.removeFromCart = (req, res) => {
+  
   const { productId } = req.body;
-  req.session.cart = (req.session.cart || []).filter(item => item.productId !== productId);
+  req.session.cart = (req.session.cart || []).filter(
+    item => item.productId.toString() !== productId
+  );
+  res.json({ success: true });
+};
+
+exports.updateCartQuantity = (req, res) => {
+  const { productId, quantity } = req.body;
+
+  if (!req.session.cart) return res.json({ success: false, message: "Cart is empty" });
+
+  const cart = req.session.cart;
+  const item = cart.find(item => item.productId === productId);
+
+  if (!item) {
+    return res.json({ success: false, message: "Item not found" });
+  }
+
+  item.quantity = parseInt(quantity);
   res.json({ success: true });
 };
