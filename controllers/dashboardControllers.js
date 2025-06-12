@@ -1,5 +1,4 @@
 // for all Admin functianlity Customers/ orders/ products / collection / category
-
 //------------------------------------start of customer controller-----------------------------------------------------
 const User = require("../models/usersDB");
 exports.getAllUsers = async (req, res) => {
