@@ -61,6 +61,7 @@ app.use("/", homepageRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/", orderRoutes);
 app.use("/", productdetailsRoute);
+
 app.use("/", cartRoutes);
 
 app.use((req, res) => {
