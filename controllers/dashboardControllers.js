@@ -1,4 +1,5 @@
 // for all Admin functianlity Customers/ orders/ products / collection / category
+
 //------------------------------------start of customer controller-----------------------------------------------------
 const User = require("../models/usersDB");
 exports.getAllUsers = async (req, res) => {
@@ -54,7 +55,7 @@ exports.deleteUserByEmail = async (req, res) => {
 const Product = require("../models/productDB");
 
 const fs = require('fs');
-exports.createProduct = async (req, res) => {
+/*exports.createProduct = async (req, res) => {
   try {
     
     if (!req.file) {
@@ -87,9 +88,64 @@ exports.createProduct = async (req, res) => {
     console.error(err);
     res.status(400).json({ error: err.message });
   }
+};*/
+
+
+
+
+
+exports.createProduct = async (req, res) => {
+  try {
+    if (!req.files || !req.files["image"]) {
+      return res.status(400).json({ error: "Main image is required" });
+    }
+
+    const existingProduct = await Product.findOne({
+      productNumber: req.body.productNumber,
+    });
+    if (existingProduct) {
+      return res.status(400).json({
+        error: "Product with this productNumber already exists",
+      });
+    }
+
+    const image = req.files["image"][0];
+    const hoverImage = req.files["hoverImage"]?.[0];
+
+    const product = new Product({
+      productNumber: req.body.productNumber,
+      name: req.body.name,
+      description: req.body.description,
+      colors: JSON.parse(req.body.colors),
+      category: req.body.category,
+      collection: req.body.collection,
+      stock: req.body.stock,
+      price: req.body.price,
+      totalSales: req.body.totalSales || 0,
+
+      image: {
+        data: image.buffer,
+        contentType: image.mimetype,
+      },
+
+      ...(hoverImage && {
+        hoverImage: {
+          data: hoverImage.buffer,
+          contentType: hoverImage.mimetype,
+        },
+      }),
+    });
+
+    await product.save();
+
+    res.status(200).json(product);
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ error: err.message });
+  }
 };
 
-////
+///////////////
 
 exports.getProductById = async (req, res) => {
   try {
@@ -113,6 +169,8 @@ exports.getAllProducts = async (req, res) => {
     res.status(500).send("Server Error");
   }
 };
+
+
 
 
 exports.updateProduct = async (req, res) => {
