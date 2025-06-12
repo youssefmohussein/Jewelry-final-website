@@ -12,7 +12,14 @@ const userRoutes = require("./routes/userRoute");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const homepageRoutes = require("./routes/homepageRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
+
 // Middleware to parse form data
+const orderRoutes = require("./routes/orderRoutes");
+const productdetailsRoute = require("./routes/productdetailsRoutes");
+const handleError = require("./utils/errorHandle");
+const cartRoutes = require("./routes/cartRoute");
+
+// Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
@@ -55,6 +62,18 @@ app.use("/", userRoutes);
 app.use("/", dashboardRoutes);
 app.use("/", homepageRoutes);
 app.use("/categories", categoryRoutes);
+app.use("/", orderRoutes);
+app.use("/", productdetailsRoute);
+
+app.use("/", cartRoutes);
+
+app.use((req, res) => {
+  handleError(res, 404, 'Page Not Found');
+});
+
+// MongoDB
+const MONGO_URI = process.env.MONGO_URI;
+
 mongoose
   .connect(MONGO_URI)
   .then(() => console.log("✅ Connected to MongoDB"))
