@@ -25,6 +25,7 @@ app.use(express.json());
 app.use(cookieParser());
 const MongoStore = require("connect-mongo"); // Import connect-mongo
 
+
 app.use(
   session({
     secret: process.env.SECRET_KEY,
@@ -44,6 +45,8 @@ app.use(
     },
   })
 );
+
+
 //collection w category ashan mybozosh m3 el sessions
 app.use((req, res, next) => {
   res.locals.isLoggedIn = req.session.isLoggedIn || false;
