@@ -71,93 +71,9 @@ window.onclick = function (event) {
   }
 };
 
-// Add Collection function
-// function addCollection() {
-//   const name = document.getElementById("collectionName").value;
-//   const image = document.getElementById("collectionImage").value;
 
-//   // Basic validation
-//   if (!name || !image) {
-//     alert("Please provide both Collection Name and Image URL.");
-//     return;
-//   }
-
-//   // Send POST request to the server
-//   fetch("/admin/create", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({ name, image }),
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       if (data.message === "Collection created successfully") {
-//         alert("Collection added successfully!");
-//         closeCollectionForm(); // Close modal after successful creation
-//         // Optionally, refresh or update the page content
-//       } else {
-//         alert("Something went wrong. Try again.");
-//       }
-//     })
-//     .catch((error) => {
-//       console.error("Error:", error);
-//       alert("Failed to add collection.");
-//     });
-// }
-// The addProduct function without img
 
 /*async function addProduct() {
-  const product = {
-    productNumber: document
-      .getElementById("productNumber")
-      .value.trim()
-      .toUpperCase(),
-    name: document.getElementById("productName").value.trim(),
-    description: document.getElementById("description").value.trim(),
-    colors: document
-      .getElementById("colors")
-      .value.trim()
-      .split(",")
-      .map((c) => c.trim()),
-    category: document.getElementById("category").value.trim(),
-    collection: document.getElementById("collection").value.trim(),
-    stock: parseInt(document.getElementById("stock").value),
-    price: parseFloat(document.getElementById("price").value),
-    image: document
-      .getElementById("imageUrls")
-      .value.trim()
-      .split(",")
-      .map((url) => url.trim()),
-    totalSales: 0,
-  };
-
-  try {
-    const response = await fetch("/products", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(product),
-    });
-
-    const result = await response.json();
-
-    if (response.ok) {
-      alert("Product added successfully!");
-      closeProductForm();
-    } else {
-      alert(
-        `Failed to add product: ${
-          result.error || result.message || "Unknown error"
-        }`
-      );
-    }
-  } catch (err) {
-    console.error("Error submitting product:", err);
-    alert("An error occurred while adding the product.");
-  }
-}*/
-
-async function addProduct() {
   const formData = new FormData();
 
   formData.append(
@@ -213,7 +129,59 @@ async function addProduct() {
     console.error("Error:", err);
     alert("Something went wrong while adding the product.");
   }
+}*/
+
+async function addProduct() {
+  const formData = new FormData();
+
+  formData.append("productNumber", document.getElementById("productNumber").value.trim().toUpperCase());
+  formData.append("name", document.getElementById("productName").value.trim());
+  formData.append("description", document.getElementById("description").value.trim());
+  formData.append("category", document.getElementById("category").value.trim());
+  formData.append("collection", document.getElementById("collection").value.trim());
+  formData.append("stock", document.getElementById("stock").value);
+  formData.append("price", document.getElementById("price").value);
+  formData.append("totalSales", 0);
+
+  const colors = document.getElementById("colors").value.trim().split(",").map(c => c.trim());
+  formData.append("colors", JSON.stringify(colors));
+
+  // Append main image
+  const mainImageInput = document.getElementById("image");
+  if (mainImageInput.files.length > 0) {
+    formData.append("image", mainImageInput.files[0]);
+  } else {
+    alert("Main image is required.");
+    return;
+  }
+
+  // Append hover image (optional)
+  const hoverImageInput = document.getElementById("hoverImage");
+  if (hoverImageInput && hoverImageInput.files.length > 0) {
+    formData.append("hoverImage", hoverImageInput.files[0]);
+  }
+
+  try {
+    const response = await fetch("/products", {
+      method: "POST",
+      body: formData,
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      alert("Product added successfully!");
+      closeProductForm();
+    } else {
+      alert(`Failed to add product: ${result.error || result.message || "Unknown error"}`);
+    }
+  } catch (err) {
+    console.error("Error:", err);
+    alert("Something went wrong while adding the product.");
+  }
 }
+
+
 
 //----------------------------------------updata button----------------------------------------
 // for opening the edit form

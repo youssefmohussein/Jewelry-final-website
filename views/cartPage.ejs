@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Your Shopping Cart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/Css/Add-to-cart.css" />
+    <link rel="stylesheet" href="/Css/HeadFoot.css" />
+  </head>
+  <body>
+    <%- include('partials/header') %>
+
+    <div class="wrapper">
+      <h1>Your Shopping Cart</h1>
+
+      <div class="project">
+        <div class="add">
+          <% if (cartItems && cartItems.length > 0) { %> <%
+          cartItems.forEach(item => { %>
+          <div class="box" data-product-id="<%= item._id %>">
+            <img src="<%= item.image %>" alt="<%= item.name %>" />
+            <div class="container">
+              <p class="product1-name">Product: <%= item.name %></p>
+              <p class="product-price">Price: LE <%= item.price.toLocaleString() %></p>
+              <p class="unit">
+                Item:
+                <input
+                  type="number"
+                  value="<%= item.quantity %>"
+                  min="1"
+                  class="cart-quantity-input"
+                  data-product-id="<%= item._id %>"
+                />
+              </p>
+              <p class="btn-area">
+                <i class="fa fa-trash"></i>
+                <span class="btn2 remove-item-btn" data-product-id="<%= item._id %>">remove</span>
+              </p>
+            </div>
+          </div>
+          <% }) %> <% } else { %>
+          <p>Your cart is empty.</p>
+          <% } %>
+        </div>
+
+        <div class="right-bar">
+          <p><span>Subtotal</span><span>LE <%= subtotal.toLocaleString() %></span></p>
+          <hr />
+          <p><span>Tax (15%)</span><span>LE <%= tax.toLocaleString() %></span></p>
+          <hr />
+          <p><span>Shipping</span><span>LE <%= shipping.toLocaleString() %></span></p>
+          <hr />
+          <p><span>Total</span><span>LE <%= total.toLocaleString() %></span></p>
+          <a href="#" class="checkout-btn">Checkout</a>
+        </div>
+      </div>
+    </div>
+
+    <%- include('partials/footer') %>
+
+    <script src="/javasScript/Add-to-cart.js"></script>
+  </body>
+</html>

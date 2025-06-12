@@ -7,7 +7,7 @@ body {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 170px 24px;
+  padding: 110px 24px;
   text-align: center;
 }
 
@@ -96,16 +96,19 @@ button:hover {
 }
 
 .containerr {
-  width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  align-items: flex-start; /* Align form at the top instead of center */
+  min-height: 100vh; /* Full viewport height */
+  margin-top: -230px; /* Move form upward */
 }
 
 .containerr form {
   width: 100%;
   max-width: 600px;
-  padding: 0 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
 }
 
 /* Responsive fix for smaller screens */

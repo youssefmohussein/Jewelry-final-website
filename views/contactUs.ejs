@@ -7,14 +7,14 @@
   <title>Contact us</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-<link rel="stylesheet" href="/Css/HeadFoot.css" />
-<link rel="stylesheet" href="Css/style-contact.css">
-<script src="/Home page/header.js" defer></script>
+  <link rel="stylesheet" href="/Css/HeadFoot.css" />
+  <link rel="stylesheet" href="/Css/style-contact.css">
+  <script src="/Home page/header.js" defer></script>
 </head>
 
 <body>
   <div id="header">
-   <%- include('partials/header') %>
+    <%- include('partials/header') %>
   </div>
 
   <section class="contact">
@@ -50,24 +50,24 @@
             Saturday - Sunday: 11:00 AM - 7:00 PM <br><br>
             Friday: Closed</p>
         </div>
-
         <img src="/Images/contact us/image2.png" alt="Luxora Jewelry Showcase" class="contact-img">
-
-        <div class="containerr">
-          <form action="/contact-us" method="POST">
-            <div class="row">
-              <input type="text" name="name" placeholder="Name">
-              <input type="email" name="email" placeholder="Email *" required>
-            </div>
-            <input type="tel" name="phone" placeholder="Phone number">
-            <textarea name="comment" placeholder="Comment" rows="4"></textarea>
-            <br>
-            <button type="submit">Send</button>
-          </form>
-        </div>
       </div>
     </div>
   </section>
+
+  <!-- Separated form section, centered -->
+  <div class="containerr">
+    <form action="/contact-us" method="POST">
+      <div class="row">
+        <input type="text" name="name" placeholder="Name">
+        <input type="email" name="email" placeholder="Email *" required>
+      </div>
+      <input type="tel" name="phone" placeholder="Phone number">
+      <textarea name="comment" placeholder="Comment" rows="4"></textarea>
+      <br>
+      <button type="submit">Send</button>
+    </form>
+  </div>
 </body>
 
 </html>

@@ -9,6 +9,7 @@ router.get("/login", homepageController.getLoginPage);
 router.get("/forgetpassword", homepageController.getForgetPasswordPage);
 router.get("/about-us", homepageController.aboutus);
 router.get("/faq", homepageController.faq);
+router.get("/refundPolicy", homepageController.refundpolicy);
 
 // Contact Us routes
 router.get("/contact-us", homepageController.contactus);
