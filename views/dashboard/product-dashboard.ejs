@@ -11,7 +11,7 @@
       <h2>Velora</h2>
       <hr />
       <ul>
-        <a href="/admin-dashboard/dashboard"><li>Dashboard</li></a>
+        <a href="/dashboard"><li>Dashboard</li></a>
         <a href="/customers-dashboard"><li>Customers</li></a>
         <a href="/orders-dashboard"><li>Orders</li></a>
         <a href="/product-dashboard"><li>Products</li></a>
@@ -74,8 +74,9 @@
     <label for="collectionName">Collection Name</label>
     <input type="text" id="collectionName" required />
 
-    <label for="collectionImage">Image URL</label>
-    <input type="text" id="collectionImage" required />
+<label for="collectionImage">Upload Image</label>
+<input type="file" id="collectionImage" name="collectionImage" accept="image/*" required />
+
 
     <button type="button" onclick="addCollection()">Add Collection</button>
     <button type="button" onclick="closeCollectionForm()">Close</button>
