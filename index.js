@@ -15,6 +15,8 @@ const userRoutes = require("./routes/userRoute");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const homepageRoutes = require("./routes/homepageRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
+const cartRoutes = require('./routes/cartRoutes');
+
 // Middleware to parse form data
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -55,6 +57,8 @@ app.use("/users", userRoutes);
 app.use("/", dashboardRoutes);
 app.use("/", homepageRoutes);
 app.use("/categories", categoryRoutes);
+app.use('/cart', cartRoutes);
+
 mongoose
   .connect(MONGO_URI)
   .then(() => console.log("✅ Connected to MongoDB"))

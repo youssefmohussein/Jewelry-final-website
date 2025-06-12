@@ -1,0 +1,244 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'SAOLDISPLAY-MEDIUM';
+    background-color: #fdfaf5;
+    scroll-behavior: smooth;
+}
+
+.wrapper {
+    margin-top: 110px;
+    margin-left: 150px;
+    max-width: 1200px;
+}
+/* hiii */
+
+.wrapper h1 {
+ 
+    text-align: center;
+    padding: 30px;
+    text-transform: uppercase;
+}
+
+.project {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.add {
+    padding: 20px;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.right-bar {
+    flex: 1;
+    padding: 45px;
+    margin-left: 40px;
+    height: auto;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: rgba(208, 208, 211, 0.2) 0 7px 29px 0;
+}
+
+.box {
+    display: flex;
+    position: relative;
+    align-items: center;
+    width: 600px;
+    height: 190px;
+    margin-left: 18px;
+    margin-bottom: 20px;
+    background: #ffffff;
+    padding: 10px;
+}
+
+.box img {
+    width: 200px;
+    height: 200px;
+    object-fit: fill;
+    border-radius: 20px;
+}
+
+.container {
+    flex-grow: 1;
+    text-align: left;
+    padding-left: 15px;
+}
+
+.right-bar hr {
+    margin-bottom: 25px;
+}
+
+.right-bar p {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.right-bar a {
+    background-color: #212322;
+    color: #fff;
+    display: block;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    font-weight: 900;
+    border-radius: 40px;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.right-bar a:hover {
+    background-color: #413e3e;
+}
+
+/* Input Spinner Styling */
+.unit input {
+    width: 55px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+
+    appearance: auto;
+    -moz-appearance: textfield;
+}
+
+.unit input::-webkit-outer-spin-button,
+.unit input::-webkit-inner-spin-button {
+    -webkit-appearance: auto;
+    margin: 0;
+}
+
+/* Trash icon styles */
+.btn-area {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: white;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.btn-area:hover {
+    background-color: rgb(252, 252, 252);
+}
+
+.btn-area i {
+    color: red;
+}
+
+.product-price {
+    text-decoration: none !important;
+    box-shadow: none !important;
+    background: none !important; /* optional, in case it's applying a background too */
+}
+
+
+
+/* Responsive */
+@media screen and (max-width: 700px) {
+    .project {
+        flex-direction: column;
+    }
+
+    .right-bar {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 20px;
+    }
+
+    .btn-area {
+        position: relative;
+        margin-top: 10px;
+    }
+
+    
+}
+
+
+
+
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.item-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.item-details {
+  flex: 1;
+}
+
+.item-details h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.item-details p {
+  margin: 4px 0;
+  color: #666;
+}
+
+
+
+
+.remove-btn {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #c0392b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  background-color: #e74c3c;
+}
+
+
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.quantity-control button {
+  background-color: #eee;
+  border: none;
+  padding: 4px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Css/cart.css">
+    <link rel="stylesheet" href="/Css/HeadFoot.css">
+   <script src="/js/header.js" defer></script>
+
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <div class="wrapper">
+        <h1>Shopping Cart</h1>
+        <div class="project">
+            <div class="add">
+                <div id="cartContainer">
+                    <% if (cartItems.length > 0) { %>
+                        <% cartItems.forEach(item => { %>
+                            <div class="cart-item">
+                                <img src="<%= item.image %>" alt="<%= item.name %>" class="item-img" />
+                                <div class="item-details">
+                                    <h3><%= item.name %></h3>
+                                    <p>Price: LE <%= item.price %></p>
+                                     <p>Quantity: <%= item.quantity %></p>
+
+                                    <div class="quantity-control">
+                                      <button onclick="updateQuantity('<%= item._id %>', -1)">−</button>
+                                      <span><%= item.quantity %></span>
+                                      <button onclick="updateQuantity('<%= item._id %>', 1)">+</button>
+                                    </div>
+                                    
+                                    <button onclick="removeFromCart('<%= item._id %>')" class="remove-btn">Remove</button>
+                                </div>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <p>Your cart is empty.</p>
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="right-bar">
+                <p>SUMMARY:</p>
+                <p><span>Subtotal: </span><span id="subtotal">LE <%= subtotal %></span></p>
+                <hr>
+                <p><span>Tax (15%): </span><span id="tax">LE <%= tax %></span></p>
+                <hr>
+                <p><span>Shipping: </span><span id="shipping">LE <%= shipping %></span></p>
+                <hr>
+                <p><span>Total: </span><span id="total">LE <%= total %></span></p>
+                <a href="/checkout" class="buttonCheckout">CHECKOUT</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/javasScript/cart.js" defer></script>
+</body>
+
+</html>

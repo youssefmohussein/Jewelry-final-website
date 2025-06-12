@@ -1,7 +1,7 @@
 {
   "name": "jewelry-final-website",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a full-stack jewelry e-commerce website built using **Node.js**, **Express.js**, **MongoDB**,and **EJS**. It includes full admin functionality for managing collections, products, and customers, as well as a user-facing frontend for shopping.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
