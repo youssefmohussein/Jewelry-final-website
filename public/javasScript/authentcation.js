@@ -37,7 +37,7 @@ signUpForm.addEventListener("submit", async function (e) {
   }
 
   try {
-    const response = await fetch("/register", {
+    const response = await fetch("/users/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password }), // FIXED key names
@@ -68,7 +68,7 @@ signInForm.addEventListener("submit", async function (e) {
   }
 
   try {
-    const response = await fetch("/login", {
+    const response = await fetch("/users/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }), // FIXED key names
@@ -113,7 +113,7 @@ resetForm.addEventListener("submit", async function (e) {
   }
 
   try {
-    const response = await fetch("/resetpassword", {
+    const response = await fetch("/users/resetpassword", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password, confirmPassword }), // FIXED key names
@@ -211,7 +211,7 @@ async function submitUserEdit() {
 }
 async function logout() {
   try {
-    const response = await fetch("/logout", {
+    const response = await fetch("/users/logout", {
       method: "POST", // Sends a POST request
       headers: { "Content-Type": "application/json" },
     });
@@ -220,50 +220,10 @@ async function logout() {
     alert(result.message);
 
     if (response.ok) {
-      window.location.href = "/"; // Redirects to the login page
+      window.location.href = "/login"; // Redirects to the login page
     }
   } catch (err) {
     console.error("Error during logout:", err);
     alert("Something went wrong during logout.");
   }
 }
-
-function handleEmailEdit() {
-  document.getElementById("editEmailModal").style.display = "block";
-}
-
-// Close modal when user clicks close button
-function closeEmailModal() {
-  document.getElementById("editEmailModal").style.display = "none";
-}
-
-      // Submit email update
-      async function submitEmailEdit() {
-        const userId = document.getElementById("editEmailUserId").value;
-        const newEmail = document.getElementById("newEmail").value;
-
-        if (!userId || !newEmail) {
-          alert("Missing user ID or email.");
-          return;
-        }
-
-        try {
-          const response = await fetch(`/users/${userId}/edit-email`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email: newEmail }),
-          });
-
-          const result = await response.json();
-
-          if (response.ok) {
-            alert(result.message);
-            window.location.reload();
-          } else {
-            alert(result.message || "Failed to update email.");
-          }
-        } catch (error) {
-          console.error(error);
-          alert("Error updating email.");
-        }
-      }

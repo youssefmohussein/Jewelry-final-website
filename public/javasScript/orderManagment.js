@@ -5,14 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
   function openEditOrderForm(orderRow) {
     editOrderModal.style.display = "block";
 
-    document.getElementById("editOrderId").value =
-      orderRow.querySelector("td:nth-child(1)").innerText || "";
-    document.getElementById("editCustomerName").value =
-      orderRow.querySelector("td:nth-child(2)").innerText || "";
-    document.getElementById("editProducts").value =
-      orderRow.querySelector("td:nth-child(3)").innerText || "";
-    document.getElementById("editTotalPrice").value =
-      orderRow.querySelector("td:nth-child(5)").innerText || "";
+    document.getElementById("editOrderId").value = orderRow.querySelector("td:nth-child(1)").innerText || "";
+    document.getElementById("editCustomerName").value = orderRow.querySelector("td:nth-child(2)").innerText || "";
+    document.getElementById("editProducts").value = orderRow.querySelector("td:nth-child(3)").innerText || "";
+    document.getElementById("editTotalPrice").value = orderRow.querySelector("td:nth-child(5)").innerText || "";
 
     // Combine shipping address fields into one textarea
     const addressParts = [
@@ -23,13 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
       orderRow.dataset.country,
     ].filter(Boolean);
 
-    document.getElementById("editShippingAddress").value =
-      addressParts.join(", ");
+    document.getElementById("editShippingAddress").value = addressParts.join(", ");
 
     // Set status dropdown, only allow "shipped" or "delivered"
-    let currentStatus = orderRow
-      .querySelector("td:nth-child(6) span")
-      .innerText.toLowerCase();
+    let currentStatus = orderRow.querySelector("td:nth-child(6) span").innerText.toLowerCase();
     if (currentStatus !== "shipped" && currentStatus !== "delivered") {
       currentStatus = "shipped"; // default if not shipped/delivered
     }
@@ -74,9 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         row.querySelector("td:nth-child(6) span").innerText =
           updatedStatus.charAt(0).toUpperCase() + updatedStatus.slice(1);
-        row.querySelector(
-          "td:nth-child(6) span"
-        ).className = `status-${updatedStatus}`;
+        row.querySelector("td:nth-child(6) span").className = `status-${updatedStatus}`;
 
         window.closeEditOrderForm();
       })
@@ -98,21 +89,9 @@ document.addEventListener("DOMContentLoaded", () => {
   attachEditButtons();
 });
 
-async function logout() {
-  try {
-    const response = await fetch("/logout", {
-      method: "POST", // Sends a POST request
-      headers: { "Content-Type": "application/json" },
-    });
 
-    const result = await response.json();
-    alert(result.message);
+function logout() {
+  // Redirect to login page
+  window.location.href = "/login";
 
-    if (response.ok) {
-      window.location.href = "/"; // Redirects to the login page
-    }
-  } catch (err) {
-    console.error("Error during logout:", err);
-    alert("Something went wrong during logout.");
-  }
 }

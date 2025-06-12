@@ -8,23 +8,26 @@ function closeForm() {
 }
 
 async function addCollection() {
-  const formData = new FormData();
+  const collectionName = document.getElementById("collectionName").value;
+  const collectionImage = document.getElementById("collectionImage").value;
 
-  const collectionName = document.getElementById("collectionName").value.trim();
-  const collectionImageInput = document.getElementById("collectionImage");
-
-  if (!collectionName || collectionImageInput.files.length === 0) {
-    alert("Please enter a collection name and select an image.");
+  // Validate the fields
+  if (!collectionName || !collectionImage) {
+    alert("Please fill in both fields.");
     return;
   }
 
-  formData.append("name", collectionName);
-  formData.append("collectionImage", collectionImageInput.files[0]);
-
   try {
-    const response = await fetch("/create", {
+    // Send a POST request to create the collection
+    const response = await fetch("/collections/create", {
       method: "POST",
-      body: formData,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: collectionName,
+        image: collectionImage,
+      }),
     });
 
     const data = await response.json();
@@ -33,11 +36,11 @@ async function addCollection() {
       alert("Collection added successfully!");
       closeForm();
     } else {
-      alert(`Failed to add collection: ${data.message || "Unknown error"}`);
+      alert(`Error: ${data.message}`);
     }
   } catch (error) {
     console.error("Error adding collection:", error);
-    alert("Something went wrong while adding the collection.");
+    alert("There was an error adding the collection.");
   }
 }
 
@@ -72,39 +75,39 @@ window.onclick = function (event) {
 };
 
 // Add Collection function
-// function addCollection() {
-//   const name = document.getElementById("collectionName").value;
-//   const image = document.getElementById("collectionImage").value;
+function addCollection() {
+  const name = document.getElementById("collectionName").value;
+  const image = document.getElementById("collectionImage").value;
 
-//   // Basic validation
-//   if (!name || !image) {
-//     alert("Please provide both Collection Name and Image URL.");
-//     return;
-//   }
+  // Basic validation
+  if (!name || !image) {
+    alert("Please provide both Collection Name and Image URL.");
+    return;
+  }
 
-//   // Send POST request to the server
-//   fetch("/admin/create", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({ name, image }),
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       if (data.message === "Collection created successfully") {
-//         alert("Collection added successfully!");
-//         closeCollectionForm(); // Close modal after successful creation
-//         // Optionally, refresh or update the page content
-//       } else {
-//         alert("Something went wrong. Try again.");
-//       }
-//     })
-//     .catch((error) => {
-//       console.error("Error:", error);
-//       alert("Failed to add collection.");
-//     });
-// }
+  // Send POST request to the server
+  fetch("/admin/create", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, image }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.message === "Collection created successfully") {
+        alert("Collection added successfully!");
+        closeCollectionForm(); // Close modal after successful creation
+        // Optionally, refresh or update the page content
+      } else {
+        alert("Something went wrong. Try again.");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("Failed to add collection.");
+    });
+}
 // The addProduct function without img
 
 /*async function addProduct() {
@@ -339,21 +342,7 @@ function handleDeleteClick(button) {
   }
 }
 
-async function logout() {
-  try {
-    const response = await fetch("/logout", {
-      method: "POST", // Sends a POST request
-      headers: { "Content-Type": "application/json" },
-    });
-
-    const result = await response.json();
-    alert(result.message);
-
-    if (response.ok) {
-      window.location.href = "/"; // Redirects to the login page
-    }
-  } catch (err) {
-    console.error("Error during logout:", err);
-    alert("Something went wrong during logout.");
-  }
+function logout() {
+  // Redirect to login page
+  window.location.href = "/login";
 }

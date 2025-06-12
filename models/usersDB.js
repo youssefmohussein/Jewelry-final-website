@@ -47,4 +47,3 @@ usersManagementSchema.pre("save", async function (next) {
 
 const users = mongoose.model("users", usersManagementSchema);
 module.exports = users;
-//hhhh

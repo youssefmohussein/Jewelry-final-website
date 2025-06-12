@@ -20,17 +20,15 @@
 
     <div class="product-grid">
       <% products.forEach(product => { %>
-      <a href="/product/<%= product._id %>" class="product-item-link">
-        <div class="product-item">
-          <img
-            class="product-image"
-            src="<%= product.imageSrc %>"
-            alt="<%= product.name %>"
-          />
-          <span class="product-name"><%= product.name %></span>
-          <p class="product-price">$<%= product.price %></p>
-        </div>
-      </a>
+      <div class="product-item">
+        <img
+          class="product-image"
+          src="<%= product.imageSrc %>"
+          alt="<%= product.name %>"
+        />
+        <span class="product-name"><%= product.name %></span>
+        <p class="product-price">$<%= product.price %></p>
+      </div>
       <% }) %>
     </div>
 
