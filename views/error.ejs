@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>404 - Lost in Space</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+        background: black;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at center, #222 0%, #000 70%),
+          repeating-radial-gradient(
+            circle at center,
+            transparent 0 2px,
+            rgba(255, 255, 255, 0.05) 2px 4px
+          );
+        animation: backgroundPulse 10s ease-in-out infinite alternate;
+        z-index: 0;
+        pointer-events: none;
+        filter: blur(15px);
+      }
+
+      @keyframes backgroundPulse {
+        0% {
+          background-position: center;
+          filter: blur(12px);
+        }
+        100% {
+          background-position: 10% 10%;
+          filter: blur(18px);
+        }
+      }
+
+      .overlay {
+        position: relative;
+        text-align: center;
+        z-index: 1;
+        max-width: 600px;
+        padding: 2rem;
+        animation: fadeIn 1.5s ease forwards;
+      }
+
+      .overlay h1 {
+        font-size: 7rem;
+        margin: 0;
+        letter-spacing: 0.15em;
+        text-shadow: 0 0 8px white, 0 0 15px white, 0 0 30px white;
+      }
+
+      .overlay p {
+        font-size: 1.6rem;
+        margin-top: 1rem;
+        text-shadow: 0 0 5px #ccc;
+        line-height: 1.4;
+        letter-spacing: 0.05em;
+      }
+
+      .overlay a {
+        margin-top: 3rem;
+        display: inline-block;
+        padding: 1rem 3rem;
+        background: white;
+        color: black;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 1.3rem;
+        text-decoration: none;
+        box-shadow: 0 0 12px white, 0 0 24px white;
+        transition: all 0.3s ease;
+      }
+
+      .overlay a:hover {
+        background: black;
+        color: white;
+        box-shadow: 0 0 20px white, 0 0 40px white;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="overlay">
+      <h1><%= code %></h1>
+      <p><%= message %></p>
+
+      <% if (code === 400 && message.includes("Email")) { %>
+      <p>
+        The email you entered is already registered. Please use a different one.
+      </p>
+      <% } else if (code === 400) { %>
+      <p>There was a problem with your request. Please try again.</p>
+      <% } else if (code === 401) { %>
+      <p>You need to log in to access this page.</p>
+      <% } else if (code === 403) { %>
+      <p>Access denied. You don’t have permission.</p>
+      <% } else if (code === 404) { %>
+      <p>The page or resource you're looking for does not exist.</p>
+      <% } else if (code === 500) { %>
+      <p>Devlopers f agaza.</p>
+      <% } %>
+      <!-- push -->
+      <a href="<%= backUrl || '/' %>">arg3 tany</a>
+    </div>
+  </body>
+</html>

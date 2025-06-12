@@ -14,6 +14,7 @@ const homepageRoutes = require("./routes/homepageRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const productdetailsRoute = require("./routes/productdetailsRoutes");
+const handleError = require("./utils/errorHandle");
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -60,6 +61,11 @@ app.use("/", homepageRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/", orderRoutes);
 app.use("/", productdetailsRoute);
+
+app.use((req, res) => {
+  handleError(res, 404, 'Page Not Found');
+});
+
 // MongoDB
 const MONGO_URI = process.env.MONGO_URI;
 mongoose

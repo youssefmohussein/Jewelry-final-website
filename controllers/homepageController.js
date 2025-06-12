@@ -30,6 +30,16 @@ exports.getForgetPasswordPage = (req, res) => {
   res.render("resetPasswordPage");
 };
 
+exports.aboutus= async (req, res) => {
+   try {
+    const collections = await Collection.find();
+    res.render('about', { collections });
+  } catch (error) {  
+    console.error('Error fetching collections:', error);
+    res.render('about', { collections: [] });
+  }
+}
+
 // Specific collection page
 
 
