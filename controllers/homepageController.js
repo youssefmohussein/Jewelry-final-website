@@ -59,7 +59,6 @@ exports.getCollectionPage = async (req, res) => {
   }
 };
 
-
 // FAQ Page
 exports.faq = async (req, res) => {
   try {
@@ -79,6 +78,24 @@ exports.faq = async (req, res) => {
   }
 };
 
+// Refund Policy Page (GET)
+exports.refundpolicy = async (req, res) => {
+  try {
+    const collections = await Collection.find(); // Used for header dropdowns or links
+    res.render("refundPolicy", {
+      collections,
+      isLoggedIn: !!req.session.userId,
+      role: req.session.role,
+    });
+  } catch (error) {
+    console.error("Error rendering Refund Policy page:", error);
+    res.render("refundPolicy", {
+      collections: [],
+      isLoggedIn: false,
+      role: null,
+    });
+  }
+};
 
 // Contact Us Page (GET)
 exports.contactus = async (req, res) => {
