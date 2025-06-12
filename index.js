@@ -61,7 +61,7 @@ app.use("/", homepageRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/", orderRoutes);
 app.use("/", productdetailsRoute);
-
+// 
 app.use((req, res) => {
   handleError(res, 404, 'Page Not Found');
 });
