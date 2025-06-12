@@ -2,7 +2,8 @@
 const express = require("express");
 const router = express.Router();
 const dashboardController = require("../controllers/dashboardControllers");
-const upload = require("../middleware/uploads");
+//const upload = require("../middleware/uploads");
+const { upload, uploadProductImages } = require("../middleware/uploads");
 const { isAuthenticated, isAdmin } = require("../middleware/authMiddleware"); // Import auth middleware
 router.get("/dashboard", dashboardController.getDashboard);
 //-----------------------------------------------Start of Customers dashboard Routes
@@ -30,26 +31,24 @@ router.delete(
 //-----------------------------------------------End of customers dashboard Routes-----------------------------------------------
 
 //-----------------------------------------------Start of products dashboard routes-----------------------------------------------
-router.get("/product-dashboard", dashboardController.getAllProducts);
-// Create product
-router.post(
-  "/products",
-  upload.single("image"),
-  dashboardController.createProduct
-);
 
+// Create product
+//router.post( "/products",upload.single("image"),dashboardController.createProduct);
+
+router.post("/products",uploadProductImages,dashboardController.createProduct);
+
+router.get("/product-dashboard", dashboardController.getAllProducts);
 // Get all products
 router.get("/products", dashboardController.getAllProducts);
+
 // Get product by productNumber
 router.get("/products/:productNumber", dashboardController.getProductById);
 // Update product
 //router.put("/products/:productNumber", dashboardController.updateProduct);
 
-router.put(
-  "/products/:productNumber",
-  upload.single("image"),
-  dashboardController.updateProduct
-);
+router.put("/products/:productNumber",upload.single("image"),dashboardController.updateProduct);
+
+
 // Delete product
 router.delete("/products/:productNumber", dashboardController.deleteProduct);
 
