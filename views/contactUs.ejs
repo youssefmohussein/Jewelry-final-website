@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact us</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="/Css/HeadFoot.css" />
+  <link rel="stylesheet" href="/Css/style-contact.css">
+  <script src="/Home page/header.js" defer></script>
+</head>
+
+<body>
+  <div id="header">
+    <%- include('partials/header') %>
+  </div>
+
+  <section class="contact">
+    <div class="container">
+      <h1>Contact us</h1>
+      <p>The Velora team is delighted to assist you with your order,
+        we understand the importance of being readily available to our clients,
+        especially when it comes to our exquisite 18k gold jewelry.
+        Your satisfaction is our top priority,
+        and we're here to assist you every step of the way.
+        Please select your preferred method of contact below.</p>
+
+      <div class="contact-content">
+        <img src="/Images/contact us/image1.png" alt="Luxora Jewelry Showcase" class="contact-img">
+        <div class="contact-text">
+          <h2>Customer Service</h2>
+          <p>Our dedicated customer service team is available every day except Friday,
+            from 11:00 AM to 7:00 PM.</p>
+          <p>You can reach us through our: <br><br>
+            Phone number: +(20)123456789 <br>
+            Email: Velora@gmail.com</p>
+        </div>
+      </div>
+
+      <div class="contact-content">
+        <div class="contact-text">
+          <h2>Office Location</h2>
+          <p>Our office is located in Paris, France.<br>
+            Please note that our office is restricted to employees or business<br> affairs only.</p>
+
+          <h2>Business Hours</h2>
+          <p>Monday - Thursday: 11:00 AM - 7:00 PM <br><br>
+            Saturday - Sunday: 11:00 AM - 7:00 PM <br><br>
+            Friday: Closed</p>
+        </div>
+        <img src="/Images/contact us/image2.png" alt="Luxora Jewelry Showcase" class="contact-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- Separated form section, centered -->
+  <div class="containerr">
+    <form action="/contact-us" method="POST">
+      <div class="row">
+        <input type="text" name="name" placeholder="Name">
+        <input type="email" name="email" placeholder="Email *" required>
+      </div>
+      <input type="tel" name="phone" placeholder="Phone number">
+      <textarea name="comment" placeholder="Comment" rows="4"></textarea>
+      <br>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</body>
+
+</html>

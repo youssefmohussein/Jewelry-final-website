@@ -1,0 +1,49 @@
+body {
+  background: rgb(255, 253, 243);
+  line-height: 1.6;
+}
+
+.container,
+.refundd {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+
+.refund {
+  padding: 80px 0;
+}
+
+
+
+.container h1,.refundquestion {
+  font-size: 2.5em;
+}
+
+.container h1,
+.refundquestion {
+  font-size: 2em;
+  font-weight: 300;
+  text-align: center;
+  margin-top: 90px;
+  margin-bottom: -20px;
+  padding-left: 50px;
+  color: black;
+  font-family: "SAOLDISPLAY-MEDIUM";
+}
+
+.refundquestion {
+  text-align: left;
+  font-size: 28px;
+}
+
+
+p,
+.refundanswer {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: rgb(69, 71, 78);
+  font-family: FuturaNowHeadline;
+}
