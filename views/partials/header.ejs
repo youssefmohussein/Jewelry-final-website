@@ -65,7 +65,21 @@
 
       <!-- Icons -->
       <div class="icons">
+        <% if (isLoggedIn && role === 'customer') { %>
+        <a href="/profile"><i class="fas fa-user"></i></a>
+        <form
+  action="/logout"
+  method="POST"
+  class="logout-form"
+  style="display: inline"
+>
+  <button onclick="logout()" class="logout-icon-btn" title="Logout">
+    <i class="fas fa-arrow-right-from-bracket"></i>
+  </button>
+</form>
+        <% } else { %>
         <a href="/login"><i class="fas fa-user"></i></a>
+        <% } %>
         <a href="/cart"><i class="fas fa-bag-shopping"></i></a>
       </div>
     </nav>
@@ -85,5 +99,6 @@
         dropdownContent.style.display = "none"; // Hide the dropdown content
       });
     </script>
+    <script src="/javasScript/authentcation.js"></script>
   </body>
 </html>

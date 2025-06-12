@@ -7,8 +7,8 @@ name: {
  
 },
 image: {
-    type: String,
-    required: true,
+    data: Buffer,
+    contentType: String,
 },
 products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }]
 });
