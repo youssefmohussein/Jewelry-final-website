@@ -15,7 +15,7 @@ const categoryRoutes = require("./routes/categoryRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const productdetailsRoute = require("./routes/productdetailsRoutes");
 const handleError = require("./utils/errorHandle");
-
+const cartRoutes = require("./routes/cartRoute");
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -61,6 +61,8 @@ app.use("/", homepageRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/", orderRoutes);
 app.use("/", productdetailsRoute);
+
+app.use("/", cartRoutes);
 
 app.use((req, res) => {
   handleError(res, 404, 'Page Not Found');

@@ -54,15 +54,17 @@ exports.deleteUserByEmail = async (req, res) => {
 
 const Product = require("../models/productDB");
 
+
 const fs = require('fs');
 /*exports.createProduct = async (req, res) => {
+const fs = require("fs");
+exports.createProduct = async (req, res) => {
+
   try {
-    
     if (!req.file) {
-      return res.status(400).json({ error: 'Image file is required' });
+      return res.status(400).json({ error: "Image file is required" });
     }
 
-    
     const existingProduct = await Product.findOne({
       productNumber: req.body.productNumber,
     });
@@ -70,7 +72,7 @@ const fs = require('fs');
     if (existingProduct) {
       return res
         .status(400)
-        .json({ error: 'Product with this productNumber already exists' });
+        .json({ error: "Product with this productNumber already exists" });
     }
 
     const product = new Product({
@@ -171,8 +173,6 @@ exports.getAllProducts = async (req, res) => {
 };
 
 
-
-
 exports.updateProduct = async (req, res) => {
   try {
     const productNumber = req.params.productNumber;
@@ -180,14 +180,15 @@ exports.updateProduct = async (req, res) => {
     const updatedData = {
       name: req.body.name,
       description: req.body.description,
-      colors: req.body.colors ? req.body.colors.split(',').map(color => color.trim()) : [],
+      colors: req.body.colors
+        ? req.body.colors.split(",").map((color) => color.trim())
+        : [],
       category: req.body.category,
       collection: req.body.collection,
       stock: req.body.stock,
       price: req.body.price,
     };
 
-   
     if (req.file) {
       updatedData.image = {
         data: req.file.buffer,
@@ -212,7 +213,6 @@ exports.updateProduct = async (req, res) => {
   }
 };
 
-
 exports.deleteProduct = async (req, res) => {
   try {
     const product = await Product.findOneAndDelete({
@@ -224,23 +224,13 @@ exports.deleteProduct = async (req, res) => {
     res.status(200).json({ message: "Product deleted successfully" });
   } catch (err) {
     res.status(500).json({ error: err.message });
-
   }
 };
-
-
 
 //----------------------------------------------------End of products-----------------------------------------------------
 
 //-----------------------------------------------Start of Collection-----------------------------------------------------
 const Collection = require("../models/collectionDB");
-
-
-
-
-
-
-
 
 exports.createCollection = async (req, res) => {
   try {
@@ -248,7 +238,9 @@ exports.createCollection = async (req, res) => {
 
     // Basic validation
     if (!name || !req.file) {
-      return res.status(400).json({ message: "Both name and image are required." });
+      return res
+        .status(400)
+        .json({ message: "Both name and image are required." });
     }
 
     // Create and save the new collection
@@ -271,8 +263,6 @@ exports.createCollection = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-
-
 
 /*/*exports.createCollection = async (req, res) => {
   try {
@@ -299,9 +289,6 @@ exports.createCollection = async (req, res) => {
   }
 };*/
 
-
-
-
 exports.viewCollection = async (req, res) => {
   const { collectionName } = req.params;
 
@@ -315,7 +302,7 @@ exports.viewCollection = async (req, res) => {
 
     //  Generate base64 image for collection
     if (collection.image && collection.image.data) {
-      const base64 = collection.image.data.toString('base64');
+      const base64 = collection.image.data.toString("base64");
       collection.imageSrc = `data:${collection.image.contentType};base64,${base64}`;
     } else {
       collection.imageSrc = null;
@@ -324,9 +311,9 @@ exports.viewCollection = async (req, res) => {
     //  Generate base64 image for each product
     const products = await Product.find({ collection: collection.name }).lean();
 
-    products.forEach(product => {
+    products.forEach((product) => {
       if (product.image && product.image.data) {
-        const base64 = product.image.data.toString('base64');
+        const base64 = product.image.data.toString("base64");
         product.imageSrc = `data:${product.image.contentType};base64,${base64}`;
       } else {
         product.imageSrc = null;
@@ -336,7 +323,7 @@ exports.viewCollection = async (req, res) => {
     res.render("collectionPage", {
       collection,
       collections,
-      products, 
+      products,
     });
   } catch (error) {
     console.error(error);
@@ -344,15 +331,13 @@ exports.viewCollection = async (req, res) => {
   }
 };
 
-
-
 //-----------------------------------------------------End of Collection -----------------------------------------------------
 
 //-----------------------------------------------------Start of Order -----------------------------------------------------
 const Order = require("../models/orderDB");
 exports.getAllOrders = async (req, res) => {
   try {
-    const orders = await Order.find()
+    const orders = await Order.find();
     res.render("dashboard/orders-dashboard", { orders });
   } catch (err) {
     console.error(err);
@@ -379,7 +364,9 @@ exports.updateOrder = async (req, res) => {
       return res.status(404).json({ message: "Order not found" });
     }
 
-    res.status(200).json({ message: "Order updated successfully", updatedOrder });
+    res
+      .status(200)
+      .json({ message: "Order updated successfully", updatedOrder });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server Error", error: err.message });
@@ -401,4 +388,77 @@ exports.deleteOrder = async (req, res) => {
 
 //-----------------------------------------------------End of Orders -----------------------------------------------------
 
+// ... imports ...
+exports.getDashboard = async (req, res) => {
+  console.log("Attempting to load dashboard data...");
+  let customerCount = 0;
+  let orderCount = 0;
+  let productCount = 0;
 
+  try {
+    console.log("Querying Customer count...");
+    // You named your customer model "User" in usersDB.js, so use User here.
+    customerCount = await User.countDocuments({}); // <-- FIX IS HERE: Changed Customer to User
+    console.log("Customer count:", customerCount);
+
+    console.log("Querying Order count...");
+    orderCount = await Order.countDocuments({});
+    console.log("Order count:", orderCount);
+
+    console.log("Querying Product count...");
+    productCount = await Product.countDocuments({});
+    console.log("Product count:", productCount);
+
+    res.render("/dashboard/dashboardPage", {
+      customerCount,
+      orderCount,
+      productCount,
+    });
+  } catch (error) {
+    console.error("Specific error details:", error); // THIS IS KEY!
+    console.error(
+      "Error fetching dashboard data: A problem occurred while querying the database."
+    );
+    res.status(500).send("Error loading dashboard");
+  }
+};
+// dashboardControllers.js
+
+// ... (your imports like const User = require("../models/usersDB"); etc. should be at the top)
+
+exports.getDashboard = async (req, res) => {
+  console.log("Attempting to load dashboard data...");
+  let customerCount = 0;
+  let orderCount = 0;
+  let productCount = 0;
+
+  try {
+    console.log("Querying Customer count...");
+    customerCount = await User.countDocuments({});
+    console.log("Customer count:", customerCount);
+
+    console.log("Querying Order count...");
+    orderCount = await Order.countDocuments({});
+    console.log("Order count:", orderCount);
+
+    console.log("Querying Product count...");
+    productCount = await Product.countDocuments({});
+    console.log("Product count:", productCount);
+
+    // --- FIX IS HERE: Change the view path to match your folder structure ---
+    res.render("dashboard/dashboardPage", {
+      // <--- THIS IS THE CORRECT PATH
+      customerCount,
+      orderCount,
+      productCount,
+    });
+  } catch (error) {
+    console.error("Specific error details:", error);
+    console.error(
+      "Error fetching dashboard data: A problem occurred while querying the database."
+    );
+    res.status(500).send("Error loading dashboard");
+  }
+};
+
+// ... (rest of your controller functions) ...

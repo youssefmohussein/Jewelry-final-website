@@ -9,58 +9,50 @@
 }
 
 body {
-    /* More subtle gradient with softer colors */
-    background: linear-gradient(to right, #fdfdfd, #ffffff);
+    /* background: #f4f4f4; */
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     height: 100vh;
-    padding-top: 150px; 
+    padding-top: 50px; /* Raised up */
+    background-color: rgba(255, 255, 255, 0.9); /* White with transparency */
+    background-image: url('https://www.transparenttextures.com/patterns/black-linen.png');
+    background-repeat: repeat;
+    background-blend-mode: lighten; /* Makes texture blend softly with white */
 }
 
 .container {
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 30px;
-    /* Lighter shadow for reduced eye strain */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
     position: relative;
     overflow: hidden;
-    width: 768px;
+    width: 900px; /* Increased size */
     max-width: 100%;
-    min-height: 480px;
+    min-height: 580px; /* Increased height */
 }
 
-
-/*Styles paragraphs inside the container*/
 .container p {
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 16px;
+    line-height: 22px;
     letter-spacing: 0.3px;
     margin: 20px 0;
+    color: white;
 }
 
-/* 
-.container span {
-    font-size: 12px;
-} */
-
-/*Styles links */
 .container a {
-    /* Slightly darker for better contrast */
-    color: #555;
-    font-size: 13px;
+    color: rgb(31, 28, 28);
+    font-size: 14px;
     text-decoration: none;
     margin: 15px 0 10px;
 }
 
-/*Styles all buttons inside the form.*/
 .container button {
-    /* Softer brown that's easier on the eyes */
-    background-color: #b76e79;
+    background-color: #000;
     color: #fff;
-    font-size: 12px;
-    padding: 10px 45px;
+    font-size: 16px;
+    padding: 14px 50px;
     border: 1px solid transparent;
     border-radius: 8px;
     font-weight: 600;
@@ -68,11 +60,13 @@ body {
     text-transform: uppercase;
     margin-top: 10px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .container button.hidden {
     background-color: transparent;
-    border-color: #fff;
+    border-color: white;
+    color: white;
 }
 
 .container form {
@@ -85,17 +79,16 @@ body {
     height: 100%;
 }
 
-/*Styles all text fields Name, Email, Password*/
 .container input {
-    /* Slightly warmer grey for less eye strain */
-    background-color: #f0eae3;
+    background-color: #eaeaea;
     border: none;
-    margin: 8px 0;
-    padding: 10px 15px;
-    font-size: 13px;
+    margin: 10px 0;
+    padding: 14px 20px;
+    font-size: 16px;
     border-radius: 8px;
     width: 100%;
     outline: none;
+    color: #000;
 }
 
 .form-container {
@@ -111,8 +104,6 @@ body {
     z-index: 2;
 }
 
-
-/*Moves the Sign-In form off the screen when Sign Up is clicked*/
 .container.active .sign-in {
     transform: translateX(100%);
     margin-top: 1000px;
@@ -125,7 +116,6 @@ body {
     z-index: 1;
 }
 
-/*Moves the Sign-Up form on to the screen.*/
 .container.active .sign-up {
     transform: translateX(100%);
     opacity: 1;
@@ -145,16 +135,13 @@ body {
     z-index: 1000;
 }
 
-/*Moves the toggle panel to the left when switching forms*/
-
 .container.active .toggle-container {
     transform: translateX(-100%);
     border-radius: 0 150px 100px 0;
 }
 
 .toggle {
-    /* Softer gradient with more muted colors */
-    background: linear-gradient(#b76e79, #dc8f9a);
+    background: rgb(31, 28, 28);
     color: #fff;
     position: relative;
     left: -100%;
@@ -181,6 +168,7 @@ body {
     top: 0;
     transform: translateX(0);
     transition: all 0.6s ease-in-out;
+    color: #fff;
 }
 
 .toggle-left {
@@ -202,76 +190,67 @@ body {
 
 /* ====== Forget Password Page Styling ====== */
 .reset-container {
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 20px;
-    /* Lighter shadow */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    width: 500px;
-    /* Adjust width to match design */
-    max-width: 90%;
-    padding: 40px;
+    width: 600px; /* Increased size */
+    max-width: 95%;
+    padding: 50px; /* More padding */
     text-align: center;
-
-    /* Center Everything Inside */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-/* Reset Password Heading */
 .reset-container h1 {
-    font-size: 26px;
+    font-size: 32px;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    color: rgb(31, 28, 28);
 }
 
-/* Reset Password Subtext */
 .reset-container p {
-    /* Slightly darker text for better readability */
-    font-size: 16px;
-    color: black;
-    margin-bottom: 20px;
+    font-size: 18px;
+    color: rgb(31, 28, 28);
+    margin-bottom: 25px;
 }
 
-/* Input Fields */
 .reset-container input {
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     border: none;
     border-radius: 8px;
-    font-size: 14px;
-    /* Warmer background color */
-    background: #f0eae3;
+    font-size: 16px;
+    background: #eaeaea;
     outline: none;
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
+    color: #000;
 }
 
-/* Reset Button */
 .reset-container button {
     width: 100%;
-    padding: 12px;
-    /* Softer brown */
-    background: #b76e79;
+    padding: 14px;
+    background: rgb(31, 28, 28);
     color: white;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     text-transform: uppercase;
-    transition: 0.3s;
+    transition: background 0.3s;
 }
 
-
-
-/* Centering Reset Password Page */
 body.reset {
-    /* Matching the main body gradient */
-    background: linear-gradient(to right, #fdfdfd, #ffffff);
+    background: #f4f4f4;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
+}
+
+span{
+    margin-bottom: 30px;
 }

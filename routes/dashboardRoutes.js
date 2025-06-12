@@ -5,7 +5,7 @@ const dashboardController = require("../controllers/dashboardControllers");
 //const upload = require("../middleware/uploads");
 const { upload, uploadProductImages } = require("../middleware/uploads");
 const { isAuthenticated, isAdmin } = require("../middleware/authMiddleware"); // Import auth middleware
-
+router.get("/dashboard", dashboardController.getDashboard);
 //-----------------------------------------------Start of Customers dashboard Routes
 // Get all users and render customers dashboard page - PROTECTED (Admin only)
 router.get(
@@ -56,7 +56,11 @@ router.delete("/products/:productNumber", dashboardController.deleteProduct);
 
 //-----------------------------------------------Start of collection routes -----------------------------------------------
 // Create collection
-router.post("/create",upload.single("collectionImage"), dashboardController.createCollection);
+router.post(
+  "/create",
+  upload.single("collectionImage"),
+  dashboardController.createCollection
+);
 
 // Render collection by name
 router.get("/collections/:collectionName", dashboardController.viewCollection);
