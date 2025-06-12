@@ -8,6 +8,7 @@ router.get("/home", isAuthenticated, homepageController.getHomePage);
 router.get("/login", homepageController.getLoginPage);
 router.get("/forgetpassword", homepageController.getForgetPasswordPage);
 router.get("/about-us", homepageController.aboutus);
+router.get("/faq", homepageController.faq);
 
 // Contact Us routes
 router.get("/contact-us", homepageController.contactus);
