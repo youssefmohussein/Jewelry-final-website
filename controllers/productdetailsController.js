@@ -21,7 +21,6 @@ exports.getProductDetails = async (req, res) => {
       product.images = [];
     }
 
-    // 🎯 Get 4 random products, excluding the current one
     const relatedProducts = await Product.aggregate([
       { $match: { _id: { $ne: product._id } } },
       { $sample: { size: 6 } },

@@ -52,6 +52,12 @@ const productSchema = new mongoose.Schema({
     data: Buffer,
     contentType: String,
   },
+  //for second photo 
+  hoverImage: {
+  data: Buffer,
+  contentType: String,
+},
+
 
   salesCount: {
     type: Number,
