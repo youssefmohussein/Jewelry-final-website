@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.navbar:hover{
+    background-color: rgba(228, 224, 224, 0.366);
+}
+
+body {
+    font-family: montserrat, sans-serif;
+    background: rgba(255, 254, 254, 0.9);
+    scroll-behavior: smooth;
+}
+
+.wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.wrapper h1 {
+    font-family: 'SAOLDISPLAY-MEDIUM';
+    color: rgb(78, 77, 77);
+    margin-left: 50px;
+    margin-bottom: -120px;
+    padding: 140px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.project {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px; /* Adds space between the two sections */
+}
+
+.add {
+    flex: 2; /* Makes the left section (add-to-cart items) take more space */
+}
+
+.right-bar {
+    flex: 1; /* Makes the right-bar section take less space */
+    padding: 20px;
+    height: auto;
+    min-width: 250px;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: rgba(100,100,111,0.2) 0 7px 29px 0;
+}
+
+.box {
+    display: flex;
+    position: relative;
+    align-items: center;
+    width: 600px;
+    height: 190px;
+    margin-bottom: 20px;
+    background: #ffffff;
+    transition: all 0.3s ease-in-out;
+    box-shadow: rgba(51, 51, 55, 0.2) 0 7px 29px 0;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.box img {
+    width: 200px;
+    height: 200px;
+    object-fit: fill;
+    border-radius: 20px;
+}
+
+.container {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.right-bar hr {
+    margin-bottom: 25px;
+}
+
+.right-bar p {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.right-bar a {
+    background-color: #333938;
+    color: #fff;
+    display: block;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    font-weight: 900;
+    border-radius: 10px;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.right-bar a:hover {
+    background-color: #413e3e;
+}
+
+.unit input {
+    width: 55px;
+    height: 20px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.btn-area {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 8px 15px;
+    background-color: #413e3e;
+    color: #fff;
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.btn-area:hover {
+    background-color: #55585a;
+    color: #fff;
+}
+
+.btn-area i {
+    margin-right: 5px;
+}
+
+.product-price {
+    text-decoration:none;
+    box-shadow: none !important;
+    background: none !important; /* optional, in case it's applying a background too */
+}
+
+
+
+/* Responsive design for smaller screens */
+@media screen and (max-width: 700px) {
+    .project {
+        flex-direction: column; /* Stacks the sections vertically on smaller screens */
+    }
+
+    .right-bar {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 20px;
+    }
+
+    .btn-area {
+        position: relative;
+        margin-top: 10px;
+    }
+}
