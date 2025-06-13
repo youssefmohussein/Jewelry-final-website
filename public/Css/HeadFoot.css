@@ -6,7 +6,13 @@
     scroll-behavior: smooth;
 
 }
-
+:root {
+    --font-sans-serif: 'Laslo-Regular', sans-serif;
+    --pf-secondary-font: 'Laslo-Regular', sans-serif;
+    --font-sans-serif-light: 'Laslo-Light', sans-serif;
+    --font-serif: 'adobe-caslon-pro', sans-serif;
+    --heading-font-family: 'adobe-caslon-pro', sans-serif;
+}
 /***/
 
 .navbar {
@@ -205,36 +211,24 @@
 /* Footer */
 
 
-/* footer  */
+/* Footer */
 footer {
     margin: 0;
-    font-family: "Didot", serif;
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
     line-height: 1.6;
     color: #F5F1EA;
     background: black;
     text-align: center;
+    letter-spacing: 2px;
 }
-
-.logout-icon-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: rgb(9, 9, 9); /* matches other icons */
-  font-size: 25px;     /* matches .icons a size */
-  padding-left: 30px;  /* consistent with other icons */
-  transition: color 0.3s;
-}
-
-.logout-icon-btn:hover {
-  color: #b30000; /* red tint on hover to indicate logout action */
-}
-
 
 .footer {
     padding: 60px 20px;
 }
 
 .heritage .logo {
+    font-family: 'DM Serif Display', serif;
     font-size: 36px;
     color: white;
 }
@@ -287,14 +281,13 @@ footer {
 }
 
 .footer-section h3 {
+    font-family: 'DM Serif Display', serif;
     font-size: 18px;
     font-weight: 400;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     margin-bottom: 20px;
     position: relative;
 }
-
-
 
 .footer-section ul {
     list-style: none;
@@ -302,20 +295,17 @@ footer {
 }
 
 .footer-section a {
+    font-family: 'Playfair Display', serif;
     color: inherit;
     text-decoration: none;
     transition: 0.3s;
-}
-
-.footer-section a:hover {
-    color: rgb(9, 9, 9);
 }
 
 .newsletter-form input,
 .newsletter-form button {
     width: 100%;
     padding: 12px;
-    font-family: inherit;
+    font-family: 'Playfair Display', serif;
     border: 1px solid rgb(9, 9, 9);
     background: transparent;
     color: white;
@@ -346,6 +336,7 @@ footer {
 
 .social-links a,
 .legal-links a {
+    font-family: 'Playfair Display', serif;
     color: inherit;
     text-decoration: none;
     margin: 0 15px;
@@ -355,17 +346,7 @@ footer {
 }
 
 .copyright {
+    font-family: 'Playfair Display', serif;
     font-size: 14px;
     color: white;
-}
-
-.logout-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: inherit; /* match navbar icon color */
-  font-size: 1.2rem;
-}
-.logout-btn:hover {
-  color: #f00; /* or any hover color */
 }
