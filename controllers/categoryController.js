@@ -4,7 +4,7 @@ const Collection = require("../models/collectionDB");
 exports.getCategoryProducts = async (req, res) => {
   const category = req.params.category;
   const page = parseInt(req.query.page) || 1;
-  const limit = 9; // Number of products per page
+  const limit = 6; // Number of products per page
   const skip = (page - 1) * limit;
   try {
     const totalProducts = await Product.countDocuments({ category });
