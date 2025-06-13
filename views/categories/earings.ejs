@@ -27,6 +27,13 @@
             src="<%= product.imageSrc %>"
             alt="<%= product.name %>"
           />
+          <% if (product.hoverImageSrc) { %>
+          <img
+            class="product-hover-image"
+            src="<%= product.hoverImageSrc %>"
+            alt="<%= product.name %> Hover"
+          />
+          <% } %>
           <span class="product-name"><%= product.name %></span>
           <p class="product-price">$<%= product.price %></p>
         </div>

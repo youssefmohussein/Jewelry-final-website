@@ -70,7 +70,7 @@ body {
 }
 
 .product-item:hover .product-hover-image {
-  opacity: 1; /* Show the hover image on hover */
+  opacity: 100; /* Show the hover image on hover */
 }
 
 /* Other styling for product name and price */
