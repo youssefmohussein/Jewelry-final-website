@@ -1,6 +1,6 @@
 const Collection = require("../models/collectionDB");
+const Product = require("../models/productDB");
 
-// Homepage logic
 exports.getHomePage = async (req, res) => {
   try {
     if (req.session.userId && req.session.role === "admin") {
@@ -8,14 +8,39 @@ exports.getHomePage = async (req, res) => {
     }
 
     const collections = await Collection.find();
+
+    // Get 8 random products
+    const rawProducts = await Product.aggregate([{ $sample: { size: 8 } }]);
+
+    const products = rawProducts.map((product) => {
+      let imageBase64 = "";
+      if (product.image && product.image.data) {
+        imageBase64 = `data:${
+          product.image.contentType
+        };base64,${product.image.data.toString("base64")}`;
+      }
+
+      return {
+        _id: product._id,
+        name: product.name,
+        imageSrc: imageBase64,
+      };
+    });
+
     res.render("homePage", {
       collections,
+      products,
       isLoggedIn: !!req.session.userId,
       role: req.session.role,
     });
   } catch (error) {
-    console.error("Error fetching collections:", error);
-    res.render("homePage", { collections: [], isLoggedIn: false, role: null });
+    console.error("Error fetching homepage data:", error);
+    res.render("homePage", {
+      collections: [],
+      products: [],
+      isLoggedIn: false,
+      role: null,
+    });
   }
 };
 

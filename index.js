@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const session = require("express-session"); // Import express-session
 const cookieParser = require("cookie-parser"); // Import cookie-parser
-const i18n = require('i18n');
+const i18n = require("i18n");
 // Initialize the app
 const app = express();
 
@@ -27,25 +27,23 @@ app.use(cookieParser());
 const MongoStore = require("connect-mongo"); // Import connect-mongo
 ///////
 i18n.configure({
-  locales: ['en', 'ar'],
-  defaultLocale: 'en',
-  cookie: 'lang',
-  queryParameter: 'lang',
-  directory: path.join(__dirname, 'locales'),
+  locales: ["en", "ar"],
+  defaultLocale: "en",
+  cookie: "lang",
+  queryParameter: "lang",
+  directory: path.join(__dirname, "locales"),
   autoReload: true,
   syncFiles: true,
 });
 
 app.use(i18n.init);
-//middleware 
 
 app.use((req, res, next) => {
-  const lang = req.query.lang || req.cookies.lang || 'en';
+  const lang = req.query.lang || req.cookies.lang || "en";
   res.setLocale(lang);
   res.locals.locale = lang;
   next();
 });
-
 
 app.use(
   session({
@@ -66,7 +64,6 @@ app.use(
     },
   })
 );
-
 
 //collection w category ashan mybozosh m3 el sessions
 app.use((req, res, next) => {
@@ -92,7 +89,7 @@ app.use("/", productdetailsRoute);
 app.use("/", cartRoutes);
 
 app.use((req, res) => {
-  handleError(res, 404, 'Page Not Found');
+  handleError(res, 404, "Page Not Found");
 });
 
 // MongoDB
@@ -106,5 +103,6 @@ mongoose
 // Start
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  // console.log(`Server is running on http://localhost:${PORT}`);
+  console.log("http://velora-store.local:8000/");
 });

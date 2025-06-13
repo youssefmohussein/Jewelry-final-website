@@ -383,3 +383,48 @@
     cursor: pointer;
     font-size: 18px;
 }
+
+.scroll-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.scroll-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.product-scroll-container {
+  display: flex;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  gap: 20px;
+  max-width: 100%;
+  padding: 20px 0;
+}
+
+/* Hide scrollbar for all browsers */
+.product-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.product-scroll-container {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.product-item {
+  flex: 0 0 auto;
+  width: 500px;
+  text-align: center;
+}
+
+.product-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
