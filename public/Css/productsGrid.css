@@ -36,10 +36,12 @@ body {
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  gap: 70px;
+  gap: 30px;
   list-style: none;
   padding-bottom: 50px;
-  padding-left: 50px;
+  padding-left: 20px;
+  align-items: center;
+  justify-content: center;
 
 }
 
@@ -65,7 +67,7 @@ body {
   height: auto;
   transition: opacity 0.3s ease-in-out;
   padding:40px;
-
+  margin-left: 10%;
 }
 
 .product-hover-image {
@@ -148,3 +150,12 @@ body {
   opacity: 0.5;
   cursor: not-allowed;
 }
+    .message-box {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      padding: 20px;
+      border-radius: 8px;
+      display: inline-block;
+      font-size: 1.2em;
+    }
