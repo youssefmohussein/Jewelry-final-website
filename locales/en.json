@@ -1,0 +1,25 @@
+{
+	"welcome": "Welcome to our store",
+	"products": "Products",
+	"add_to_cart": "Add to cart",
+	"shop": "shop",
+	"collections": "collections",
+	"about_us": "about_us",
+	"quick_links": "Quick Links",
+	"earrings": "Earrings",
+	"rings": "Rings",
+	"bracelets": "Bracelet",
+	"necklaces": "Necklace",
+	"contact": "Contact",
+	"services": "Services",
+	"refund_policy": "Refund Policy",
+	"shipping": "Shipping",
+	"contact_us": "Contact Us",
+	"faq": "FAQ",
+	"newsletter": "Newsletter",
+	"subscribe_text": "Subscribe to receive our latest collections and private events.",
+	"enter_email": "Enter your email",
+	"subscribe": "Subscribe",
+	"all_rights_reserved": "All rights reserved"
+	
+}

@@ -8,6 +8,37 @@
       src="https://kit.fontawesome.com/a076d05399.js"
       crossorigin="anonymous"
     ></script>
+    <style>
+    
+      .top-right-container {
+        display: flex;
+        align-items: center;
+        gap: 8px; 
+      }
+
+      .language-switcher a {
+        color: #333;
+        text-decoration: none;
+        padding: 0 6px;
+        font-size: 14px;
+      }
+      .language-switcher a:hover {
+        text-decoration: underline;
+      }
+
+      .icons {
+        display: flex;
+        align-items: center;
+        gap: 12px; 
+      }
+      .logout-icon-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: inherit;
+        font-size: 1em;
+      }
+    </style>
   </head>
   <body>
     <!-- NAVBAR -->
@@ -15,10 +46,14 @@
       <div class="navigation">
         <!-- Shop Dropdown -->
         <div class="dropdown">
-          <a href="#">Shop</a>
+          <!--<a href="#">Shop</a>-->
+          <a href="#"><%= __('shop') %></a>
+
           <div class="dropdown-content mega-menu">
             <div class="mega-menu-column">
-              <h3>Categories</h3>
+              <!--<h3>Categories</h3>-->
+              <a href="#"><%= __('collections') %></a>
+
               <a href="#">Rings</a>
               <a href="#">Earrings</a>
               <a href="#">Necklaces</a>
@@ -33,7 +68,7 @@
 
         <!-- Collections Dropdown -->
         <div class="dropdown">
-          <a href="#">Collections</a>
+          <a href="#"><%= __('collections') %></a>
           <div class="dropdown-content mega-menu">
             <div class="mega-menu-column">
               <h3>Collection</h3>
@@ -54,7 +89,8 @@
         </div>
 
         <!-- Static Link -->
-        <a href="/about-us">About Us</a>
+        <!-- <a href="/about-us">About Us</a> -->
+        <a href="/about-us"><%= __('about_us') %></a>
       </div>
 
       <!-- Logo -->
@@ -63,26 +99,35 @@
         <h2>Paris</h2>
       </a>
 
-      <!-- Icons -->
-      <div class="icons">
-        <% if (isLoggedIn && role === 'customer') { %>
-        <a href="/profile"><i class="fas fa-user"></i></a>
-        <form
-  action="/logout"
-  method="POST"
-  class="logout-form"
-  style="display: inline"
->
-  <button onclick="logout()" class="logout-icon-btn" title="Logout">
-    <i class="fas fa-arrow-right-from-bracket"></i>
-  </button>
-</form>
-        <% } else { %>
-        <a href="/login"><i class="fas fa-user"></i></a>
-        <% } %>
-        <a href="/cart"><i class="fas fa-bag-shopping"></i></a>
+  
+      <div class="top-right-container">
+        <!-- Language Switcher -->
+        <div class="language-switcher">
+          <a href="?lang=en">English</a> | <a href="?lang=ar">العربية</a>
+        </div>
+
+        <!-- Icons -->
+        <div class="icons">
+          <% if (isLoggedIn && role === 'customer') { %>
+            <a href="/profile"><i class="fas fa-user"></i></a>
+            <form
+              action="/logout"
+              method="POST"
+              class="logout-form"
+              style="display: inline"
+            >
+              <button onclick="logout()" class="logout-icon-btn" title="Logout" type="submit">
+                <i class="fas fa-arrow-right-from-bracket"></i>
+              </button>
+            </form>
+          <% } else { %>
+            <a href="/login"><i class="fas fa-user"></i></a>
+          <% } %>
+          <a href="/cart"><i class="fas fa-bag-shopping"></i></a>
+        </div>
       </div>
     </nav>
+
     <script>
       const dropdown = document.querySelector(".dropdown");
 
