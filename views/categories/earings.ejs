@@ -1,9 +1,15 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Bracelets</title>
+    <title>Earrings</title>
     <link rel="stylesheet" href="/Css/productsGrid.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
   </head>
   <body>
     <%- include('../partials/header') %>
@@ -35,28 +41,33 @@
           />
           <% } %>
           <span class="product-name"><%= product.name %></span>
-          <p class="product-price"><LEg>LE</LEg><%= product.price %></p>
+          <p class="product-price">$<%= product.price %></p>
         </div>
       </a>
       <% }) %>
     </div>
-        <% if (totalPages > 1) { %>
+    <% if (totalPages > 1) { %>
     <div class="pagination">
       <% if (hasPrevPage) { %>
-        <a href="?page=<%= currentPage - 1 %>" class="pagination-btn">&laquo; Previous</a>
-      <% } %>
-      
-      <% for(let i = 1; i <= totalPages; i++) { %>
-        <a href="?page=<%= i %>" class="pagination-btn <%= i === currentPage ? 'active' : '' %>"><%= i %></a>
-      <% } %>
-      
-      <% if (hasNextPage) { %>
-        <a href="?page=<%= currentPage + 1 %>" class="pagination-btn">Next &raquo;</a>
+      <a href="?page=<%= currentPage - 1 %>" class="pagination-btn"
+        >&laquo; Previous</a
+      >
+      <% } %> <% for(let i = 1; i <= totalPages; i++) { %>
+      <a
+        href="?page=<%= i %>"
+        class="pagination-btn <%= i === currentPage ? 'active' : '' %>"
+        ><%= i %></a
+      >
+      <% } %> <% if (hasNextPage) { %>
+      <a href="?page=<%= currentPage + 1 %>" class="pagination-btn"
+        >Next &raquo;</a
+      >
       <% } %>
     </div>
     <% } %>
 
-   <script src="/javasScript/thumbnail.js"></script>
+    <script src="/javasScript/thumbnail.js"></script>
     <%- include('../partials/footer') %>
   </body>
 </html>
+
