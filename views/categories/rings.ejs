@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <title>Rings</title>
     <link rel="stylesheet" href="/Css/productsGrid.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
   </head>
   <body>
     <%- include('../partials/header') %>
@@ -27,7 +31,7 @@
             src="<%= product.imageSrc %>"
             alt="<%= product.name %>"
           />
-            <% if (product.hoverImageSrc) { %>
+          <% if (product.hoverImageSrc) { %>
           <img
             class="product-hover-image"
             src="<%= product.hoverImageSrc %>"
@@ -40,18 +44,22 @@
       </a>
       <% }) %>
     </div>
-        <% if (totalPages > 1) { %>
+    <% if (totalPages > 1) { %>
     <div class="pagination">
       <% if (hasPrevPage) { %>
-        <a href="?page=<%= currentPage - 1 %>" class="pagination-btn">&laquo; Previous</a>
-      <% } %>
-      
-      <% for(let i = 1; i <= totalPages; i++) { %>
-        <a href="?page=<%= i %>" class="pagination-btn <%= i === currentPage ? 'active' : '' %>"><%= i %></a>
-      <% } %>
-      
-      <% if (hasNextPage) { %>
-        <a href="?page=<%= currentPage + 1 %>" class="pagination-btn">Next &raquo;</a>
+      <a href="?page=<%= currentPage - 1 %>" class="pagination-btn"
+        >&laquo; Previous</a
+      >
+      <% } %> <% for(let i = 1; i <= totalPages; i++) { %>
+      <a
+        href="?page=<%= i %>"
+        class="pagination-btn <%= i === currentPage ? 'active' : '' %>"
+        ><%= i %></a
+      >
+      <% } %> <% if (hasNextPage) { %>
+      <a href="?page=<%= currentPage + 1 %>" class="pagination-btn"
+        >Next &raquo;</a
+      >
       <% } %>
     </div>
     <% } %>
