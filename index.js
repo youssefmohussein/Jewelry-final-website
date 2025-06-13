@@ -37,12 +37,6 @@ i18n.configure({
 });
 
 app.use(i18n.init);
-<<<<<<< HEAD
-//middleware
-=======
-//middleware 
-
->>>>>>> a74aceb5529d9651a61f37293c504d7d3fd0aa91
 app.use((req, res, next) => {
   const lang = req.query.lang || req.cookies.lang || "en";
   res.setLocale(lang);
@@ -50,10 +44,6 @@ app.use((req, res, next) => {
   next();
 });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> a74aceb5529d9651a61f37293c504d7d3fd0aa91
 app.use(
   session({
     secret: process.env.SECRET_KEY,
