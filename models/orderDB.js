@@ -12,9 +12,6 @@ const OrderSchema = new mongoose.Schema({
     ref: 'Product',
     required: true
   }],
-  product_names: [String],
-    customerName: String,
-    customerEmail: String,
   orderDate: {
     type: Date,
     default: Date.now

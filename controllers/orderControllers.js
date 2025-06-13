@@ -1,54 +1,23 @@
 const mongoose = require("mongoose");
 const Order = require("../models/orderDB");
-const Product = require("../models/productDB");
 
-exports.renderOrderPage = async (req, res) => {
-  try {
-    const cart = req.session.cart || [];
-    if (cart.length === 0) {
-      return res.redirect('/cart'); // Prevent ordering empty cart
-    }
+exports.renderOrderPage = (req, res) => {
+  const generatedOrderId = 'ORD' + Date.now();
+  const userId = new mongoose.Types.ObjectId().toString();
+  const productIds = [
+    new mongoose.Types.ObjectId().toString(),
+    new mongoose.Types.ObjectId().toString()
+  ].join(',');
+  const totalQuantity = 3;
+  const totalPrice = 250.75;
 
-    let totalQuantity = 0;
-    let totalPrice = 0;
-    let productIds = [];
-
-    for (const item of cart) {
-  console.log("Trying to find product with ID:", item.productId);
-
-  const product = await Product.findById(item.productId);
-
-  if (!product) {
-    console.warn("Product not found for ID:", item.productId);
-    continue;
-  }
-
-  console.log("Product found:", product.name);
-
-  totalQuantity += item.quantity;
-  totalPrice += item.quantity * product.price;
-  productIds.push(product._id);
-}
-
-
-    const tax = totalPrice * 0.15;
-    const shipping = totalPrice > 0 ? 5000 : 0;
-    const finalTotalPrice = totalPrice + tax + shipping;
-
-    const generatedOrderId = 'ORD' + Date.now();
-    const userId = req.session.userId || new mongoose.Types.ObjectId().toString();
-
-    res.render('orderpage', {
-      generatedOrderId,
-      userId,
-      productIds: productIds.join(','),
-      totalQuantity,
-      totalPrice: finalTotalPrice
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Error loading checkout page");
-  }
+  res.render('orderpage', {
+    generatedOrderId,
+    userId,
+    productIds,
+    totalQuantity,
+    totalPrice
+  });
 };
 
 exports.createOrder = async (req, res) => {
@@ -68,20 +37,13 @@ exports.createOrder = async (req, res) => {
       return res.status(400).json({ error: "Order with this ID already exists." });
     }
 
-    const productIdArray = productIds.split(',').map(id => id.trim());
-    const productObjectIds = [];
-    const productNames = [];
-
-    for (const id of productIdArray) {
-      if (!mongoose.Types.ObjectId.isValid(id)) {
+    const productObjectIds = productIds.split(',').map(id => {
+      if (!mongoose.Types.ObjectId.isValid(id.trim())) {
         throw new Error(`Invalid Product ID: ${id}`);
       }
-      const product = await Product.findById(id);
-      if (product) {
-        productObjectIds.push(product._id);
-        productNames.push(product.name); // ✅ store name
-      }
-    }
+      return new mongoose.Types.ObjectId(id.trim());
+    });
+
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       throw new Error("Invalid user ID");
     }
@@ -95,9 +57,6 @@ exports.createOrder = async (req, res) => {
       quantity: parseInt(totalQuantity),
       total_price: parseFloat(totalPrice),
       product_ids: productObjectIds,
-      product_names: productNames,
-      customerName: fullName,             
-      customerEmail: email,
       shippingAddress: {
         address,
         city,
@@ -122,9 +81,6 @@ exports.createOrder = async (req, res) => {
     }
     res.status(500).json({ error: "Internal server error: " + err.message });
   }
-    await newOrder.save();
-    req.session.cart = []; // clear the cart after order placed
-    res.status(201).json({ message: "Order placed successfully!", order: newOrder });
 };
 
 // orderControllers.js
