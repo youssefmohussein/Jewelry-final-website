@@ -11,10 +11,10 @@
     <div class="footer-section">
       <h3><%= __('quick_links') %></h3>
       <ul>
-        <li><a href="/products/earrings"><%= __('earrings') %></a></li>
-        <li><a href="/products/rings"><%= __('rings') %></a></li>
-        <li><a href="/products/bracelets"><%= __('bracelets') %></a></li>
-        <li><a href="/products/necklaces"><%= __('necklaces') %></a></li>
+        <li><a href="/categories/earings"><%= __('earrings') %></a></li>
+        <li><a href="/categories/rings"><%= __('rings') %></a></li>
+        <li><a href="/categories/bracelets"><%= __('bracelets') %></a></li>
+        <li><a href="/categories/necklace"><%= __('necklaces') %></a></li>
       </ul>
     </div>
 
@@ -31,9 +31,8 @@
     <div class="footer-section">
       <h3><%= __('services') %></h3>
       <ul>
-        <li><a href="/refund-policy"><%= __('refund_policy') %></a></li>
-        <li><a href="#"><%= __('shipping') %></a></li>
-        <li><a href="/contact"><%= __('contact_us') %></a></li>
+        <li><a href="/refundPolicy"><%= __('refund_policy') %></a></li>
+        <li><a href="/contact-us"><%= __('contact_us') %></a></li>
         <li><a href="/faq"><%= __('faq') %></a></li>
       </ul>
     </div>
@@ -54,6 +53,8 @@
       <a href="#">Facebook</a>
       <a href="#">Pinterest</a>
     </div>
-    <div class="copyright">© <%= new Date().getFullYear() %> VELORA. <%= __('all_rights_reserved') %></div>
+    <div class="copyright">
+      © <%= new Date().getFullYear() %> VELORA. <%= __('all_rights_reserved') %>
+    </div>
   </div>
 </footer>

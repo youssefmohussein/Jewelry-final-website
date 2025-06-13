@@ -71,9 +71,64 @@ window.onclick = function (event) {
   }
 };
 
+//--------------------------------------------delete collection------------------------------//
 
+function openDeleteCollectionModal() {
+  document.getElementById("deleteCollectionModal").style.display = "block";
+}
 
-/*async function addProduct() {
+function closeDeleteCollectionModal() {
+  document.getElementById("deleteCollectionModal").style.display = "none";
+}
+
+window.onclick = function (event) {
+  const modal = document.getElementById("deleteCollectionModal");
+  if (event.target === modal) {
+    closeDeleteCollectionModal();
+  }
+};
+
+function handleDeleteCollection() {
+  const collectionName = document.getElementById("deleteCollectionName").value;
+  if (!collectionName) {
+    alert("Please select a collection to delete.");
+    return;
+  }
+  if (
+    confirm(
+      `Are you sure you want to delete the collection: ${collectionName}?`
+    )
+  ) {
+    fetch(`/collections/${encodeURIComponent(collectionName)}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Collection deleted successfully");
+          location.reload();
+        } else {
+          response.json().then((data) => {
+            alert(data.message || "Failed to delete the collection");
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting collection:", error);
+        alert("An error occurred while deleting the collection");
+      });
+  }
+}
+
+document
+  .getElementById("deleteCollectionForm")
+  .addEventListener("submit", function (e) {
+    e.preventDefault();
+    handleDeleteCollection();
+  });
+
+//----------------------------------end of delete collection---------------//
+
+async function addProduct() {
   const formData = new FormData();
 
   formData.append(
@@ -99,51 +154,6 @@ window.onclick = function (event) {
     .value.trim()
     .split(",")
     .map((c) => c.trim());
-  formData.append("colors", JSON.stringify(colors));
-
-  // taking images
-  const imageInput = document.getElementById("image");
-  if (imageInput.files.length > 0) {
-    formData.append("image", imageInput.files[0]);
-  }
-
-  try {
-    const response = await fetch("/products", {
-      method: "POST",
-      body: formData,
-    });
-
-    const result = await response.json();
-
-    if (response.ok) {
-      alert("Product added successfully!");
-      closeProductForm();
-    } else {
-      alert(
-        `Failed to add product: ${
-          result.error || result.message || "Unknown error"
-        }`
-      );
-    }
-  } catch (err) {
-    console.error("Error:", err);
-    alert("Something went wrong while adding the product.");
-  }
-}*/
-
-async function addProduct() {
-  const formData = new FormData();
-
-  formData.append("productNumber", document.getElementById("productNumber").value.trim().toUpperCase());
-  formData.append("name", document.getElementById("productName").value.trim());
-  formData.append("description", document.getElementById("description").value.trim());
-  formData.append("category", document.getElementById("category").value.trim());
-  formData.append("collection", document.getElementById("collection").value.trim());
-  formData.append("stock", document.getElementById("stock").value);
-  formData.append("price", document.getElementById("price").value);
-  formData.append("totalSales", 0);
-
-  const colors = document.getElementById("colors").value.trim().split(",").map(c => c.trim());
   formData.append("colors", JSON.stringify(colors));
 
   // Append main image
@@ -173,15 +183,17 @@ async function addProduct() {
       alert("Product added successfully!");
       closeProductForm();
     } else {
-      alert(`Failed to add product: ${result.error || result.message || "Unknown error"}`);
+      alert(
+        `Failed to add product: ${
+          result.error || result.message || "Unknown error"
+        }`
+      );
     }
   } catch (err) {
     console.error("Error:", err);
     alert("Something went wrong while adding the product.");
   }
 }
-
-
 
 //----------------------------------------updata button----------------------------------------
 // for opening the edit form
@@ -283,29 +295,6 @@ function handleDeleteClick(button) {
 }
 
 //----------------------------------------------------end---------------------------------
-//---------------------------------------delete product -------------------------
-function handleDeleteClick(button) {
-  const product = JSON.parse(button.getAttribute("data-product"));
-  if (
-    confirm(`Are you sure you want to delete the product: ${product.name}?`)
-  ) {
-    fetch(`/products/${product.productNumber}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        if (response.ok) {
-          alert("Product deleted successfully");
-          location.reload();
-        } else {
-          alert("Failed to delete the product");
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        alert("An error occurred while deleting");
-      });
-  }
-}
 
 async function logout() {
   try {
@@ -324,4 +313,20 @@ async function logout() {
     console.error("Error during logout:", err);
     alert("Something went wrong during logout.");
   }
+}
+
+function searchTable() {
+  const input = document.getElementById("searchInput").value.toLowerCase();
+  const tableRows = document.querySelectorAll("tbody tr");
+
+  tableRows.forEach((row) => {
+    const productNumber = row.cells[0].textContent.toLowerCase();
+    const productName = row.cells[1].textContent.toLowerCase();
+
+    if (productNumber.includes(input) || productName.includes(input)) {
+      row.style.display = "";
+    } else {
+      row.style.display = "none";
+    }
+  });
 }

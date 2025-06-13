@@ -9,11 +9,10 @@
       crossorigin="anonymous"
     ></script>
     <style>
-    
       .top-right-container {
         display: flex;
         align-items: center;
-        gap: 8px; 
+        gap: 8px;
       }
 
       .language-switcher a {
@@ -29,7 +28,7 @@
       .icons {
         display: flex;
         align-items: center;
-        gap: 12px; 
+        gap: 12px;
       }
       .logout-icon-btn {
         background: none;
@@ -48,7 +47,6 @@
         <div class="dropdown">
           <!--<a href="#">Shop</a>-->
           <a href="#"><%= __('shop') %></a>
-
           <div class="dropdown-content mega-menu">
             <div class="mega-menu-column">
               <!--<h3>Categories</h3>-->
@@ -60,8 +58,8 @@
               <a href="#">Bangles and Bracelets</a>
             </div>
             <div class="mega-menu-column1">
-              <img src="/images/nav1.png" alt="Jewelry 1" class="menu-image" />
-              <img src="/images/nav2.png" alt="Jewelry 2" class="menu-image" />
+              <img src="/images/Homepage/nav2.png" alt="Jewelry 1" class="menu-image" />
+              <img src="/images/Homepage/nav3.png" alt="Jewelry 2" class="menu-image" />
             </div>
           </div>
         </div>
@@ -82,8 +80,8 @@
               <% } %>
             </div>
             <div class="mega-menu-column1">
-              <img src="/images/nav1.png" alt="Jewelry 1" class="menu-image" />
-              <img src="/images/nav2.png" alt="Jewelry 2" class="menu-image" />
+              <img src="/images/Homepage/nav1.png" alt="Jewelry 1" class="menu-image" />
+              <img src="/images/Homepage/nav2.png" alt="Jewelry 2" class="menu-image" />
             </div>
           </div>
         </div>
@@ -99,7 +97,6 @@
         <h2>Paris</h2>
       </a>
 
-  
       <div class="top-right-container">
         <!-- Language Switcher -->
         <div class="language-switcher">
@@ -109,19 +106,24 @@
         <!-- Icons -->
         <div class="icons">
           <% if (isLoggedIn && role === 'customer') { %>
-            <a href="/profile"><i class="fas fa-user"></i></a>
-            <form
-              action="/logout"
-              method="POST"
-              class="logout-form"
-              style="display: inline"
+          <a href="/profile"><i class="fas fa-user"></i></a>
+          <form
+            action="/logout"
+            method="POST"
+            class="logout-form"
+            style="display: inline"
+          >
+            <button
+              onclick="logout()"
+              class="logout-icon-btn"
+              title="Logout"
+              type="submit"
             >
-              <button onclick="logout()" class="logout-icon-btn" title="Logout" type="submit">
-                <i class="fas fa-arrow-right-from-bracket"></i>
-              </button>
-            </form>
+              <i class="fas fa-arrow-right-from-bracket"></i>
+            </button>
+          </form>
           <% } else { %>
-            <a href="/login"><i class="fas fa-user"></i></a>
+          <a href="/login"><i class="fas fa-user"></i></a>
           <% } %>
           <a href="/cart"><i class="fas fa-bag-shopping"></i></a>
         </div>
@@ -142,6 +144,14 @@
       // Hide dropdown content on mouseout
       dropdown.addEventListener("mouseout", function () {
         dropdownContent.style.display = "none"; // Hide the dropdown content
+      });
+      window.addEventListener("scroll", function () {
+        const navbar = document.querySelector(".navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
       });
     </script>
     <script src="/javasScript/authentcation.js"></script>

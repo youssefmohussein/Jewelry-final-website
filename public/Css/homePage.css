@@ -1,215 +1,136 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Delius&family=Delius+Swash+Caps&family=Gravitas+One&family=Lavishly+Yours&family=Markazi+Text:wght@400..700&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Pattaya&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&family=Vibur&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
-
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-    scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  scroll-behavior: smooth;
 }
 
-/*-------------------- VIDEO BACKGROUND --------------------*/
+/* Hero Video */
 .video-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
 }
-
 .video-container video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/*-------------------- BEST SELLER PRODUCTS --------------------*/
-.section-best-seller {
-    font-size: 35px;
-    font-weight: bold;
-    color: #090909;
-    margin-bottom: 20px;
-    text-align: center;
-    font-family: serif;
-    padding: 40px;
+/* Explore Section */
+section.content {
+  padding: 40px 20px;
+  background-color: #fdfdfd;
+  position: relative;
+  overflow: hidden;
 }
 
-.product-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.product-container p {
-    padding-top: 20px;
-}
-
-.product-item1,
-.product-item2,
-.product-item3,
-.product-item4 {
-    margin-left: 25px;
-    padding-left: 10px;
-}
-
-.image-1,
-.image-2,
-.image-3,
-.image-4 {
-    width: 320px;
-    margin-right: 20px;
-    padding: 0 20px;
-    transition: transform 0.4s ease-out, opacity 0.3s ease-out, box-shadow 0.3s ease-out;
-}
-
-.image-1:hover,
-.image-2:hover,
-.image-3:hover,
-.image-4:hover {
-    transform: scale(1.08);
-    opacity: 0.9;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
-}
-
-.product-title1,
-.product-title2,
-.product-title3,
-.product-title4 {
-    font-size: 12px;
-    color: #090909;
-    text-align: center;
-    padding: 30px 35px 50px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-style: italic;
-}
-
-.product-price1,
-.product-price2,
-.product-price3,
-.product-price4 {
-    font-size: 13px;
-    color: #090909;
-    font-weight: bold;
-    margin: -10px;
-    padding-right: 61px;
-}
-
-/*-------------------- EXPLORE --------------------*/
 .Explore {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 42px;
-    padding: 50px 0 45px 37px;
-    font-weight: 500;
-    letter-spacing: 1.5px;
-    color: #090909;
+  font-family: 'Poppins', serif;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: black;
 }
 
-/*-------------------- PRODUCT DETAILS --------------------*/
-.product-details {
-    display: flex;
-    gap: 30px;
-    max-width: 1000px;
-    padding: 20px 0 20px 35px;
-    margin-left: 150px;
-    align-items: center;
-    justify-content: center;
+/* Scrollable Products */
+.scroll-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
-.product-image img {
-    width: 400px;
-    border: 5px solid rgba(186, 149, 125, 0.8);
-    border-radius: 19px;
-    margin-top: 30%;
-    padding-left: 25px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.scroll-btn {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  padding: 10px 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+  transition: background-color 0.3s ease;
+}
+.scroll-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.scroll-btn.left { left: 0; position: absolute; }
+.scroll-btn.right { right: 0; position: absolute; }
+
+.product-scroll-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 20px;
+  padding: 20px 40px;
+  max-width: 100%;
+}
+.product-scroll-container::-webkit-scrollbar {
+  display: none;
 }
 
-.product-image img:hover {
-    transform: scale(1.1);
-    box-shadow: -10px 10px 25px rgba(186, 149, 125, 0.8);
+.product-item-link {
+  text-decoration: none;
+  color: inherit;
 }
 
-.product-info {
-    margin-left: 28%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.product-item {
+  min-width: 300px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+.product-item img {
+  width: 65%;
+  object-fit: cover;
+}
+.product-title {
+  font-family: 'PT Serif', serif;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #222;
 }
 
-.product-title h1 {
-    text-align: center;
-    padding-bottom: 200%;
-}
-
-.product-description h4 {
-    padding-top: 10px;
-}
-
-.product-price {
-    padding: 10px;
-    text-align: left;
-    text-decoration: underline;
-    font-weight: lighter;
-    color: rgba(15, 12, 12, 0.8);
-}
-
-.product-price:hover {
-    box-shadow: 5px 5px 25px rgba(186, 149, 125, 0.8);
-}
-
-.details {
-    display: flex;
-    text-align: center;
-    font-size: 150%;
-}
-
-.product-description {
-    padding: 50px;
-    text-align: justify;
-    font-weight: lighter;
-    color: rgba(15, 12, 12, 0.8);
-}
-
-/*-------------------- COLLECTION TITLE --------------------*/
-.collection {
-    font-size: 50px;
-    font-style: italic;
-    font-family: 'Laslo-Regular';
-    color: #090909;
-    padding: 70px 0;
-    text-align: center;
-}
-
-/*-------------------- MODEL SECTION --------------------*/
+/* model section*/
 .model-content {
     text-align: center;
     gap: 30px;
+
 }
 
 .heading-text {
+    color: black;
+    margin-bottom: 80px;
     font-size: 30px;
     font-weight: lighter;
     font-style: italic;
     font-family: 'Laslo-Regular';
-    color: #090909;
-    margin-bottom: 80px;
 }
 
 .images {
     display: flex;
     justify-content: center;
     gap: 30px;
+
 }
 
 .images img {
     width: 600px;
     height: 750px;
+
+
 }
+
 
 .zoom-container {
     position: relative;
@@ -217,8 +138,11 @@
     height: 600px;
     overflow: hidden;
     border-radius: 5px;
+
+
 }
 
+/* Image that acts like a video */
 .video-image {
     width: 200%;
     height: 200%;
@@ -227,159 +151,186 @@
     transition: transform 0.5s ease-in-out;
 }
 
+
 @keyframes zoomPan {
-    0%   { transform: scale(1) translate(3px, 3px); }
-    25%  { transform: scale(1) translate(3%, 4%); }
-    50%  { transform: scale(1.1) translate(2%, 2%); }
-    75%  { transform: scale(1.1) translate(2%, 2%); }
-    100% { transform: scale(1) translate(0, 0); }
+    0% {
+        transform: scale(1) translateX(3) translateY(3);
+    }
+
+    25% {
+        transform: scale(1) translateX(3%) translateY(4%);
+    }
+
+    50% {
+        transform: scale(1.1) translateX(2%) translateY(2%);
+    }
+
+    75% {
+        transform: scale(1.1) translateX(2%) translateY(2%);
+    }
+
+    100% {
+        transform: scale(1) translateX(0) translateY(0);
+    }
 }
 
-/*-------------------- JEWELRY COLLECTION --------------------*/
-.container {
-    margin: 0 auto;
-    padding: 20px;
-}
 
+/* Collections Section */
+.collection {
+  font-family: 'Laslo-Regular';
+  color: #000000;
+  font-size: 50px;
+  font-style: italic;
+  text-align: center;
+  padding: 70px 0;
+}
 .jewelry-grid {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 60px;
 }
-
 .jewelry-item {
-    text-align: center;
-    background: white;
-    padding: 20px;
-    transition: transform 0.3s ease;
+  text-align: center;
+  background: white;
+  padding: 20px;
+  transition: transform 0.3s ease;
 }
-
 .jewelry-item:hover {
-    transform: translateY(-10px);
+  transform: translateY(-10px);
 }
-
-.jewelry-item:hover img {
-    opacity: 0.8;
-}
-
 .jewelry-item img {
-    width: 300px;
-    height: 300px;
-    object-fit: cover;
-    transition: opacity 0.3s ease;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
 }
-
+.jewelry-item:hover img {
+  opacity: 0.8;
+}
 .name {
-    margin-top: 25px;
-    font-size: 16px;
-    font-style: italic;
-    color: #090909;
+  margin-top: 25px;
+  font-size: 16px;
+  color: black;
+  font-style: italic;
 }
+/* Headings */
 
-/*-------------------- WORKSHOP SECTION --------------------*/
+/* Container */
 .container-workshop {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
+
+/* About Section */
+.workshop-content {
+    padding: 80px;
+
+
+}
+
+
 .container-workshop h1 {
     font-size: 30px;
     font-weight: 300;
     text-align: center;
-    margin: 80px 0 -20px;
-    color: #090909;
+    margin-top: 80px;
+    margin-bottom: -20px;
+    color: black;
     font-family: 'Laslo-Regular';
 }
 
 .container-workshop p {
-    margin: 40px 0 20px;
+    margin-top: 40px;
+    margin-bottom: 20px;
     font-size: 20px;
     text-align: center;
     font-style: italic;
     font-family: 'Laslo-Regular';
+
 }
+
+
+.workshop-text h2 {
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    color: black;
+    text-align: left;
+    font-family: 'Laslo-Regular';
+
+}
+
+.workshop-text p {
+    margin-top: 40px;
+    margin-bottom: 80px;
+    font-size: 23px;
+    text-align: left;
+    font-style: italic;
+    font-family: 'Laslo-Regular';
+    line-height: 1.4;
+
+
+
+}
+
+
 
 .workshop-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
     margin: 60px 0;
-    padding: 80px 0;
 }
 
+/* Image Styling */
 .workshop-img {
     width: 600px;
     height: 500px;
     object-fit: cover;
 }
 
-.workshop-text h2,
+.workshop-text1 p {
+    margin-top: 40px;
+    margin-bottom: 80px;
+    font-size: 26px;
+    padding-left: 100px;
+    padding-right: 20%;
+    text-align: left;
+    font-style: italic;
+    font-family: 'Laslo-Regular';
+    line-height: 1.7;
+
+
+}
+
+
 .workshop-text1 h2 {
     font-size: 1.8rem;
     font-weight: 300;
-    margin: 50px 0 20px;
-    color: #090909;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    color: black;
+    text-align: center;
     font-family: 'Laslo-Regular';
+
 }
 
-.workshop-text p {
-    margin: 40px 0 80px;
-    font-size: 23px;
-    text-align: left;
-    font-style: italic;
-    font-family: 'Laslo-Regular';
-    line-height: 1.4;
-}
 
-.workshop-text1 p {
-    font-size: 26px;
-    text-align: left;
-    line-height: 1.7;
-    font-style: italic;
-    font-family: 'Laslo-Regular';
-    padding: 40px 20% 80px 100px;
-}
-
-/*-------------------- FONTS --------------------*/
-@font-face {
-    font-family: 'Laslo-Light';
-    src: url('fonts/Laslo-Light.woff2') format('woff2'),
-         url('fonts/Laslo-Light.woff') format('woff'),
-         url('fonts/Laslo-Light.ttf') format('truetype');
-    font-weight: 300;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Laslo-Regular';
-    src: url('fonts/Laslo-Regular.woff2') format('woff2'),
-         url('fonts/Laslo-Regular.woff') format('woff'),
-         url('fonts/Laslo-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "SAOLDISPLAY-MEDIUM";
-    src: url("path/to/SAOLDISPLAY-MEDIUM.woff2") format("woff2"),
-         url("path/to/SAOLDISPLAY-MEDIUM.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
-}
-
-/*-------------------- SCROLL TO TOP --------------------*/
+/* Scroll to Top */
 #scroll-to-top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: whitesmoke;
-    color: #090909;
-    border: none;
-    padding: 10px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 18px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: whitesmoke;
+  color: black;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
 }
+

@@ -35,62 +35,31 @@
 
     <!-- EXPLORE SECTION -->
     <section class="content">
-      <p class="Explore">Explore...</p>
+      <p class="Explore"><%= __('explore_text') %></p>
+      <div class="scroll-wrapper">
+        <button class="scroll-btn left" onclick="scrollLeft()">
+          <i class="fas fa-chevron-left"></i>
+        </button>
 
-      <div class="product-container">
-        <!-- Product 1 -->
-        <div class="product-item1">
-          <a href="/product-details/necklace1-dh.html">
-            <img
-              class="image-1"
-              src="/Images/homepageImg/necklace.png"
-              alt="Necklace"
-            />
+        <div class="product-scroll-container" id="productScroll">
+          <% if (products && products.length > 0) { %> <%
+          products.forEach((product, index) => { %>
+          <a href="/product/<%= product._id %>" class="product-item-link">
+            <div class="product-item">
+              <a href="/product/<%= product._id %>">
+                <img src="<%= product.imageSrc %>" alt="<%= product.name %>" />
+              </a>
+              <p class="product-title"><%= product.name %></p>
+            </div>
           </a>
-          <p class="product-title1">Oval Link Necklace</p>
-        
-
+          <% }) %> <% } else { %>
+          <p>No products available</p>
+          <% } %>
         </div>
 
-        <!-- Product 2 -->
-        <div class="product-item2">
-          <a href="/product-details/bracelet-dh.html">
-            <img
-              class="image-2"
-              src="/Images/homepageImg/bracelet.png"
-              alt="Bracelet"
-              width="250"
-            />
-          </a>
-          <p class="product-title2">Bubble Mod Cuff</p>
-        
-
-        </div>
-
-        <!-- Product 3 -->
-        <div class="product-item3">
-          <a href="/product-details/earings-dh.html">
-            <img
-              class="image-3"
-              src="/Images/homepageImg/earings.png"
-              alt="Earrings"
-            />
-          </a>
-          <p class="product-title3">Serenade Earrings</p>
-        </div>
-
-        <!-- Product 4 -->
-        <div class="product-item4">
-          <a href="/product-details/rings-dh.html">
-            <img
-              class="image-4"
-              src="/Images/homepageImg/darkgreen.png"
-              alt="Ring"
-            />
-          </a>
-          <p class="product-title4">Oval Buckle Gold Ring</p>
-
-        </div>
+        <button class="scroll-btn right" onclick="scrollRight()">
+          <i class="fas fa-chevron-right"></i>
+        </button>
       </div>
     </section>
 
@@ -119,34 +88,38 @@
 
     <!-- COLLECTIONS -->
     <div class="container">
-      <p class="collection">Collections</p>
+      <p class="collection"><%= __('collections') %></p>
       <div class="jewelry-grid">
         <div class="jewelry-item">
           <a href="/categories/rings">
             <img src="/Images/homepageImg/rings-bg.jpg" alt="Rings" />
           </a>
-          <p class="name">Rings</p>
+          <p class="name"><%= __('rings') %></p>
+
         </div>
 
         <div class="jewelry-item">
           <a href="/categories/necklace">
             <img src="/Images/homepageImg/necklace-bg.jpg" alt="Necklace" />
           </a>
-          <p class="name">Necklace</p>
+          <p class="name"><%= __('Necklace') %></p>
+
         </div>
 
         <div class="jewelry-item">
           <a href="/categories/earings">
             <img src="/Images/homepageImg/earrings-bg.jpg" alt="Earrings" />
           </a>
-          <p class="name">Earrings</p>
+         <p class="name"><%= __('Earrings') %></p>
+
         </div>
 
         <div class="jewelry-item">
           <a href="/categories/bracelets">
             <img src="/Images/homepageImg/bracelet-bg.jpg" alt="Bracelet" />
           </a>
-          <p class="name">Bracelet</p>
+          <p class="name"><%= __('Bracelet') %></p>
+
         </div>
       </div>
     </div>
@@ -154,11 +127,8 @@
     <!-- WORKSHOP SECTION -->
     <section class="Workshop">
       <div class="container-workshop">
-        <h1>VELORA JEWEL</h1>
-        <p>
-          "I believe the things I make have museum quality and hopefully, will
-          last as long as the originals that inspired them."
-        </p>
+        <h1><%= __('velora_jewel') %></h1>
+        <p><%= __('quote_text') %></p>
         <div class="workshop-content">
           <img
             src="/Images/homepageImg/qoute 1 img.jpg"
@@ -166,27 +136,17 @@
             class="workshop-img"
           />
           <div class="workshop-text">
-            <h2>Workshop</h2>
-            <p>
-              The VELORA JEWEL workshop proudly sits above our Madison Avenue
-              Flagship Boutique, and provides the house with unparalleled access
-              to jewelry as it is being created. Every VELORA JEWEL jewel is
-              meticulously handcrafted by our master jewelers, from stone
-              setting and gold hammering, to hard stone carving and enameling.
-            </p>
+            
+<h2><%= __('workshop') %></h2>
+          <p><%= __('workshop_paragraph') %></p>
           </div>
         </div>
       </div>
 
       <div class="workshop-content">
         <div class="workshop-text1">
-          <h2>Archive</h2>
-          <p>
-            VELORA JEWEL holds a collection of past designs and collections,
-            showcasing the brand’s evolution over time. It allows customers to
-            explore timeless pieces and learn about the craftsmanship behind
-            each creation.
-          </p>
+       <h2><%= __('archive') %></h2>
+         <p><%= __('archive_paragraph') %></p>
         </div>
         <img
           src="/Images/homepageImg/qoute 2 img.jpg"
@@ -214,9 +174,7 @@
         <button type="submit">Send</button>
       </form>
     </div>
-
-    <script src="/javasScript/chatbot.js"></script>
-
     <%- include('partials/footer') %>
+    <script src="/javasScript/chatbot.js"></script>
   </body>
 </html>

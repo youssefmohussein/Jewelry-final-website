@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -27,16 +28,20 @@
         <h1>Orders</h1>
       </div>
 
-       <div class="search-container">
-           <input type="text" id="orderIdSearchInput" placeholder="Search by Order ID..." />
-        <button id="searchByIdBtn" class="btn">Search</button> 
+      <div class="search-bar">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search products..."
+          onkeyup="searchTable()"
+        />
         <!-- Make sure you have this dropdown in your HTML above the orders table -->
-      <select id="statusFilter">
-        <option value="all">All status</option>
-        <option value="pending">Pending</option>
-        <option value="shipped">Shipped</option>
-        <option value="delivered">Delivered</option>
-      </select>
+        <select id="statusFilter">
+          <option value="all">All status</option>
+          <option value="pending">Pending</option>
+          <option value="shipped">Shipped</option>
+          <option value="delivered">Delivered</option>
+        </select>
       </div>
 
       <div class="orders-container">
@@ -72,14 +77,13 @@
               data-total-price="<%= order.total_price.toFixed(2) %>"
             >
               <td><%= order.orderId %></td>
-              <td><%= order.customerName || "Unknown" %></td>             
+              <td><%= order.user?.name || "Unknown" %></td>
               <td>
-                <% if (order.product_names && order.product_names.length > 0) { %>
-                  <%= order.product_names.join(", ") %>
-                <% } else { %>
-                  No products
-                <% } %>
-              </td>           
+                <% if (order.product_ids && order.product_ids.length > 0) { %>
+                <% order.product_ids.forEach((product, i) => { %> <%=
+                product.name %><%= i < order.product_ids.length - 1 ? ", " : ""
+                %> <% }) %> <% } else { %> No products <% } %>
+              </td>
               <td><%= order.orderDate.toDateString() %></td>
               <td>$<%= order.total_price.toFixed(2) %></td>
               <td>
@@ -155,3 +159,4 @@
     <script src="/javasScript/orderManagment.js"></script>
   </body>
 </html>
+

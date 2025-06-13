@@ -63,10 +63,10 @@ button,
 }
 
 .main-image img {
-  width: 500px;
+  width: 480px;
   max-width: 90vw;
   height: auto;
-  object-fit: cover;
+  object-fit:cover;
 }
 
 /* ========== Product Details ========== */

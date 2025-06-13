@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= locale %>">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About</title>
+    <title><%= __('about_title') %></title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -17,47 +17,30 @@
 
     <section class="about">
       <div class="container">
-        <h1>About VELORA JEWEL</h1>
-        <p>
-          At VELORA JEWEL , we redefine luxury with unparalleled craftsmanship
-          and timeless elegance. Inspired by the finest traditions of haute
-          joaillerie, our exquisite collections are a celebration of artistry,
-          sophistication, and exclusivity.
-        </p>
+        <h1><%= __('about_title') %></h1>
+        <p><%= __('about_intro') %></p>
 
         <div class="about-content">
           <img
-            src="/images/about us/about us.jpg"
-            alt="Luxora Jewelry Showcase"
+            src="/Images/aboutus/about us.jpg"
+            alt="<%= __('about_image_alt') %>"
             class="about-img"
           />
           <div class="about-text">
-            <h2>Our Legacy</h2>
-            <p>
-              Founded with a passion for perfection, VELORA JEWEL combines
-              meticulous handcrafting techniques with contemporary designs. Each
-              piece is a symbol of opulence, created to elevate every moment
-              into a statement of prestige.
-            </p>
+            <h2><%= __('our_legacy_title') %></h2>
+            <p><%= __('our_legacy_text') %></p>
 
-            <h2>Exquisite Craftsmanship</h2>
-            <p>
-              Every jewel is masterfully designed using the world's rarest
-              gemstones and the finest metals. Our artisans bring decades of
-              expertise, ensuring each creation embodies the pinnacle of luxury
-              and brilliance.
-            </p>
+            <h2><%= __('craftsmanship_title') %></h2>
+            <p><%= __('craftsmanship_text') %></p>
           </div>
         </div>
 
-        <h2>Unveiling Elegance</h2>
-        <p>
-          VELORA JEWEL is more than a brand—it’s an experience of extraordinary
-          beauty and exclusivity. We invite you to explore our collections and
-          indulge in the ultimate expression of sophistication.
-        </p>
+        <h2><%= __('elegance_title') %></h2>
+        <p><%= __('elegance_text') %></p>
       </div>
     </section>
+
     <%- include('partials/footer') %>
   </body>
 </html>
+
