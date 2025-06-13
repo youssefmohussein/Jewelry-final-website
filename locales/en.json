@@ -6,10 +6,6 @@
 	"collections": "collections",
 	"about_us": "about_us",
 	"quick_links": "Quick Links",
-	"earrings": "Earrings",
-	"rings": "Rings",
-	"bracelets": "Bracelet",
-	"necklaces": "Necklace",
 	"contact": "Contact",
 	"services": "Services",
 	"refund_policy": "Refund Policy",
@@ -47,7 +43,7 @@
 	"signup_prompt": "Register with your personal details to use all site features",
 	"hello": "hello",
 	"world_of_velora": "world_of_velora",
-	"explore_text": "explore_text",
+	"explore_text": "explore",
 	"Necklace": "Necklace",
 	"Earrings": "Earrings",
 	"Bracelet": "Bracelet",
@@ -56,5 +52,9 @@
 	"workshop": "workshop",
 	"workshop_paragraph": "The VELORA JEWEL workshop proudly sits above our Madison Avenue Flagship Boutique, and provides the house with unparalleled access to jewelry as it is being created. Every VELORA JEWEL jewel is meticulously handcrafted by our master jewelers, from stone setting and gold hammering, to hard stone carving and enameling",
 	"archive": "archive",
-	"archive_paragraph": "VELORA JEWEL holds a collection of past designs and collections, showcasing the brand’s evolution over time. It allows customers to explore timeless pieces and learn about the craftsmanship behind each creation"
+	"archive_paragraph": "VELORA JEWEL holds a collection of past designs and collections, showcasing the brand’s evolution over time. It allows customers to explore timeless pieces and learn about the craftsmanship behind each creation",
+	"rings": "rings",
+	"earrings": "earrings",
+	"bracelets": "bracelets",
+	"necklaces": "necklaces"
 }
