@@ -289,7 +289,7 @@ exports.createCollection = async (req, res) => {
   }
 };*/
 
-exports.viewCollection = async (req, res) => {
+/*exports.viewCollection = async (req, res) => {
   const { collectionName } = req.params;
 
   try {
@@ -329,7 +329,65 @@ exports.viewCollection = async (req, res) => {
     console.error(error);
     res.status(500).send("Server error");
   }
+};*/
+
+exports.viewCollection = async (req, res) => {
+  const { collectionName } = req.params;
+
+  try {
+    const collection = await Collection.findOne({ name: collectionName });
+    const collections = await Collection.find(); // for header
+
+    if (!collection) {
+      return res.status(404).send("Collection not found");
+    }
+
+    // Generate base64 image for collection
+    if (collection.image && collection.image.data) {
+      const base64 = collection.image.data.toString("base64");
+      collection.imageSrc = `data:${collection.image.contentType};base64,${base64}`;
+    } else {
+      collection.imageSrc = null;
+    }
+
+    // Get products in this collection
+    const products = await Product.find({ collection: collection.name }).lean();
+
+    products.forEach((product) => {
+      // Original image
+      if (product.image && product.image.data) {
+        const base64 = product.image.data.toString("base64");
+        product.imageSrc = `data:${product.image.contentType};base64,${base64}`;
+      } else {
+        product.imageSrc = null;
+      }
+
+      // Hover image
+      if (product.hoverImage && product.hoverImage.data) {
+        const hoverBase64 = product.hoverImage.data.toString("base64");
+        product.hoverImageSrc = `data:${product.hoverImage.contentType};base64,${hoverBase64}`;
+      } else {
+        product.hoverImageSrc = null;
+      }
+    });
+
+    res.render("collectionPage", {
+      collection,
+      collections,
+      products,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
 };
+
+
+
+
+
+
+
 
 //-----------------------------------------------------End of Collection -----------------------------------------------------
 
