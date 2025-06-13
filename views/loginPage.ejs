@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,85 +8,56 @@
     />
     <link rel="stylesheet" href="/Css/signup.css" />
     <link rel="stylesheet" href="/Css/HeadFoot.css" />
-    <title>Login Page</title>
+    <title><%= __('login_title') %></title>
     <script src="/js/header.js" defer></script>
   </head>
 
   <body>
+    <!-- زر تغيير اللغة في الأعلى يمين -->
+    <div style="text-align: right; margin: 15px 30px 0 0; font-weight: bold; font-family: Arial, sans-serif;">
+      <a href="?lang=en" style="margin-right: 10px; text-decoration: none; color: #333;">English</a> | 
+      <a href="?lang=ar" style="text-decoration: none; color: #333;">العربية</a>
+    </div>
+
     <div id="header"></div>
+
     <div class="container" id="container">
       <div class="form-container sign-up">
         <!-- Sign Up Form -->
         <form id="signUpForm" action="/users/register" method="POST">
-          <h1>Create Account</h1>
-          <span>or use your email for registration</span>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Name"
-            required
-          />
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Email"
-            required
-          />
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="password"
-            required
-          />
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            required
-          />
-          <button>Sign Up</button>
+          <h1><%= __('create_account') %></h1>
+          <span><%= __('signup_subtext') %></span>
+          <input type="text" id="name" name="name" placeholder="<%= __('name') %>" required />
+          <input type="email" id="email" name="email" placeholder="<%= __('email') %>" required />
+          <input type="password" id="password" name="password" placeholder="<%= __('password') %>" required />
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="<%= __('confirm_password') %>" required />
+          <button><%= __('sign_up') %></button>
         </form>
       </div>
 
       <div class="form-container sign-in">
         <!-- Sign In Form -->
         <form id="signInForm" action="/users/login" method="POST">
-          <h1>Sign In</h1>
-          <span>or use your email and password</span>
-          <input
-            type="email"
-            id="loginEmail"
-            name="email"
-            placeholder="Email"
-            required
-          />
-          <input
-            type="password"
-            id="loginPassword"
-            name="password"
-            placeholder="Password"
-            required
-          />
-          <a href="/forgetpassword">Forget Your Password?</a>
-          <button>Sign In</button>
+          <h1><%= __('sign_in') %></h1>
+          <span><%= __('signin_subtext') %></span>
+          <input type="email" id="loginEmail" name="email" placeholder="<%= __('email') %>" required />
+          <input type="password" id="loginPassword" name="password" placeholder="<%= __('password') %>" required />
+          <a href="/forgetpassword"><%= __('forgot_password') %></a>
+          <button><%= __('sign_in') %></button>
         </form>
       </div>
 
       <div class="toggle-container">
         <div class="toggle">
           <div class="toggle-panel toggle-left">
-            <h1>Welcome Back!</h1>
-            <p>Enter your personal details to use all site features</p>
-            <button class="hidden" id="login">Sign In</button>
+            <h1><%= __('welcome_back') %></h1>
+            <p><%= __('signin_prompt') %></p>
+            <button class="hidden" id="login"><%= __('sign_in') %></button>
           </div>
           <div class="toggle-panel toggle-right">
-            <h1>Hello, Friend!</h1>
-            <p>Register with your personal details to use all site features</p>
-            <button class="hidden" id="register">Sign Up</button>
+            <h1><%= __('hello') %></h1>
+            <p><%= __('signup_prompt') %></p>
+            <button class="hidden" id="register"><%= __('sign_up') %></button>
           </div>
         </div>
       </div>
