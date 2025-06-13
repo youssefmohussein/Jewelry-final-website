@@ -3,8 +3,16 @@ const Collection = require("../models/collectionDB");
 
 exports.getCategoryProducts = async (req, res) => {
   const category = req.params.category;
+  const page = parseInt(req.query.page) || 1;
+  const limit = 9; // Number of products per page
+  const skip = (page - 1) * limit;
   try {
-    const products = await Product.find({ category });
+    const totalProducts = await Product.countDocuments({ category });
+
+    const totalPages = Math.ceil(totalProducts / limit);
+    const products = await Product.find({ category })
+    .skip(skip)
+    .limit(limit);
     const collections = await Collection.find();
 
     products.forEach((product) => {
@@ -28,6 +36,10 @@ exports.getCategoryProducts = async (req, res) => {
     res.render(`categories/${category}`, {
       products,
       collections,
+       currentPage: page,
+      totalPages,
+      hasNextPage: page < totalPages,
+      hasPrevPage: page > 1
     });
   } catch (err) {
     console.error(err);
