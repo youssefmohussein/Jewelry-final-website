@@ -44,11 +44,18 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Redirect to cart page after successful addition
                     window.location.href = "/cart";
                 } else {
-                    alert("Failed to add to cart.");
+                    // --- NEW LOGIC: Handle login requirement ---
+                    if (result.message && result.message.includes("log in")) {
+                        alert(result.message); // Show the "Please log in" message
+                        window.location.href = '/login'; // Redirect to the login page
+                    } else {
+                        alert("Failed to add to cart: " + (result.message || "Unknown error."));
+                    }
+                    // --- END NEW LOGIC ---
                 }
             } catch (error) {
                 console.error("Error adding to cart:", error);
-                alert("Server error.");
+                alert("Login to add to cart."); // More specific error message
             }
         });
     }
