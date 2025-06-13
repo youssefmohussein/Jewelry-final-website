@@ -67,4 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('ordersContainer')) {
     fetchUserOrders();
   }
+  // orderManagment.js
+    searchInput.addEventListener("keyup", function (event) {
+        fetchAndRenderOrders(); // <--- THIS CALLS THE SEARCH FUNCTION
+    });
 });
+
