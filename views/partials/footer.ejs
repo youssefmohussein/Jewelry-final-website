@@ -1,76 +1,59 @@
-    <!-- FOOTER -->
-    <footer class="footer">
-      <div class="heritage">
-        <div class="logo">✦</div>
-        <h2 class="brand">VELORA JEWEL</h2>
-        <p class="tagline">PARIS • 1888</p>
-        <div class="separator"><span>◆</span></div>
-      </div>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="heritage">
+    <div class="logo">✦</div>
+    <h2 class="brand">VELORA JEWEL</h2>
+    <p class="tagline">PARIS • 1888</p>
+    <div class="separator"><span>◆</span></div>
+  </div>
 
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <ul>
-            <li><a href="/products/earrings">Earrings</a></li>
-            <li><a href="/products/rings">Rings</a></li>
-            <li><a href="/products/bracelets">Bracelet</a></li>
-            <li><a href="/products/necklaces">Necklace</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Contact</h3>
-          <ul class="contact-info">
-            <li>13 Place Vendôme</li>
-            <li>75001 Paris, France</li>
-            <li>+33 1 42 61 58 58</li>
-            <li>contact@maisonlumiere.com</li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Services</h3>
-          <ul>
-            <li><a href="/refund-policy">Refund Policy</a></li>
-            <li><a href="#">Shipping</a></li>
-            <li><a href="/contact">Contact Us</a></li>
-            <li><a href="/faq">FAQ</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Newsletter</h3>
-          <p>Subscribe to receive our latest collections and private events.</p>
-          <form class="newsletter-form">
-            <input type="email" placeholder="Enter your email" />
-            <button type="submit">Subscribe</button>
-          </form>
-        </div>
-      </div>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3><%= __('quick_links') %></h3>
+      <ul>
+        <li><a href="/products/earrings"><%= __('earrings') %></a></li>
+        <li><a href="/products/rings"><%= __('rings') %></a></li>
+        <li><a href="/products/bracelets"><%= __('bracelets') %></a></li>
+        <li><a href="/products/necklaces"><%= __('necklaces') %></a></li>
+      </ul>
+    </div>
 
-      <div class="footer-bottom">
-        <div class="social-links">
-          <a href="#">Instagram</a>
-          <a href="#">Facebook</a>
-          <a href="#">Pinterest</a>
-        </div>
-        <div class="copyright">© 2024 VELORA. All rights reserved.</div>
-      </div>
-    </footer>
+    <div class="footer-section">
+      <h3><%= __('contact') %></h3>
+      <ul class="contact-info">
+        <li>13 Place Vendôme</li>
+        <li>75001 Paris, France</li>
+        <li>+33 1 42 61 58 58</li>
+        <li>contact@maisonlumiere.com</li>
+      </ul>
+    </div>
 
-    <!-- JS for Scroll Effect -->
-    <script>
-      let lastScrollTop = 0;
-      const navbar = document.querySelector(".navbar");
+    <div class="footer-section">
+      <h3><%= __('services') %></h3>
+      <ul>
+        <li><a href="/refund-policy"><%= __('refund_policy') %></a></li>
+        <li><a href="#"><%= __('shipping') %></a></li>
+        <li><a href="/contact"><%= __('contact_us') %></a></li>
+        <li><a href="/faq"><%= __('faq') %></a></li>
+      </ul>
+    </div>
 
-      window.addEventListener("scroll", function () {
-        let currentScroll = window.pageYOffset;
+    <div class="footer-section">
+      <h3><%= __('newsletter') %></h3>
+      <p><%= __('subscribe_text') %></p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="<%= __('enter_email') %>" />
+        <button type="submit"><%= __('subscribe') %></button>
+      </form>
+    </div>
+  </div>
 
-        if (currentScroll > lastScrollTop) {
-          navbar.classList.add("scrolled");
-        } else if (currentScroll <= 0) {
-          navbar.classList.remove("scrolled");
-        }
-
-        lastScrollTop = currentScroll;
-      });
-    </script>
-  </body>
-</html>
+  <div class="footer-bottom">
+    <div class="social-links">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">Pinterest</a>
+    </div>
+    <div class="copyright">© <%= new Date().getFullYear() %> VELORA. <%= __('all_rights_reserved') %></div>
+  </div>
+</footer>
