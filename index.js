@@ -38,14 +38,13 @@ i18n.configure({
 
 app.use(i18n.init);
 //middleware 
+
 app.use((req, res, next) => {
   const lang = req.query.lang || req.cookies.lang || 'en';
   res.setLocale(lang);
   res.locals.locale = lang;
   next();
 });
-
-
 
 
 app.use(
