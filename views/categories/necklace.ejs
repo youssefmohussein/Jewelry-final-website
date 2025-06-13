@@ -40,7 +40,22 @@
       </a>
       <% }) %>
     </div>
-
+        <% if (totalPages > 1) { %>
+    <div class="pagination">
+      <% if (hasPrevPage) { %>
+        <a href="?page=<%= currentPage - 1 %>" class="pagination-btn">&laquo; Previous</a>
+      <% } %>
+      
+      <% for(let i = 1; i <= totalPages; i++) { %>
+        <a href="?page=<%= i %>" class="pagination-btn <%= i === currentPage ? 'active' : '' %>"><%= i %></a>
+      <% } %>
+      
+      <% if (hasNextPage) { %>
+        <a href="?page=<%= currentPage + 1 %>" class="pagination-btn">Next &raquo;</a>
+      <% } %>
+    </div>
+    <% } %>
+   <script src="/javasScript/thumbnail.js"></script>
     <%- include('../partials/footer') %>
   </body>
 </html>
