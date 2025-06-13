@@ -127,7 +127,8 @@ exports.getProductById = async (req, res) => {
 exports.getAllProducts = async (req, res) => {
   try {
     const products = await Product.find();
-    res.render("dashboard/product-dashboard", { products });
+    const collections = await Product.distinct("collection");
+    res.render("dashboard/product-dashboard", { products, collections });
   } catch (err) {
     res.status(500).send("Server Error");
   }
@@ -279,6 +280,22 @@ exports.viewCollection = async (req, res) => {
   }
 };
 
+/////////////////////////////////////
+exports.deleteCollection = async (req, res) => {
+  try {
+    const collection = await Collection.findOneAndDelete({ name: req.params.collectionName });
+
+    if (!collection) {
+      return res.status(404).json({ message: "Collection not found" });
+    }
+
+    res.status(200).json({ message: "Collection deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+//////////////////
 
 
 

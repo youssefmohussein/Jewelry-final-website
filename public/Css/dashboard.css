@@ -624,7 +624,7 @@ th, td {
 .add-collection-btn,
 .add-product-btn,
 .edit-btn,
-.delete-btn {
+.delete-btn,.delete-collection-btn,.delete-btn {
   display: inline-block;
   background-color: #6a5acd;
   color: white;

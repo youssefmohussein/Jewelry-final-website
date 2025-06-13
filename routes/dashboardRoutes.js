@@ -2,9 +2,9 @@
 const express = require("express");
 const router = express.Router();
 const dashboardController = require("../controllers/dashboardControllers");
-//const upload = require("../middleware/uploads");
 const { upload, uploadProductImages } = require("../middleware/uploads");
 const { isAuthenticated, isAdmin } = require("../middleware/authMiddleware"); // Import auth middleware
+
 router.get("/dashboard", dashboardController.getDashboard);
 //-----------------------------------------------Start of Customers dashboard Routes
 // Get all users and render customers dashboard page - PROTECTED (Admin only)
@@ -64,6 +64,9 @@ router.post(
 
 // Render collection by name
 router.get("/collections/:collectionName", dashboardController.viewCollection);
+//delete collection 
+router.delete("/collections/:collectionName", dashboardController.deleteCollection);
+
 
 //-----------------------------------------------End of collection routes -----------------------------------------------
 
@@ -71,5 +74,6 @@ router.get("/collections/:collectionName", dashboardController.viewCollection);
 router.get("/orders-dashboard", dashboardController.getAllOrders);
 router.put("/orders/:id", dashboardController.updateOrder);
 router.delete("/orders/:id", dashboardController.deleteOrder);
+
 
 module.exports = router;
