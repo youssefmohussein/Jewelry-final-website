@@ -55,6 +55,7 @@
             <% }) %>
           <% } else { %>
             <p>Your cart is empty.</p>
+
           <% } %>
         </div>
 
@@ -66,7 +67,7 @@
           <p><span>Shipping</span><span>LE <%= shipping.toLocaleString() %></span></p>
           <hr />
           <p><span>Total</span><span>LE <%= total.toLocaleString() %></span></p>
-          <a href="#" class="checkout-btn">Checkout</a>
+          <a href="/order" class="checkout-btn">Checkout</a>
         </div>
       </div>
     </div>
