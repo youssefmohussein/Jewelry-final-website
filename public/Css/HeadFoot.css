@@ -369,6 +369,7 @@ footer {
 .logout-btn:hover {
   color: #f00; /* or any hover color */
 }
+
 * {
     font-family: sans-serif;
     margin: 0;
