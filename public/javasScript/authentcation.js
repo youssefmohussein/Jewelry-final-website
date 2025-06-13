@@ -237,33 +237,49 @@ function closeEmailModal() {
   document.getElementById("editEmailModal").style.display = "none";
 }
 
-      // Submit email update
-      async function submitEmailEdit() {
-        const userId = document.getElementById("editEmailUserId").value;
-        const newEmail = document.getElementById("newEmail").value;
+// Submit email update
+async function submitEmailEdit() {
+  const userId = document.getElementById("editEmailUserId").value;
+  const newEmail = document.getElementById("newEmail").value;
 
-        if (!userId || !newEmail) {
-          alert("Missing user ID or email.");
-          return;
-        }
+  if (!userId || !newEmail) {
+    alert("Missing user ID or email.");
+    return;
+  }
 
-        try {
-          const response = await fetch(`/users/${userId}/edit-email`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email: newEmail }),
-          });
+  try {
+    const response = await fetch(`/users/${userId}/edit-email`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: newEmail }),
+    });
 
-          const result = await response.json();
+    const result = await response.json();
 
-          if (response.ok) {
-            alert(result.message);
-            window.location.reload();
-          } else {
-            alert(result.message || "Failed to update email.");
-          }
-        } catch (error) {
-          console.error(error);
-          alert("Error updating email.");
-        }
-      }
+    if (response.ok) {
+      alert(result.message);
+      window.location.reload();
+    } else {
+      alert(result.message || "Failed to update email.");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Error updating email.");
+  }
+}
+
+function searchTable() {
+  const input = document.getElementById("searchInput").value.toLowerCase();
+  const tableRows = document.querySelectorAll("tbody tr");
+
+  tableRows.forEach((row) => {
+    const productNumber = row.cells[0].textContent.toLowerCase();
+    const productName = row.cells[1].textContent.toLowerCase();
+
+    if (productNumber.includes(input) || productName.includes(input)) {
+      row.style.display = "";
+    } else {
+      row.style.display = "none";
+    }
+  });
+}

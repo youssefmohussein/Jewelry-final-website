@@ -108,7 +108,9 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
-        const confirmDelete = confirm("Are you sure you want to delete this order?");
+        const confirmDelete = confirm(
+          "Are you sure you want to delete this order?"
+        );
         if (!confirmDelete) return;
 
         fetch(`/orders/${orderId}`, {
@@ -138,7 +140,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const rows = document.querySelectorAll("table tbody tr");
 
     rows.forEach((row) => {
-      const statusText = row.querySelector("td:nth-child(6) span")?.innerText.toLowerCase() || "";
+      const statusText =
+        row.querySelector("td:nth-child(6) span")?.innerText.toLowerCase() ||
+        "";
       const visible = selected === "all" || statusText === selected;
       row.style.display = visible ? "" : "none";
     });
@@ -152,3 +156,19 @@ document.addEventListener("DOMContentLoaded", () => {
   attachDeleteButtons();
   applyStatusFilter(); // Initial load
 });
+
+function searchTable() {
+  const input = document.getElementById("searchInput").value.toLowerCase();
+  const tableRows = document.querySelectorAll("tbody tr");
+
+  tableRows.forEach((row) => {
+    const productNumber = row.cells[0].textContent.toLowerCase();
+    const productName = row.cells[1].textContent.toLowerCase();
+
+    if (productNumber.includes(input) || productName.includes(input)) {
+      row.style.display = "";
+    } else {
+      row.style.display = "none";
+    }
+  });
+}

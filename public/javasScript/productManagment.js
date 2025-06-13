@@ -74,22 +74,19 @@ window.onclick = function (event) {
 //--------------------------------------------delete collection------------------------------//
 
 function openDeleteCollectionModal() {
-  document.getElementById('deleteCollectionModal').style.display = 'block';
+  document.getElementById("deleteCollectionModal").style.display = "block";
 }
 
 function closeDeleteCollectionModal() {
-  document.getElementById('deleteCollectionModal').style.display = 'none';
+  document.getElementById("deleteCollectionModal").style.display = "none";
 }
 
-
-window.onclick = function(event) {
-  const modal = document.getElementById('deleteCollectionModal');
+window.onclick = function (event) {
+  const modal = document.getElementById("deleteCollectionModal");
   if (event.target === modal) {
     closeDeleteCollectionModal();
   }
-}
-
-
+};
 
 function handleDeleteCollection() {
   const collectionName = document.getElementById("deleteCollectionName").value;
@@ -97,7 +94,11 @@ function handleDeleteCollection() {
     alert("Please select a collection to delete.");
     return;
   }
-  if (confirm(`Are you sure you want to delete the collection: ${collectionName}?`)) {
+  if (
+    confirm(
+      `Are you sure you want to delete the collection: ${collectionName}?`
+    )
+  ) {
     fetch(`/collections/${encodeURIComponent(collectionName)}`, {
       method: "DELETE",
     })
@@ -106,7 +107,7 @@ function handleDeleteCollection() {
           alert("Collection deleted successfully");
           location.reload();
         } else {
-          response.json().then(data => {
+          response.json().then((data) => {
             alert(data.message || "Failed to delete the collection");
           });
         }
@@ -117,31 +118,42 @@ function handleDeleteCollection() {
       });
   }
 }
-  
-  document.getElementById("deleteCollectionForm").addEventListener("submit", function (e) {
+
+document
+  .getElementById("deleteCollectionForm")
+  .addEventListener("submit", function (e) {
     e.preventDefault();
     handleDeleteCollection();
   });
 
-
 //----------------------------------end of delete collection---------------//
-
-
-
 
 async function addProduct() {
   const formData = new FormData();
 
-  formData.append("productNumber", document.getElementById("productNumber").value.trim().toUpperCase());
+  formData.append(
+    "productNumber",
+    document.getElementById("productNumber").value.trim().toUpperCase()
+  );
   formData.append("name", document.getElementById("productName").value.trim());
-  formData.append("description", document.getElementById("description").value.trim());
+  formData.append(
+    "description",
+    document.getElementById("description").value.trim()
+  );
   formData.append("category", document.getElementById("category").value.trim());
-  formData.append("collection", document.getElementById("collection").value.trim());
+  formData.append(
+    "collection",
+    document.getElementById("collection").value.trim()
+  );
   formData.append("stock", document.getElementById("stock").value);
   formData.append("price", document.getElementById("price").value);
   formData.append("totalSales", 0);
 
-  const colors = document.getElementById("colors").value.trim().split(",").map(c => c.trim());
+  const colors = document
+    .getElementById("colors")
+    .value.trim()
+    .split(",")
+    .map((c) => c.trim());
   formData.append("colors", JSON.stringify(colors));
 
   // Append main image
@@ -171,15 +183,17 @@ async function addProduct() {
       alert("Product added successfully!");
       closeProductForm();
     } else {
-      alert(`Failed to add product: ${result.error || result.message || "Unknown error"}`);
+      alert(
+        `Failed to add product: ${
+          result.error || result.message || "Unknown error"
+        }`
+      );
     }
   } catch (err) {
     console.error("Error:", err);
     alert("Something went wrong while adding the product.");
   }
 }
-
-
 
 //----------------------------------------updata button----------------------------------------
 // for opening the edit form
@@ -282,7 +296,6 @@ function handleDeleteClick(button) {
 
 //----------------------------------------------------end---------------------------------
 
-
 async function logout() {
   try {
     const response = await fetch("/logout", {
@@ -302,4 +315,18 @@ async function logout() {
   }
 }
 
+function searchTable() {
+  const input = document.getElementById("searchInput").value.toLowerCase();
+  const tableRows = document.querySelectorAll("tbody tr");
 
+  tableRows.forEach((row) => {
+    const productNumber = row.cells[0].textContent.toLowerCase();
+    const productName = row.cells[1].textContent.toLowerCase();
+
+    if (productNumber.includes(input) || productName.includes(input)) {
+      row.style.display = "";
+    } else {
+      row.style.display = "none";
+    }
+  });
+}
