@@ -52,6 +52,11 @@ const faqs = new Map([
   [['price','cost'], 'Check our pricing page for more info.'],
   [['contact','support'], 'Email us at support@website.com.'],
   [['login','signin','log in','sign in'], 'You can log in here: http://localhost:8000/login']
+  [['refund policy','policy','refund'], 'You can find it here:http://localhost:8000/refundPolicy']
+  [['contact','contact-us'], 'You can find it here:http://localhost:8000/contact-us']
+  [['FAQ','questions'], 'You can find it here:http://localhost:8000/faq']
+
+
 ]);
 
 function getBotReply(msg) {

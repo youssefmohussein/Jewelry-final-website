@@ -37,6 +37,7 @@ i18n.configure({
 });
 
 app.use(i18n.init);
+
 app.use((req, res, next) => {
   const lang = req.query.lang || req.cookies.lang || "en";
   res.setLocale(lang);
