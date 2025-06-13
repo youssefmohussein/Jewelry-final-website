@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/Css/dashboard.css" />
   </head>
-<body>
-  <div class="sidebar">
+  <body>
+    <div class="sidebar">
       <h2>Velora</h2>
       <hr />
       <ul>
@@ -15,252 +15,232 @@
         <a href="/customers-dashboard"><li>Customers</li></a>
         <a href="/orders-dashboard"><li>Orders</li></a>
         <a href="/product-dashboard"><li>Products</li></a>
-        <li>
-    <button onclick="logout()" class="logout-btn">Logout</button>
-  </li>
+        <li><button onclick="logout()" class="logout-btn">Logout</button></li>
       </ul>
     </div>
+
     <div class="main">
       <div class="top">
         <h1>Product Management</h1>
       </div>
 
       <div class="cards">
-        <div class="card1">
-          <h3>Total Products</h3>
-          <p>120</p>
-        </div>
-        <div class="card2">
-          <h3>Categories</h3>
-          <p>4</p>
-        </div>
-        <div class="card3">
-          <h3>New Arrivals</h3>
-          <p>5 This Week</p>
-        </div>
+        <div class="card1"><h3>Total Products</h3><p>120</p></div>
+        <div class="card2"><h3>Categories</h3><p>4</p></div>
+        <div class="card3"><h3>New Arrivals</h3><p>5 This Week</p></div>
       </div>
 
       <div class="search-bar">
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search products..."
-          onkeyup="searchTable()"
-        />
+        <input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchTable()" />
         <select id="category-select">
           <option>All Categories</option>
-          <!-- Categories will be populated dynamically -->
         </select>
       </div>
 
-      <!-- Add Collection Button -->
-      <div class="buttons-container">
-          <div style="margin-bottom: 20px">
-            <button class="add-collection-btn" onclick="openForm()">
-            + Add Collection
-            </button>
-          </div>
-     <!-- Button to open product modal -->
-        <div style="margin-bottom: 20px;">
-            <button class="add-product-btn" onclick="openProductForm()">
-            + Add Product
-            </button>
+      <!-- Buttons -->
+      <div class="buttons-container" style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center;">
+        <!-- Add Collection -->
+        <button class="add-collection-btn" onclick="openForm()">+ Add Collection</button>
+
+        <!-- Add Product -->
+        <button class="add-product-btn" onclick="openProductForm()">+ Add Product</button>
+
+        <!-- Delete Collection -->
+       <button class="delete-collection-btn" onclick="openDeleteCollectionModal()">
+  Delete Collection
+</button>
+
+      </div>
+
+     
+
+<!-- Delete Collection Modal -->
+<div id="deleteCollectionModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <form id="deleteCollectionForm">
+      <label for="deleteCollectionName">Enter Collection Name to Delete:</label>
+      <input 
+        type="text" 
+        id="deleteCollectionName" 
+        name="collectionName" 
+        placeholder="Enter collection name" 
+        required 
+        style="margin-right: 10px;"
+      />
+
+      <div style="margin-top: 15px;">
+        <button 
+          type="submit" 
+          class="delete-btn" 
+          style="background-color: #e74c3c; color: white; padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer;">
+          Delete Collection
+        </button>
+        <button type="button" onclick="closeDeleteCollectionModal()" style="margin-left: 10px;">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+      <!-- Collection Modal -->
+      <div id="collectionModal" class="modal">
+        <div class="modal-content">
+          <label for="collectionName">Collection Name</label>
+          <input type="text" id="collectionName" required />
+
+          <label for="collectionImage">Upload Image</label>
+          <input type="file" id="collectionImage" name="collectionImage" accept="image/*" required />
+
+          <button type="button" onclick="addCollection()">Add Collection</button>
+          <button type="button" onclick="closeCollectionForm()">Close</button>
         </div>
       </div>
 
-<!-- Collection Modal -->
-<div id="collectionModal" class="modal">
-  <div class="modal-content">
-    <label for="collectionName">Collection Name</label>
-    <input type="text" id="collectionName" required />
-
-<label for="collectionImage">Upload Image</label>
-<input type="file" id="collectionImage" name="collectionImage" accept="image/*" required />
-
-
-    <button type="button" onclick="addCollection()">Add Collection</button>
-    <button type="button" onclick="closeCollectionForm()">Close</button>
-  </div>
-</div>
-
-<!-- Product Modal -->
-<div id="productModal" class="modal">
-  <div class="modal-content">
-    <h2>Add New Product</h2>
-
-<div class="form-grid">
-  <!-- Row 1: Number + Name -->
-  <div class="double">
-    <label for="productNumber">Product Number</label>
-    <input type="text" id="productNumber" required />
-  </div>
-  <div class="double">
-    <label for="productName">Product Name</label>
-    <input type="text" id="productName" required />
-  </div>
-
-  <!-- Row 2: Description full-width -->
-  <div class="full">
-    <label for="description">Description</label>
-    <textarea id="description" maxlength="500"></textarea>
-  </div>
-
-  <!-- Row 3: Colors + Category -->
-  <div class="double">
-    <label for="colors">Colors</label>
-    <input type="text" id="colors" required />
-  </div>
-  <div class="double">
-    <label for="category">Category</label>
-    <input type="text" id="category" required />
-  </div>
-
-  <!-- Row 4: Collection + Stock -->
-  <div class="double">
-    <label for="collection">Collection</label>
-    <input type="text" id="collection" required />
-  </div>
-  <div class="double">
-    <label for="stock">Stock</label>
-    <input type="number" id="stock" required min="0" />
-  </div>
-
-  <!-- Row 5: Price + Image -->
-  <div class="double">
-    <label for="price">Price</label>
-    <input type="number" id="price" required min="0" step="0.01" />
-  </div>
-  <div class="double">
-    <label for="image">Product Image</label>
-    <input type="file" id="image" name="image" accept="image/*" required />
-  </div>
-  <div class="double">
-  <label for="hoverImage">Hover Image (Optional)</label>
-  <input type="file" id="hoverImage" name="hoverImage" accept="image/*" />
-</div>
-
-</div>
-
-<div class="form-buttons">
-  <button type="button" onclick="addProduct()">Add Product</button>
-  <button type="button" onclick="closeProductForm()">Close</button>
-</div>
-
-  </div>
-</div>  
-
-
-
-
-<<!-- Edit Product Modal -->
-<div id="editProductModal" class="modal">
-  <div class="modal-content product-form-modal">
-    <h2>Edit Product</h2>
-
-    <div class="form-grid">
-      <!-- Row 1: Number + Name -->
-      <div class="double">
-        <label for="editProductNumber">Product Number</label>
-        <input type="text" id="editProductNumber" disabled />
-      </div>
-      <div class="double">
-        <label for="editProductName">Product Name</label>
-        <input type="text" id="editProductName" required />
+      <!-- Product Modal -->
+      <div id="productModal" class="modal">
+        <div class="modal-content">
+          <h2>Add New Product</h2>
+          <div class="form-grid">
+            <div class="double">
+              <label for="productNumber">Product Number</label>
+              <input type="text" id="productNumber" required />
+            </div>
+            <div class="double">
+              <label for="productName">Product Name</label>
+              <input type="text" id="productName" required />
+            </div>
+            <div class="full">
+              <label for="description">Description</label>
+              <textarea id="description" maxlength="500"></textarea>
+            </div>
+            <div class="double">
+              <label for="colors">Colors</label>
+              <input type="text" id="colors" required />
+            </div>
+            <div class="double">
+              <label for="category">Category</label>
+              <input type="text" id="category" required />
+            </div>
+            <div class="double">
+              <label for="collection">Collection</label>
+              <input type="text" id="collection" required />
+            </div>
+            <div class="double">
+              <label for="stock">Stock</label>
+              <input type="number" id="stock" required min="0" />
+            </div>
+            <div class="double">
+              <label for="price">Price</label>
+              <input type="number" id="price" required min="0" step="0.01" />
+            </div>
+            <div class="double">
+              <label for="image">Product Image</label>
+              <input type="file" id="image" name="image" accept="image/*" required />
+            </div>
+            <div class="double">
+              <label for="hoverImage">Hover Image (Optional)</label>
+              <input type="file" id="hoverImage" name="hoverImage" accept="image/*" />
+            </div>
+          </div>
+          <div class="form-buttons">
+            <button type="button" onclick="addProduct()">Add Product</button>
+            <button type="button" onclick="closeProductForm()">Close</button>
+          </div>
+        </div>
       </div>
 
-      <!-- Row 2: Description -->
-      <div class="full">
-        <label for="editDescription">Description</label>
-        <textarea id="editDescription" maxlength="500"></textarea>
+      <!-- Edit Product Modal -->
+      <div id="editProductModal" class="modal">
+        <div class="modal-content product-form-modal">
+          <h2>Edit Product</h2>
+          <div class="form-grid">
+            <div class="double">
+              <label for="editProductNumber">Product Number</label>
+              <input type="text" id="editProductNumber" disabled />
+            </div>
+            <div class="double">
+              <label for="editProductName">Product Name</label>
+              <input type="text" id="editProductName" required />
+            </div>
+            <div class="full">
+              <label for="editDescription">Description</label>
+              <textarea id="editDescription" maxlength="500"></textarea>
+            </div>
+            <div class="double">
+              <label for="editColors">Colors</label>
+              <input type="text" id="editColors" required />
+            </div>
+            <div class="double">
+              <label for="editCategory">Category</label>
+              <input type="text" id="editCategory" required />
+            </div>
+            <div class="double">
+              <label for="editCollection">Collection</label>
+              <input type="text" id="editCollection" required />
+            </div>
+            <div class="double">
+              <label for="editStock">Stock</label>
+              <input type="number" id="editStock" required min="0" />
+            </div>
+            <div class="double">
+              <label for="editPrice">Price</label>
+              <input type="number" id="editPrice" required min="0" step="0.01" />
+            </div>
+            <div class="double">
+              <label>Change Image (Optional)</label>
+              <input type="file" id="editImage" name="image" accept="image/*" />
+            </div>
+          </div>
+          <div class="form-buttons">
+            <button type="button" onclick="submitEditProduct()">Save Changes</button>
+            <button type="button" onclick="closeEditProductForm()">Cancel</button>
+          </div>
+        </div>
       </div>
 
-      <!-- Row 3: Colors + Category -->
-      <div class="double">
-        <label for="editColors">Colors</label>
-        <input type="text" id="editColors" required />
-      </div>
-      <div class="double">
-        <label for="editCategory">Category</label>
-        <input type="text" id="editCategory" required />
-      </div>
-
-      <!-- Row 4: Collection + Stock -->
-      <div class="double">
-        <label for="editCollection">Collection</label>
-        <input type="text" id="editCollection" required />
-      </div>
-      <div class="double">
-        <label for="editStock">Stock</label>
-        <input type="number" id="editStock" required min="0" />
-      </div>
-
-      <!-- Row 5: Price + Image -->
-      <div class="double">
-        <label for="editPrice">Price</label>
-        <input type="number" id="editPrice" required min="0" step="0.01" />
-      </div>
-      <div class="double">
-        <label>Change Image (Optional)</label>
-        <input type="file" id="editImage" name="image" accept="image/*" />
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Category</th>
+              <th>Collection</th>
+              <th>Colors</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% products.forEach(product => { %>
+              <tr>
+                <td><%= product.productNumber %></td>
+                <td><%= product.name %></td>
+                <td>$<%= product.price ? product.price.toFixed(2) : 'N/A' %></td>
+                <td><%= product.stock %></td>
+                <td><%= product.category %></td>
+                <td><%= product.collection %></td>
+                <td><%= product.colors ? product.colors.join(', ') : '' %></td>
+                <td>
+                  <button 
+                    class="edit-btn" 
+                    data-product='<%- JSON.stringify(product).replace(/'/g, '&#39;') %>'
+                    onclick="handleEditClick(this)">Edit</button>
+                  <button 
+                    class="delete-btn" 
+                    data-product='<%- JSON.stringify(product).replace(/'/g, '&#39;') %>'
+                    onclick="handleDeleteClick(this)">Delete</button>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
       </div>
     </div>
+  
 
-    <div class="form-buttons">
-      <button type="button" onclick="submitEditProduct()">Save Changes</button>
-      <button type="button" onclick="closeEditProductForm()">Cancel</button>
-    </div>
-  </div>
-</div>
-
-
-<div class="table">
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Stock</th>
-        <th>Category</th>
-        <th>Collection</th>
-        <th>Colors</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% products.forEach(product => { %>
-        <tr>
-          <td><%= product.productNumber %></td>
-          <td><%= product.name %></td>
-          <td>$<%= product.price ? product.price.toFixed(2) : 'N/A' %></td>
-          <td><%= product.stock %></td>
-          <td><%= product.category %></td>
-          <td><%= product.collection %></td>
-          <td><%= product.colors ? product.colors.join(', ') : '' %></td>
-
-        
-          <td>
-         <button 
-  class="edit-btn" 
-  data-product='<%- JSON.stringify(product).replace(/'/g, '&#39;') %>'
-  onclick="handleEditClick(this)">
-  Edit
-</button>
-  <button
-    class="delete-btn"
-    data-product='<%- JSON.stringify(product).replace(/'/g, '&#39;') %>'
-    onclick="handleDeleteClick(this)">
-    Delete
-  </button>
-
-          </td>
-        </tr>
-      <% }) %>
-    </tbody>
-  </table>
-</div>
-
- 
     <script src="/javasScript/productManagment.js"></script>
   </body>
 </html>
