@@ -56,45 +56,6 @@ const Product = require("../models/productDB");
 
 
 const fs = require('fs');
-/*exports.createProduct = async (req, res) => {
-const fs = require("fs");
-exports.createProduct = async (req, res) => {
-
-  try {
-    if (!req.file) {
-      return res.status(400).json({ error: "Image file is required" });
-    }
-
-    const existingProduct = await Product.findOne({
-      productNumber: req.body.productNumber,
-    });
-
-    if (existingProduct) {
-      return res
-        .status(400)
-        .json({ error: "Product with this productNumber already exists" });
-    }
-
-    const product = new Product({
-      ...req.body,
-      image: {
-        data: req.file.buffer,
-        contentType: req.file.mimetype,
-      },
-    });
-
-    await product.save();
-
-    res.status(200).json(product);
-  } catch (err) {
-    console.error(err);
-    res.status(400).json({ error: err.message });
-  }
-};*/
-
-
-
-
 
 exports.createProduct = async (req, res) => {
   try {
@@ -162,7 +123,7 @@ exports.getProductById = async (req, res) => {
     res.status(500).json({ message: "Error", error: err });
   }
 };
-
+///////////
 exports.getAllProducts = async (req, res) => {
   try {
     const products = await Product.find();
@@ -172,7 +133,7 @@ exports.getAllProducts = async (req, res) => {
   }
 };
 
-
+/////////////
 exports.updateProduct = async (req, res) => {
   try {
     const productNumber = req.params.productNumber;
@@ -212,7 +173,7 @@ exports.updateProduct = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
+/////////////
 exports.deleteProduct = async (req, res) => {
   try {
     const product = await Product.findOneAndDelete({
@@ -264,73 +225,9 @@ exports.createCollection = async (req, res) => {
   }
 };
 
-/*/*exports.createCollection = async (req, res) => {
-  try {
-    const { name, image } = req.body;
 
-    // Basic validation
-    if (!name || !image) {
-      return res
-        .status(400)
-        .json({ message: "Both name and image are required." });
-    }
 
-    // Create and save the new collection
-    const newCollection = new Collection({ name, image });
-    await newCollection.save();
-
-    res.status(201).json({
-      message: "Collection created successfully",
-      collection: newCollection,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
-  }
-};*/
-
-/*exports.viewCollection = async (req, res) => {
-  const { collectionName } = req.params;
-
-  try {
-    const collection = await Collection.findOne({ name: collectionName });
-    const collections = await Collection.find(); // for header
-
-    if (!collection) {
-      return res.status(404).send("Collection not found");
-    }
-
-    //  Generate base64 image for collection
-    if (collection.image && collection.image.data) {
-      const base64 = collection.image.data.toString("base64");
-      collection.imageSrc = `data:${collection.image.contentType};base64,${base64}`;
-    } else {
-      collection.imageSrc = null;
-    }
-
-    //  Generate base64 image for each product
-    const products = await Product.find({ collection: collection.name }).lean();
-
-    products.forEach((product) => {
-      if (product.image && product.image.data) {
-        const base64 = product.image.data.toString("base64");
-        product.imageSrc = `data:${product.image.contentType};base64,${base64}`;
-      } else {
-        product.imageSrc = null;
-      }
-    });
-
-    res.render("collectionPage", {
-      collection,
-      collections,
-      products,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Server error");
-  }
-};*/
-
+// leha 3laka bl hover 
 exports.viewCollection = async (req, res) => {
   const { collectionName } = req.params;
 
