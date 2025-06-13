@@ -19,31 +19,42 @@
 
       <div class="project">
         <div class="add">
-          <% if (cartItems && cartItems.length > 0) { %> <%
-          cartItems.forEach(item => { %>
-          <div class="box" data-product-id="<%= item._id %>">
-            <img src="<%= item.image %>" alt="<%= item.name %>" />
-            <div class="container">
-              <p class="product1-name">Product: <%= item.name %></p>
-              <p class="product-price">Price: LE <%= item.price.toLocaleString() %></p>
-              <p class="unit">
-                Item:
-                <input
-                  type="number"
-                  value="<%= item.quantity %>"
-                  min="1"
-                  class="cart-quantity-input"
-                  data-product-id="<%= item._id %>"
-                />
-              </p>
-              <p class="btn-area">
-                <i class="fa fa-trash"></i>
-                <span class="btn2 remove-item-btn" data-product-id="<%= item._id %>">remove</span>
-              </p>
-            </div>
-          </div>
-          <% }) %> <% } else { %>
-          <p>Your cart is empty.</p>
+          <% if (cartItems && cartItems.length > 0) { %>
+            <% cartItems.forEach((item, index) => { %>
+              <div class="box" data-product-id="<%= item._id %>">
+                <img src="<%= item.image %>" alt="<%= item.name %>" />
+
+                <div class="container">
+                  <div class="product-meta">
+                    <div class="product-info">
+                      <p><strong>Product:</strong> <%= item.name %></p>
+                      <p><strong>Price:</strong> LE <%= item.price.toLocaleString() %></p>
+                    </div>
+                    <span class="product-quantity">
+                      <strong>Quantity:</strong>
+                      <input
+                        type="number"
+                        value="<%= item.quantity %>"
+                        min="1"
+                        class="cart-quantity-input"
+                        data-product-id="<%= item._id %>"
+                      />
+                    </span>
+                  </div>
+
+                  <p class="btn-area">
+                    <i class="fa fa-trash"></i>
+                    <span class="btn2 remove-item-btn" data-product-id="<%= item._id %>">remove</span>
+                  </p>
+                </div>
+              </div>
+
+              <% if (index !== cartItems.length - 1) { %>
+                <hr class="cart-divider" />
+              <% } %>
+            <% }) %>
+          <% } else { %>
+            <p>Your cart is empty.</p>
           <% } %>
         </div>
 
