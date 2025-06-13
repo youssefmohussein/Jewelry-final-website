@@ -81,7 +81,7 @@ section.content {
 }
 
 .product-item {
-  min-width: 200px;
+  min-width: 300px;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }

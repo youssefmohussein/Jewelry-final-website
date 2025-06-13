@@ -10,7 +10,7 @@ body {
 }
 
 .navbar:hover {
-    background-color: rgba(222, 221, 220, 0.8);
+    background-color: white;
 }
 
 .faq-container {
@@ -20,6 +20,8 @@ body {
     padding: 20px;
     margin-top: 175px;
     border-radius: 10px;
+    
+   
 }
 
 .faq-container h2 {
@@ -46,6 +48,7 @@ body {
     margin-bottom: 10px;
     border-radius: 5px;
     overflow: hidden;
+    
 }
 
 .question {
@@ -56,6 +59,7 @@ body {
     cursor: pointer;
     font-size: 18px;
     font-weight: bold;
+    
 }
 
 .answer {
@@ -64,6 +68,7 @@ body {
     font-size: 16px;
     background: #f9f9f9;
     border-top: 1px solid #ddd;
+    
 }
 
 .question:hover {
