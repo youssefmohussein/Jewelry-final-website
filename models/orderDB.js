@@ -1,16 +1,17 @@
- const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 const OrderSchema = new mongoose.Schema({
   orderId: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    trim: true
   },
   product_ids: [{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:'Product',
-    required:true
-}],
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product',
+    required: true
+  }],
   orderDate: {
     type: Date,
     default: Date.now
@@ -21,47 +22,37 @@ const OrderSchema = new mongoose.Schema({
     required: true
   },
   phone: {
-    type: Number,
-    required: true
+    type: String, // Supports international format
+    required: true,
+    trim: true
   },
   quantity: {
     type: Number,
     required: true,
     min: 1
   },
-  total_price : {
+  total_price: {
     type: Number,
-    required: true
+    required: true,
+    min: 0
   },
   shippingAddress: {
-      address: {
-        type: String,
-        required: true 
-      },
-        city: {
-          type: String,
-          required: true 
-      },
-        postalCode: {
-          type: String, 
-          required: true 
-      },
-        country: {
-          type: String,
-          required: true
-      }
+    address: { type: String, required: true, trim: true },
+    city: { type: String, required: true, trim: true },
+    postalCode: { type: String, required: true, trim: true },
+    country: { type: String, required: true, trim: true }
   },
-  status :{
-    type:String,
-    enum:['pending','processing','shipped','delivered','cancelled'],
-    default:'pending'
+  status: {
+    type: String,
+    enum: ['pending', 'processing', 'shipped', 'delivered', 'cancelled'],
+    default: 'pending'
   },
-  Payment_method:{
-    type:String,
-    enum:['credit_card'],
-    required:false
-  },
+  payment_method: {
+    type: String,
+    enum: ['credit_card'],
+    required: false
+  }
 });
 
-const Order = mongoose.model('Order', OrderSchema);
-module.exports = Order;
+// Export model safely (for hot reload environments)
+module.exports = mongoose.models.Order || mongoose.model('Order', OrderSchema);

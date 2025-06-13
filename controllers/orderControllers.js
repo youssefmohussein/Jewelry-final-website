@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Order = require("../models/orderPage");
+const Order = require("../models/orderDB");
 
 exports.renderOrderPage = (req, res) => {
   const generatedOrderId = 'ORD' + Date.now();
@@ -82,3 +82,61 @@ exports.createOrder = async (req, res) => {
     res.status(500).json({ error: "Internal server error: " + err.message });
   }
 };
+
+// orderControllers.js
+exports.getOrdersForDashboard = async (req, res) => {
+    try {
+        const { search, status } = req.query; // Get search and status from query parameters
+
+        let query = {};
+
+        // Apply search filter if present
+        if (search) {
+            // Case-insensitive search on orderId
+            query.orderId = { $regex: search, $options: 'i' }; // <--- THIS IS THE ORDER ID SEARCH
+        }
+        // ... rest of the code
+    } catch (err) {
+        // ...
+    }
+};
+exports.getProductsForDashboard = async (req, res) => {
+    try {
+        const { search, category } = req.query; // Get search term and category filter
+
+        let query = {};
+
+        // Build search query using $regex for case-insensitive search
+        if (search) {
+            query.$or = [ // Search across name, description, and category fields
+                { name: { $regex: search, $options: 'i' } },
+                { description: { $regex: search, $options: 'i' } },
+                { category: { $regex: search, $options: 'i' } }
+            ];
+        }
+
+        // Apply category filter if provided
+        if (category && category !== 'all') {
+            query.category = category;
+        }
+
+        const products = await Product.find(query).sort({ name: 1 }); // Sort by name
+
+        // Check if the request is an AJAX/fetch request
+        if (req.xhr || req.headers.accept.indexOf('json') > -1) {
+            return res.json({ products });
+        } else {
+            // For initial page load, render the EJS template
+            return res.render('products-dashboard', { products });
+        }
+
+    } catch (error) {
+        console.error("Error fetching products for dashboard:", error);
+        if (req.xhr || req.headers.accept.indexOf('json') > -1) {
+            return res.status(500).json({ message: "Internal server error" });
+        } else {
+            return res.status(500).send("Server Error");
+        }
+    }
+};
+

@@ -1,20 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
   const editOrderModal = document.getElementById("editOrderModal");
   const editOrderForm = document.getElementById("editOrderForm");
+  const statusFilter = document.getElementById("statusFilter");
 
   function openEditOrderForm(orderRow) {
     editOrderModal.style.display = "block";
 
     document.getElementById("editOrderId").value =
-      orderRow.querySelector("td:nth-child(1)").innerText || "";
+      orderRow.querySelector("td:nth-child(1)")?.innerText || "";
     document.getElementById("editCustomerName").value =
-      orderRow.querySelector("td:nth-child(2)").innerText || "";
+      orderRow.querySelector("td:nth-child(2)")?.innerText || "";
     document.getElementById("editProducts").value =
-      orderRow.querySelector("td:nth-child(3)").innerText || "";
+      orderRow.querySelector("td:nth-child(3)")?.innerText || "";
     document.getElementById("editTotalPrice").value =
-      orderRow.querySelector("td:nth-child(5)").innerText || "";
+      orderRow.querySelector("td:nth-child(5)")?.innerText || "";
 
-    // Combine shipping address fields into one textarea
     const addressParts = [
       orderRow.dataset.address,
       orderRow.dataset.city,
@@ -26,13 +26,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("editShippingAddress").value =
       addressParts.join(", ");
 
-    // Set status dropdown, only allow "shipped" or "delivered"
-    let currentStatus = orderRow
-      .querySelector("td:nth-child(6) span")
-      .innerText.toLowerCase();
-    if (currentStatus !== "shipped" && currentStatus !== "delivered") {
-      currentStatus = "shipped"; // default if not shipped/delivered
+    let currentStatus =
+      orderRow.querySelector("td:nth-child(6) span")?.innerText.toLowerCase() ||
+      "shipped";
+
+    if (!["shipped", "delivered"].includes(currentStatus)) {
+      currentStatus = "shipped";
     }
+
     document.getElementById("editStatus").value = currentStatus;
 
     editOrderForm.dataset.orderId = orderRow.dataset.orderId;
@@ -68,24 +69,25 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!res.ok) throw new Error("Failed to update order status");
         return res.json();
       })
-      .then((updatedData) => {
+      .then(() => {
         const row = document.querySelector(`tr[data-order-id="${orderId}"]`);
         if (!row) return;
 
-        row.querySelector("td:nth-child(6) span").innerText =
-          updatedStatus.charAt(0).toUpperCase() + updatedStatus.slice(1);
-        row.querySelector(
-          "td:nth-child(6) span"
-        ).className = `status-${updatedStatus}`;
+        const span = row.querySelector("td:nth-child(6) span");
+        if (span) {
+          span.innerText =
+            updatedStatus.charAt(0).toUpperCase() + updatedStatus.slice(1);
+          span.className = `status-${updatedStatus}`;
+        }
 
         window.closeEditOrderForm();
+        applyStatusFilter(); // Refresh table visibility based on new status
       })
       .catch((err) => {
         alert(err.message);
       });
   });
 
-  // Attach edit button event listeners (you should add this part in your existing JS)
   function attachEditButtons() {
     document.querySelectorAll(".edit-btn").forEach((btn) => {
       btn.addEventListener("click", (e) => {
@@ -95,24 +97,58 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  attachEditButtons();
-});
+  function attachDeleteButtons() {
+    document.querySelectorAll(".delete-btn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const row = e.target.closest("tr");
+        const orderId = row.dataset.orderId;
 
-async function logout() {
-  try {
-    const response = await fetch("/logout", {
-      method: "POST", // Sends a POST request
-      headers: { "Content-Type": "application/json" },
+        if (!orderId) {
+          alert("Invalid order ID.");
+          return;
+        }
+
+        const confirmDelete = confirm("Are you sure you want to delete this order?");
+        if (!confirmDelete) return;
+
+        fetch(`/orders/${orderId}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => {
+            if (!res.ok) throw new Error("Failed to delete order");
+            return res.json();
+          })
+          .then(() => {
+            row.remove();
+            applyStatusFilter(); // Refresh table visibility
+          })
+          .catch((err) => {
+            alert(err.message);
+          });
+      });
     });
-
-    const result = await response.json();
-    alert(result.message);
-
-    if (response.ok) {
-      window.location.href = "/"; // Redirects to the login page
-    }
-  } catch (err) {
-    console.error("Error during logout:", err);
-    alert("Something went wrong during logout.");
   }
-}
+
+  // ✅ Status Filter Logic
+  function applyStatusFilter() {
+    const selected = statusFilter.value.toLowerCase();
+    const rows = document.querySelectorAll("table tbody tr");
+
+    rows.forEach((row) => {
+      const statusText = row.querySelector("td:nth-child(6) span")?.innerText.toLowerCase() || "";
+      const visible = selected === "all" || statusText === selected;
+      row.style.display = visible ? "" : "none";
+    });
+  }
+
+  if (statusFilter) {
+    statusFilter.addEventListener("change", applyStatusFilter);
+  }
+
+  attachEditButtons();
+  attachDeleteButtons();
+  applyStatusFilter(); // Initial load
+});
