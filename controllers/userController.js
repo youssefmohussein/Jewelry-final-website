@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const User = require("../models/usersDB");
+const Order = require("../models/orderDB");
 const bcrypt = require("bcryptjs");
 
 // Register new user
@@ -116,12 +117,23 @@ exports.getUserProfile = async (req, res) => {
       return res.status(404).send("User not found");
     }
 
-    res.render("userProfile", { user });
+    // Fetch user's orders
+    const orders = await Order.find({ user: user._id })
+      .sort({ orderDate: -1 }) // Sort by order date, newest first
+      .limit(5); // Limit to 5 most recent orders
+
+    res.render("userProfile", {
+      user,
+      orders,
+      isLoggedIn: true,
+      role: req.session.role
+    });
   } catch (error) {
     console.error("Error loading profile:", error);
     res.status(500).send("Server error");
   }
 };
+
 exports.updateUserEmail = async (req, res) => {
   const { email } = req.body;
 
