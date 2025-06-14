@@ -22,7 +22,7 @@ const productSchema = new mongoose.Schema({
       },
       message: "The color must be a String.",
     },
-    required: true,
+    required: false,
   },
   category: {
     type: String,
@@ -52,12 +52,11 @@ const productSchema = new mongoose.Schema({
     data: Buffer,
     contentType: String,
   },
-  //for second photo 
+  //for second photo
   hoverImage: {
-  data: Buffer,
-  contentType: String,
-},
-
+    data: Buffer,
+    contentType: String,
+  },
 
   salesCount: {
     type: Number,
