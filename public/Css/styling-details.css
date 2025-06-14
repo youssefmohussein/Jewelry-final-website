@@ -66,12 +66,12 @@ button,
   width: 480px;
   max-width: 90vw;
   height: auto;
-  object-fit:cover;
+  object-fit: cover;
 }
 
 /* ========== Product Details ========== */
 .pdetails {
-    margin-top: 50px;
+  margin-top: 50px;
   max-width: 400px;
   width: 100%;
   padding: 20px;
@@ -108,11 +108,15 @@ button,
 }
 
 /* Black and White Swatches */
-.black, .BOBR, .Blane {
+.black,
+.BOBR,
+.Blane {
   background: black;
 }
 
-.white, .WOBR, .Wlane {
+.white,
+.WOBR,
+.Wlane {
   background: white;
 }
 
@@ -197,9 +201,12 @@ button,
 .product-grid-scroll::-webkit-scrollbar {
   display: none;
 }
+
 .product-grid-scroll {
-  -ms-overflow-style: none;  /* IE/Edge */
-  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 /* Product preview box */
@@ -207,6 +214,12 @@ button,
   min-width: 200px;
   flex-shrink: 0;
   text-align: center;
+  text-decoration: none;
+}
+
+.product-preview a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .product-preview img {
@@ -231,6 +244,7 @@ button,
   font-size: 15px;
   color: #666;
 }
+
 .scroll-btn {
   background-color: black;
   color: white;
@@ -242,7 +256,8 @@ button,
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0; /* Optional: match your other buttons */
+  border-radius: 0;
+  /* Optional: match your other buttons */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 10;
   position: absolute;
