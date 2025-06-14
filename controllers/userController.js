@@ -44,6 +44,8 @@ exports.loginUser = async (req, res) => {
     // --- Session Management: Set session data upon successful login ---
     req.session.userId = user._id; // Store user ID in session
     req.session.role = user.role; // Store user role in session for authorization checks
+    req.session.name = user.name; // Store user name in session
+    req.session.email = user.email; // Store user email in session
     // You can store any other relevant user data in the session here
     res.status(200).json({
       message: "Login successful!",

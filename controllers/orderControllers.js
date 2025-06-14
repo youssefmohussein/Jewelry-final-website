@@ -14,16 +14,12 @@ exports.renderOrderPage = async (req, res) => {
     let productIds = [];
 
     for (const item of cart) {
-      console.log("Trying to find product with ID:", item.productId);
-
       const product = await Product.findById(item.productId);
 
       if (!product) {
         console.warn("Product not found for ID:", item.productId);
         continue;
       }
-
-      console.log("Product found:", product.name);
 
       totalQuantity += item.quantity;
       totalPrice += item.quantity * product.price;
@@ -38,12 +34,18 @@ exports.renderOrderPage = async (req, res) => {
     const userId =
       req.session.userId || new mongoose.Types.ObjectId().toString();
 
+    // Retrieve name and email from session
+    const name = req.session.name || "";
+    const email = req.session.email || "";
+
     res.render("orderpage", {
       generatedOrderId,
       userId,
       productIds: productIds.join(","),
       totalQuantity,
       totalPrice: finalTotalPrice,
+      name,
+      email,
     });
   } catch (err) {
     console.error(err);

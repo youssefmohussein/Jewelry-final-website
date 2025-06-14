@@ -1,3 +1,4 @@
+const Collection = require("../models/collectionDB");
 const Product = require("../models/productDB");
 
 exports.getCartPage = async (req, res) => {
@@ -5,6 +6,9 @@ exports.getCartPage = async (req, res) => {
     const cart = req.session.cart || [];
     const cartItems = [];
     let subtotal = 0;
+
+    // Fetch collections for the header
+    const collections = await Collection.find();
 
     for (const item of cart) {
       const product = await Product.findById(item.productId);
@@ -25,7 +29,7 @@ exports.getCartPage = async (req, res) => {
         price: product.price,
         quantity: item.quantity,
         image: imageSrc,
-        productId: item.productId
+        productId: item.productId,
       });
     }
 
@@ -35,13 +39,13 @@ exports.getCartPage = async (req, res) => {
 
     res.render("cartPage", {
       cartItems,
-      collections: [], // Add actual collections if needed
+      collections, // Pass the fetched collections
       isLoggedIn: !!req.session.userId,
       role: req.session.role,
       subtotal,
       tax,
       shipping,
-      total
+      total,
     });
   } catch (err) {
     console.error(err);
@@ -54,7 +58,7 @@ exports.addToCart = (req, res) => {
   if (!req.session.cart) req.session.cart = [];
 
   const cart = req.session.cart;
-  const existing = cart.find(item => item.productId === productId);
+  const existing = cart.find((item) => item.productId === productId);
 
   if (existing) {
     existing.quantity += parseInt(quantity); // Make sure to parseInt
@@ -65,10 +69,9 @@ exports.addToCart = (req, res) => {
   res.json({ success: true, cart });
 };
 exports.removeFromCart = (req, res) => {
-  
   const { productId } = req.body;
   req.session.cart = (req.session.cart || []).filter(
-    item => item.productId.toString() !== productId
+    (item) => item.productId.toString() !== productId
   );
   res.json({ success: true });
 };
@@ -76,10 +79,11 @@ exports.removeFromCart = (req, res) => {
 exports.updateCartQuantity = (req, res) => {
   const { productId, quantity } = req.body;
 
-  if (!req.session.cart) return res.json({ success: false, message: "Cart is empty" });
+  if (!req.session.cart)
+    return res.json({ success: false, message: "Cart is empty" });
 
   const cart = req.session.cart;
-  const item = cart.find(item => item.productId === productId);
+  const item = cart.find((item) => item.productId === productId);
 
   if (!item) {
     return res.json({ success: false, message: "Item not found" });
