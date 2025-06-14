@@ -8,6 +8,7 @@ function closeForm() {
 }
 
 async function addCollection() {
+
   const formData = new FormData();
 
   const collectionName = document.getElementById("collectionName").value.trim();
@@ -57,19 +58,6 @@ function closeCollectionForm() {
   document.getElementById("collectionModal").style.display = "none";
 }
 
-// Optional: Close modal when clicking outside of it
-window.onclick = function (event) {
-  const productModal = document.getElementById("productModal");
-  const collectionModal = document.getElementById("collectionModal");
-
-  if (event.target == productModal) {
-    productModal.style.display = "none";
-  }
-
-  if (event.target == collectionModal) {
-    collectionModal.style.display = "none";
-  }
-};
 
 //--------------------------------------------delete collection------------------------------//
 
