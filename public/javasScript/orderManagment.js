@@ -172,38 +172,3 @@ function searchTable() {
     }
   });
 }
-
-async function logout() {
-  try {
-    const response = await fetch("/logout", {
-      method: "POST", // Sends a POST request
-      headers: { "Content-Type": "application/json" },
-    });
-
-    const result = await response.json();
-    alert(result.message);
-
-    if (response.ok) {
-      window.location.href = "/"; // Redirects to the login page
-    }
-  } catch (err) {
-    console.error("Error during logout:", err);
-    alert("Something went wrong during logout.");
-  }
-}
-
-function searchTable() {
-  const input = document.getElementById("searchInput").value.toLowerCase();
-  const tableRows = document.querySelectorAll("tbody tr");
-
-  tableRows.forEach((row) => {
-    const productNumber = row.cells[0].textContent.toLowerCase();
-    const productName = row.cells[1].textContent.toLowerCase();
-
-    if (productNumber.includes(input) || productName.includes(input)) {
-      row.style.display = "";
-    } else {
-      row.style.display = "none";
-    }
-  });
-}

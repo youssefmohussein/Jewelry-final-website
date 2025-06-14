@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const User = require("../models/usersDB");
-const Order = require("../models/orderDB");
 const bcrypt = require("bcryptjs");
 
 // Register new user
@@ -45,8 +44,6 @@ exports.loginUser = async (req, res) => {
     // --- Session Management: Set session data upon successful login ---
     req.session.userId = user._id; // Store user ID in session
     req.session.role = user.role; // Store user role in session for authorization checks
-    req.session.name = user.name; // Store user name in session
-    req.session.email = user.email; // Store user email in session
     // You can store any other relevant user data in the session here
     res.status(200).json({
       message: "Login successful!",
@@ -80,11 +77,7 @@ exports.resetPassword = async (req, res) => {
     user.password = password; // Let schema middleware hash it
     await user.save();
 
-    // Render the reset password page with success message
-    res.render("resetPasswordPage", {
-      success: true,
-      message: "Password has been successfully reset! Redirecting to login page..."
-    });
+    res.status(200).json({ message: "Password reset successful." });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -121,23 +114,12 @@ exports.getUserProfile = async (req, res) => {
       return res.status(404).send("User not found");
     }
 
-    // Fetch user's orders
-    const orders = await Order.find({ user: user._id })
-      .sort({ orderDate: -1 }) // Sort by order date, newest first
-      .limit(5); // Limit to 5 most recent orders
-
-    res.render("userProfile", {
-      user,
-      orders,
-      isLoggedIn: true,
-      role: req.session.role
-    });
+    res.render("userProfile", { user });
   } catch (error) {
     console.error("Error loading profile:", error);
     res.status(500).send("Server error");
   }
 };
-
 exports.updateUserEmail = async (req, res) => {
   const { email } = req.body;
 

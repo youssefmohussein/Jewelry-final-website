@@ -254,13 +254,3 @@ body.reset {
 span{
     margin-bottom: 30px;
 }
-    .success-message {
-      background-color: #4CAF50;
-      color: white;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      text-align: center;
-      font-size: 16px;
-      font-weight: 500;
-    }

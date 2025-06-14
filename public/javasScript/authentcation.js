@@ -97,48 +97,39 @@ signInForm.addEventListener("submit", async function (e) {
 
 // Reset Password
 const resetForm = document.getElementById("resetPasswordForm");
-if (resetForm) {
-  resetForm.addEventListener("submit", async function (e) {
-    e.preventDefault();
+resetForm.addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-    const email = document.getElementById("resetEmail").value.trim();
-    const password = document.getElementById("resetPassword").value;
-    const confirmPassword = document.getElementById("resetConfirmPassword").value;
+  const email = document.getElementById("resetEmail").value.trim(); // ID changed to avoid conflict
+  const password = document.getElementById("resetPassword").value;
+  const confirmPassword = document.getElementById("resetConfirmPassword").value;
 
-    if (!email || !password || !confirmPassword) {
-      return alert("All fields are required!");
+  if (!email || !password || !confirmPassword) {
+    return alert("All fields are required!");
+  }
+
+  if (password !== confirmPassword) {
+    return alert("Passwords do not match!");
+  }
+
+  try {
+    const response = await fetch("/resetpassword", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password, confirmPassword }), // FIXED key names
+    });
+
+    const result = await response.json();
+    alert(result.message);
+
+    if (response.ok) {
+      window.location.href = "/login";
     }
-
-    if (password !== confirmPassword) {
-      return alert("Passwords do not match!");
-    }
-
-    // Password validation
-    const isValid = password.length >= 8 && /[A-Za-z]/.test(password) && /\d/.test(password);
-    if (!isValid) {
-      return alert("Password must be at least 8 characters and include both letters and numbers.");
-    }
-
-    try {
-      const response = await fetch("/resetpassword", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password, confirmPassword }),
-      });
-
-      if (response.ok) {
-        // Reload the page to show the success message
-        window.location.reload();
-      } else {
-        const result = await response.json();
-        alert(result.message || "Failed to reset password. Please try again.");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Something went wrong during password reset. Please try again.");
-    }
-  });
-}
+  } catch (err) {
+    console.error(err);
+    alert("Something went wrong during password reset.");
+  }
+});
 
 async function handleUserDelete(button) {
   const user = JSON.parse(button.getAttribute("data-user"));

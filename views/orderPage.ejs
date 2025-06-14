@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Checkout Page</title>
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    />
-    <link rel="stylesheet" href="/Css/orderPage.css" />
-    <link rel="stylesheet" href="/styles/HeadFoot.css" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="/Css/orderPage.css">
+    <link rel="stylesheet" href="/styles/HeadFoot.css">
     <script src="/scripts/header.js" defer></script>
+    <title>Checkout page</title>
+</head>
+
+<body>
   </head>
 
   <body>
@@ -29,137 +28,37 @@
     <% } %>
 
     <div class="right">
-      <h1>Shipping address</h1>
+        <h1>Shipping address</h1>
     </div>
 
     <form class="form" action="/order" method="POST">
-      <!-- Shipping Info -->
-      <div class="group">
-        <label for="fullName">FULL NAME</label>
-        <input
-          type="text"
-          id="fullName"
-          name="fullName"
-          value="<%= name %>"
-          readonly
-          required
-        />
-      </div>
-
-      <div class="group">
-        <label for="email">EMAIL</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value="<%= email %>"
-          readonly
-          required
-        />
-      </div>
-
-      <div class="group">
-        <label for="phone">PHONE NUMBER</label>
-        <input
-          type="text"
-          id="phone"
-          name="phone"
-          placeholder="phone"
-          required
-        />
-      </div>
-
-      <div class="group">
-        <label for="address">ADDRESS</label>
-        <input
-          type="text"
-          id="address"
-          name="address"
-          placeholder="Address"
-          required
-        />
-      </div>
-
-      <div class="group">
-        <label for="country">COUNTRY</label>
-        <select id="country" name="country" required>
-          <option value="Egypt">Egypt</option>
-          <option value="Saudi">Saudi</option>
-          <option value="America">America</option>
-        </select>
-      </div>
-
-      <div class="input-container">
         <div class="group">
-          <label for="city">CITY</label>
-          <select id="city" name="city" required>
-            <option value="Cairo">Cairo</option>
-            <option value="Riyadh">Riyadh</option>
-            <option value="LA">LA</option>
-          </select>
+            <label for="fullName">FULL NAME</label>
+            <input type="text" id="fullName" name="fullName" placeholder="Your name and surname" required>
         </div>
 
         <div class="group">
-          <label for="postalCode">ZIP CODE</label>
-          <input
-            type="text"
-            id="postalCode"
-            name="postalCode"
-            placeholder="123 456"
-            required
-          />
+            <label for="email">EMAIL</label>
+            <input type="email" id="email" name="email" placeholder="example@example.com" required>
         </div>
-      </div>
 
-      <!-- Hidden Order Fields -->
-      <input
-        type="hidden"
-        name="generatedOrderId"
-        value="<%= generatedOrderId || '' %>"
-      />
-      <input type="hidden" name="userId" value="<%= userId || '' %>" />
-      <input type="hidden" name="productIds" value="<%= productIds || '' %>" />
-      <input
-        type="hidden"
-        name="totalQuantity"
-        value="<%= totalQuantity || 0 %>"
-      />
-      <input type="hidden" name="totalPrice" value="<%= totalPrice || 0 %>" />
-      <input type="hidden" name="paymentMethod" value="credit_card" />
-
-      <!-- Card Preview Section -->
-      <div class="credit-section">
-        <div class="card-container">
-          <div class="card">
-            <div class="front">
-              <div class="image">
-                <img src="/Images/chip.png" alt="chip" />
-                <img src="/Images/visa.png" alt="visa" />
-              </div>
-              <div class="card-number-box">---- ---- ---- ----</div>
-              <div class="flexbox">
-                <div class="box">
-                  <span>Card Holder</span>
-                  <div class="card-holder-name">FULL NAME</div>
-                </div>
-                <div class="box">
-                  <span>Expires</span>
-                  <div class="expiration">
-                    <span class="exp-month">MM</span> /
-                    <span class="exp-year">YY</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="back">
-              <div class="stripe"></div>
-              <div class="cvv-area">
-                <label>CVV</label>
-                <div class="cvv-box">***</div>
-              </div>
-            </div>
-          </div>
+        <div class="group">
+            <label for="phone">PHONE NUMBER</label>
+            <input type="text" id="phone" name="phone" placeholder="phone" required>
         </div>
+
+        <div class="group">
+            <label for="address">ADDRESS</label>
+            <input type="text" id="address" name="address" placeholder="Address" required>
+        </div>
+
+        <div class="group">
+            <label for="country">COUNTRY</label>
+            <select id="country" name="country" required>
+                <option value="Egypt">Egypt</option>
+                <option value="Saudi">Saudi</option>
+                <option value="America">America</option>
+            </select>
 
         <!-- Card Inputs (visual only, not submitted) -->
         <div class="credit-form">
@@ -212,75 +111,45 @@
             />
           </div>
         </div>
-      </div>
 
-      <!-- Summary + Submit -->
-      <div class="back">
-        <a href="/cart" class="btn btn-link">&leftarrow; Return to cart</a>
-      </div>
+        <div class="input-container">
+            <div class="group">
+                <label for="city">CITY</label>
+                <select id="city" name="city" required>
+                    <option value="cairo">Cairo</option>
+                    <option value="riyadh">Riyadh</option>
+                    <option value="LA">LA</option>
+                </select>
+            </div>
 
-      <div class="return">
-        <div class="row">
-          <div>Total Quantity:</div>
-          <div class="totalQuantity">LE <%= totalQuantity || 0 %></div>
+            <div class="group">
+                <label for="postalCode">ZIP CODE</label>
+                <input type="text" id="postalCode" name="postalCode" placeholder="123 456" required>
+            </div>
         </div>
-        <div class="row">
-          <div>Total Price:</div>
-          <div class="total">LE <%= totalPrice || '0' %></div>
+
+        <input type="hidden" name="generatedOrderId" value="<%= generatedOrderId || '' %>">
+        <input type="hidden" name="userId" value="<%= userId || '' %>">
+        <input type="hidden" name="productIds" value="<%= productIds || '' %>">
+        <input type="hidden" name="totalQuantity" value="<%= totalQuantity || 0 %>">
+        <input type="hidden" name="totalPrice" value="<%= totalPrice || 0 %>">
+        <input type="hidden" name="paymentMethod" value="credit_card">
+
+        <div class="back">
+            <a href="/cart" class="btn btn-link">&leftarrow; Return to cart</a>
         </div>
-        <button type="submit" class="buttonCheckout">
-          Continue to payment
-        </button>
-      </div>
+
+        <div class="return">
+            <div class="row">
+                <div>Total Quantity:</div>
+                <div class="totalQuantity">LE <%= totalQuantity || 0 %></div>
+            </div>
+            <div class="row">
+                <div>Total Price:</div>
+                <div class="total">LE <%= totalPrice || '0' %></div>
+            </div>
+            <button type="submit" class="buttonCheckout">Continue to payment</button>
+        </div>
     </form>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const cardNumberInput = document.querySelector(".card-number-input");
-        const cardNumberBox = document.querySelector(".card-number-box");
-
-        const cardHolderInput = document.querySelector(".card-holder-input");
-        const cardHolderName = document.querySelector(".card-holder-name");
-
-        const monthInput = document.querySelector(".month-input");
-        const yearInput = document.querySelector(".year-input");
-        const expMonth = document.querySelector(".exp-month");
-        const expYear = document.querySelector(".exp-year");
-
-        const cvvInput = document.querySelector(".cvv-input");
-        const cvvBox = document.querySelector(".cvv-box");
-
-        const card = document.querySelector(".card");
-
-        cardNumberInput.addEventListener("input", () => {
-          cardNumberBox.textContent =
-            cardNumberInput.value || "---- ---- ---- ----";
-        });
-
-        cardHolderInput.addEventListener("input", () => {
-          cardHolderName.textContent = cardHolderInput.value || "FULL NAME";
-        });
-
-        monthInput.addEventListener("change", () => {
-          expMonth.textContent = monthInput.value || "MM";
-        });
-
-        yearInput.addEventListener("change", () => {
-          expYear.textContent = yearInput.value || "YY";
-        });
-
-        cvvInput.addEventListener("focus", () => {
-          card.classList.add("flipped");
-        });
-
-        cvvInput.addEventListener("blur", () => {
-          card.classList.remove("flipped");
-        });
-
-        cvvInput.addEventListener("input", () => {
-          cvvBox.textContent = cvvInput.value || "***";
-        });
-      });
-    </script>
-  </body>
+</body>
 </html>

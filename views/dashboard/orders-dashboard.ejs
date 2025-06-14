@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -76,11 +77,12 @@
               data-total-price="<%= order.total_price.toFixed(2) %>"
             >
               <td><%= order.orderId %></td>
-              <td><%= order.customerName || "Unknown" %></td>
+              <td><%= order.user?.name || "Unknown" %></td>
               <td>
-                <% if (order.product_names && order.product_names.length > 0) {
-                %> <%= order.product_names.join(", ") %> <% } else { %> No
-                products <% } %>
+                <% if (order.product_ids && order.product_ids.length > 0) { %>
+                <% order.product_ids.forEach((product, i) => { %> <%=
+                product.name %><%= i < order.product_ids.length - 1 ? ", " : ""
+                %> <% }) %> <% } else { %> No products <% } %>
               </td>
               <td><%= order.orderDate.toDateString() %></td>
               <td>$<%= order.total_price.toFixed(2) %></td>
@@ -157,3 +159,4 @@
     <script src="/javasScript/orderManagment.js"></script>
   </body>
 </html>
+
