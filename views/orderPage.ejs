@@ -13,8 +13,20 @@
     <link rel="stylesheet" href="/styles/HeadFoot.css" />
     <script src="/scripts/header.js" defer></script>
   </head>
+
   <body>
     <div id="header"></div>
+
+    <% if (typeof success !=='undefined' && success) { %>
+    <div class="success-overlay">
+      <div class="success-message"><%= message %></div>
+    </div>
+    <script>
+      setTimeout(function () {
+        window.location.href = "/";
+      }, 2000);
+    </script>
+    <% } %>
 
     <div class="right">
       <h1>Shipping address</h1>
@@ -172,8 +184,8 @@
             <span>Expiration Month</span>
             <select class="month-input">
               <option value="">Month</option>
-              <% for(let i = 1; i <= 12; i++) { let month =
-              i.toString().padStart(2, '0'); %>
+              <% for(let i=1; i <=12; i++) { let month=i.toString().padStart(2,
+              '0' ); %>
               <option value="<%= month %>"><%= month %></option>
               <% } %>
             </select>
@@ -182,8 +194,8 @@
             <span>Expiration Year</span>
             <select class="year-input">
               <option value="">Year</option>
-              <% const currentYear = new Date().getFullYear(); for(let i = 0; i
-              <= 10; i++) { %>
+              <% const currentYear=new Date().getFullYear(); for(let i=0; i
+              <=10; i++) { %>
               <option value="<%= currentYear + i %>">
                 <%= currentYear + i %>
               </option>

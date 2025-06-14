@@ -108,7 +108,7 @@ exports.createOrder = async (req, res) => {
       const product = await Product.findById(id);
       if (product) {
         productObjectIds.push(product._id);
-        productNames.push(product.name); // ✅ store name
+        productNames.push(product.name);
       }
     }
     if (!mongoose.Types.ObjectId.isValid(userId)) {
@@ -138,9 +138,29 @@ exports.createOrder = async (req, res) => {
 
     await newOrder.save();
     console.log("Order saved successfully:", newOrder);
-    res
-      .status(201)
-      .json({ message: "Order placed successfully!", order: newOrder });
+
+    // Clear the cart from session
+    if (req.session.cart) {
+      req.session.cart = [];
+    }
+
+    // Render the order page with success message
+    return res.render("orderpage", {
+      success: true,
+      message: "Order placed successfully!",
+      generatedOrderId,
+      userId,
+      productIds: productIds,
+      totalQuantity,
+      totalPrice,
+      name: fullName,
+      email,
+      phone,
+      address,
+      country,
+      city,
+      postalCode
+    });
   } catch (err) {
     console.error("Error creating order:", err);
     if (err.name === "ValidationError") {
