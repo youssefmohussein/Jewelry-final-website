@@ -80,7 +80,11 @@ exports.resetPassword = async (req, res) => {
     user.password = password; // Let schema middleware hash it
     await user.save();
 
-    res.status(200).json({ message: "Password reset successful." });
+    // Render the reset password page with success message
+    res.render("resetPasswordPage", {
+      success: true,
+      message: "Password has been successfully reset! Redirecting to login page..."
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
