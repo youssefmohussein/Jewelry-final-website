@@ -138,7 +138,7 @@ section.content {
   display: flex;
   justify-content: center;
   gap: 30px;
-
+  margin-bottom: 70px;
 }
 
 .images img {
@@ -195,19 +195,22 @@ section.content {
 /* Collections Section */
 .collection {
   font-family: 'Playfair Display', serif;
-  color: #000000;
-  font-size: 50px;
-  font-weight: 500;
+  font-size: 36px;
+  font-weight: 400;
+  color: #1a1a1a;
   text-align: center;
-  padding: 70px 0;
-  letter-spacing: 0.5px;
+  padding: 40px 0;
+  letter-spacing: 1.5px;
+  text-transform: none;
+  font-style: italic;
 }
 
 .jewelry-grid {
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin-bottom: 60px;
+  margin-bottom: 50px;
+  margin-top: 20px;
 }
 
 .jewelry-item {
@@ -467,6 +470,12 @@ section.content {
     font-size: 1rem !important;
     line-height: 1.4 !important;
   }
+
+  .collection {
+    font-size: 32px;
+    padding: 30px 0;
+    letter-spacing: 1.2px;
+  }
 }
 
 /* Small Devices: width ≤ 480px */
@@ -491,7 +500,9 @@ section.content {
   }
 
   .collection {
-    font-size: 1.6rem !important;
+    font-size: 28px;
+    padding: 20px 0;
+    letter-spacing: 1px;
   }
 
   .product-item {
