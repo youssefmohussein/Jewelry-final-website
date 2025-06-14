@@ -595,6 +595,75 @@ footer {
     padding: 20px;
 }
 
+
+
+/* === CLEAN RESPONSIVE NAVBAR FOR MOBILE === */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 10px;
+    gap: 10px;
+  }
+
+  .logo {
+    order: 1;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .logo h1 {
+    font-size: 24px;
+    margin: 0;
+    padding-right: 19px;
+  }
+
+  .logo h2 {
+    font-size: 18px;
+    margin: 0;
+    padding-left: 55px;
+  }
+
+  .navigation {
+    order: 2;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .navigation a {
+    font-size: 14px;
+    padding: 6px 12px;
+    white-space: nowrap;
+  }
+
+  .icons {
+    order: 3;
+    justify-content: center;
+    width: 100%;
+    gap: 5px;
+    padding-right: 70px;
+  }
+
+  .icons a,
+  .logout-icon-btn {
+    font-size: 20px;
+  }
+
+
+  .language-switcher{
+    padding-left: 10px;
+    margin-left: 10px;
+  }
+}
+
+
+
+
 /* Footer */
 
 
