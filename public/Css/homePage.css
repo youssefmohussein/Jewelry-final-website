@@ -334,3 +334,97 @@ section.content {
   cursor: pointer;
 }
 
+
+
+
+/* ========== RESPONSIVE ONLY ========== */
+/* Tablet: width ≤ 1024px */
+@media (max-width: 1024px) {
+  .images,
+  .jewelry-grid,
+  .workshop-content {
+    flex-direction: column;
+    display: flex !important;
+    align-items: center;
+  }
+
+  .zoom-container,
+  .images img,
+  .workshop-img {
+    width: 90% !important;
+    height: auto !important;
+  }
+
+  .product-scroll-container {
+    gap: 10px;
+    padding: 10px 20px;
+  }
+
+  .product-item {
+    min-width: 200px;
+  }
+
+  .jewelry-item img {
+    width: 90% !important;
+    max-width: 250px;
+    height: auto !important;
+  }
+
+  .workshop-text,
+  .workshop-text1 {
+    padding: 0 15px !important;
+    text-align: center;
+  }
+}
+
+/* Mobile: width ≤ 768px */
+@media (max-width: 768px) {
+  .Explore,
+  .collection,
+  .heading-text {
+    font-size: 1.8rem !important;
+  }
+
+  .product-item img {
+    width: 100% !important;
+    max-width: 180px;
+  }
+
+  .workshop-text p,
+  .workshop-text1 p,
+  .container-workshop p {
+    font-size: 1rem !important;
+    line-height: 1.4 !important;
+  }
+
+  .workshop-img {
+    margin-top: 20px;
+  }
+
+  .scroll-btn {
+    font-size: 1rem !important;
+    padding: 6px 10px;
+  }
+}
+
+/* Small Devices: width ≤ 480px */
+@media (max-width: 480px) {
+  .Explore {
+    font-size: 1.4rem !important;
+  }
+
+  .collection {
+    font-size: 1.6rem !important;
+  }
+
+  .product-item {
+    min-width: 160px !important;
+  }
+
+  .container-workshop h1,
+  .workshop-text h2,
+  .workshop-text1 h2 {
+    font-size: 1.2rem !important;
+  }
+}
+

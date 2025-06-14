@@ -54,8 +54,8 @@
 }
 
 .dropdown {
-    position: relative ;
-   
+    position: relative;
+
 }
 
 /* Main Navigation Links */
@@ -91,7 +91,7 @@
     z-index: 1000;
     padding: 10px;
     justify-content: space-around;
-  
+
 }
 
 /* Show on Hover */
@@ -103,21 +103,23 @@
 .mega-menu-column {
     flex: 1;
     padding: 10px;
-    
+
 }
-.mega-menu-column1{
-    display:flex;
-    flex-wrap:wrap;
+
+.mega-menu-column1 {
+    display: flex;
+    flex-wrap: wrap;
     gap: 20;
 }
 
-.mega-menu-column1 img{
-    display:flex;
-    flex-wrap:wrap;
+.mega-menu-column1 img {
+    display: flex;
+    flex-wrap: wrap;
     gap: 30;
     width: 300px;
-    height:auto;
+    height: auto;
 }
+
 .mega-menu-column h3 {
     font-family: 'Cormorant Garamond', serif;
     font-size: 18px;
@@ -146,7 +148,7 @@
 }
 
 .logo h1 {
-    font-family:'Times New Roman', Times, serif;
+    font-family: 'Times New Roman', Times, serif;
     text-transform: uppercase;
     font-weight: 500;
     text-align: center;
@@ -160,7 +162,7 @@
 }
 
 .logo h2 {
-    font-family:'Times New Roman', Times, serif;
+    font-family: 'Times New Roman', Times, serif;
     font-weight: lighter;
     text-align: center;
     font-size: 25px;
@@ -178,11 +180,12 @@
 .icons a {
     padding-left: 30px;
     font-size: 25px;
-    color:  rgb(9, 9, 9);
+    color: rgb(9, 9, 9);
 }
 
 .icons a:hover {
-    color: rgb(9, 9, 9); /* darker shade on hover */
+    color: rgb(9, 9, 9);
+    /* darker shade on hover */
 }
 
 .content {
@@ -196,8 +199,8 @@
 }
 
 
-.menu-image{
-   
+.menu-image {
+
     gap: 15px;
     padding: 20px;
 }
@@ -216,17 +219,21 @@ footer {
 }
 
 .logout-icon-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: rgb(9, 9, 9); /* matches other icons */
-  font-size: 25px;     /* matches .icons a size */
-  padding-left: 30px;  /* consistent with other icons */
-  transition: color 0.3s;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgb(9, 9, 9);
+    /* matches other icons */
+    font-size: 25px;
+    /* matches .icons a size */
+    padding-left: 30px;
+    /* consistent with other icons */
+    transition: color 0.3s;
 }
 
 .logout-icon-btn:hover {
-  color: #b30000; /* red tint on hover to indicate logout action */
+    color: #b30000;
+    /* red tint on hover to indicate logout action */
 }
 
 
@@ -308,7 +315,7 @@ footer {
 }
 
 .footer-section a:hover {
-    color: rgb(9, 9, 9);
+    color: #F5F1EA;
 }
 
 .newsletter-form input,
@@ -360,14 +367,17 @@ footer {
 }
 
 .logout-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: inherit; /* match navbar icon color */
-  font-size: 1.2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    /* match navbar icon color */
+    font-size: 1.2rem;
 }
+
 .logout-btn:hover {
-  color: #f00; /* or any hover color */
+    color: #f00;
+    /* or any hover color */
 }
 
 * {
@@ -378,6 +388,7 @@ footer {
     scroll-behavior: smooth;
 
 }
+
 :root {
     --font-sans-serif: 'Laslo-Regular', sans-serif;
     --pf-secondary-font: 'Laslo-Regular', sans-serif;
@@ -385,6 +396,7 @@ footer {
     --font-serif: 'adobe-caslon-pro', sans-serif;
     --heading-font-family: 'adobe-caslon-pro', sans-serif;
 }
+
 /***/
 
 .navbar {
@@ -432,8 +444,8 @@ footer {
 }
 
 .dropdown {
-    position: relative ;
-   
+    position: relative;
+
 }
 
 /* Main Navigation Links */
@@ -469,7 +481,7 @@ footer {
     z-index: 1000;
     padding: 10px;
     justify-content: space-around;
-  
+
 }
 
 /* Show on Hover */
@@ -481,21 +493,23 @@ footer {
 .mega-menu-column {
     flex: 1;
     padding: 10px;
-    
+
 }
-.mega-menu-column1{
-    display:flex;
-    flex-wrap:wrap;
+
+.mega-menu-column1 {
+    display: flex;
+    flex-wrap: wrap;
     gap: 20;
 }
 
-.mega-menu-column1 img{
-    display:flex;
-    flex-wrap:wrap;
+.mega-menu-column1 img {
+    display: flex;
+    flex-wrap: wrap;
     gap: 30;
     width: 300px;
-    height:auto;
+    height: auto;
 }
+
 .mega-menu-column h3 {
     font-family: 'Cormorant Garamond', serif;
     font-size: 18px;
@@ -524,7 +538,7 @@ footer {
 }
 
 .logo h1 {
-    font-family:'Times New Roman', Times, serif;
+    font-family: 'Times New Roman', Times, serif;
     text-transform: uppercase;
     font-weight: 500;
     text-align: center;
@@ -538,7 +552,7 @@ footer {
 }
 
 .logo h2 {
-    font-family:'Times New Roman', Times, serif;
+    font-family: 'Times New Roman', Times, serif;
     font-weight: lighter;
     text-align: center;
     font-size: 25px;
@@ -556,11 +570,12 @@ footer {
 .icons a {
     padding-left: 30px;
     font-size: 25px;
-    color:  rgb(9, 9, 9);
+    color: rgb(9, 9, 9);
 }
 
 .icons a:hover {
-    color: rgb(9, 9, 9); /* darker shade on hover */
+    color: rgb(9, 9, 9);
+    /* darker shade on hover */
 }
 
 .content {
@@ -574,11 +589,80 @@ footer {
 }
 
 
-.menu-image{
-   
+.menu-image {
+
     gap: 15px;
     padding: 20px;
 }
+
+
+
+/* === CLEAN RESPONSIVE NAVBAR FOR MOBILE === */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 10px;
+    gap: 10px;
+  }
+
+  .logo {
+    order: 1;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .logo h1 {
+    font-size: 24px;
+    margin: 0;
+    padding-right: 19px;
+  }
+
+  .logo h2 {
+    font-size: 18px;
+    margin: 0;
+    padding-left: 55px;
+  }
+
+  .navigation {
+    order: 2;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .navigation a {
+    font-size: 14px;
+    padding: 6px 12px;
+    white-space: nowrap;
+  }
+
+  .icons {
+    order: 3;
+    justify-content: center;
+    width: 100%;
+    gap: 5px;
+    padding-right: 70px;
+  }
+
+  .icons a,
+  .logout-icon-btn {
+    font-size: 20px;
+  }
+
+
+  .language-switcher{
+    padding-left: 10px;
+    margin-left: 10px;
+  }
+}
+
+
+
 
 /* Footer */
 
@@ -671,6 +755,10 @@ footer {
     color: inherit;
     text-decoration: none;
     transition: 0.3s;
+}
+
+.footer-section a:hover {
+    color: #F5F1EA;
 }
 
 .newsletter-form input,
