@@ -11,7 +11,21 @@
 </head>
 
 <body>
+  </head>
+
+  <body>
     <div id="header"></div>
+
+    <% if (typeof success !=='undefined' && success) { %>
+    <div class="success-overlay">
+      <div class="success-message"><%= message %></div>
+    </div>
+    <script>
+      setTimeout(function () {
+        window.location.href = "/";
+      }, 2000);
+    </script>
+    <% } %>
 
     <div class="right">
         <h1>Shipping address</h1>
@@ -45,6 +59,57 @@
                 <option value="Saudi">Saudi</option>
                 <option value="America">America</option>
             </select>
+
+        <!-- Card Inputs (visual only, not submitted) -->
+        <div class="credit-form">
+          <div class="inputBox">
+            <span>Card Number</span>
+            <input
+              type="text"
+              maxlength="16"
+              class="card-number-input"
+              placeholder="XXXX XXXX XXXX XXXX"
+            />
+          </div>
+          <div class="inputBox">
+            <span>Card Holder</span>
+            <input
+              type="text"
+              class="card-holder-input"
+              placeholder="Full Name"
+            />
+          </div>
+          <div class="inputBox">
+            <span>Expiration Month</span>
+            <select class="month-input">
+              <option value="">Month</option>
+              <% for(let i=1; i <=12; i++) { let month=i.toString().padStart(2,
+              '0' ); %>
+              <option value="<%= month %>"><%= month %></option>
+              <% } %>
+            </select>
+          </div>
+          <div class="inputBox">
+            <span>Expiration Year</span>
+            <select class="year-input">
+              <option value="">Year</option>
+              <% const currentYear=new Date().getFullYear(); for(let i=0; i
+              <=10; i++) { %>
+              <option value="<%= currentYear + i %>">
+                <%= currentYear + i %>
+              </option>
+              <% } %>
+            </select>
+          </div>
+          <div class="inputBox">
+            <span>CVV</span>
+            <input
+              type="text"
+              maxlength="3"
+              class="cvv-input"
+              placeholder="123"
+            />
+          </div>
         </div>
 
         <div class="input-container">
