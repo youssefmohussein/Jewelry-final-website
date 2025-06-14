@@ -220,12 +220,10 @@ h1 {
   width: 100%;
   height: 100%;
   background-color: rgba(17, 24, 39, 0.6);
-  /* semi-transparent black */
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 999;
-  animation: fadeInUp 0.3s ease-in-out;
 }
 
 /* Modal box */
@@ -235,25 +233,21 @@ h1 {
   border-radius: 12px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   position: relative;
-  width: 100%;
+  width: 90%;
   max-width: 400px;
-  animation: fadeInUp 0.3s ease-in-out;
-  margin: 0 auto;
-  /* Center horizontally */
-  transform: translateY(-50%);
-  /* Center vertically */
-  top: 50%;
+  animation: modalFadeIn 0.3s ease-out;
 }
 
 /* Input field */
 .modal-content input[type="email"] {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin-top: 8px;
   margin-bottom: 20px;
   border: 1px solid #d1d5db;
   border-radius: 6px;
   font-size: 14px;
+  box-sizing: border-box;
 }
 
 /* Save Changes button */
@@ -261,7 +255,7 @@ h1 {
   background-color: #111827;
   color: white;
   border: none;
-  padding: 10px;
+  padding: 12px;
   width: 100%;
   font-weight: 600;
   border-radius: 6px;
@@ -281,21 +275,22 @@ h1 {
   font-size: 22px;
   color: #6b7280;
   cursor: pointer;
+  transition: color 0.2s ease-in-out;
 }
 
 .close-btn:hover {
   color: #ef4444;
 }
 
-@keyframes fadeInUp {
+@keyframes modalFadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: scale(0.95);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
 }
 
