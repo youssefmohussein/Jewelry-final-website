@@ -1,54 +1,133 @@
-# Jewelry E-Commerce Website
+# Velora Jewelry Store
 
-This is a full-stack jewelry e-commerce website built using **Node.js**, **Express.js**, **MongoDB**,and **EJS**. It includes full admin functionality for managing collections, products, and customers, as well as a user-facing frontend for shopping.
+A full-featured e-commerce platform for a jewelry store built with Node.js, Express, and MongoDB.
 
-## 🛠️ Tech Stack
+## 🌟 Features
 
-- **Backend**: Node.js, Express.js
-- **Frontend**: HTML, CSS, EJS
-- **Database**: MongoDB (Mongoose DB)
-- **Authentication**: bcrypt, express-session
-- **Templating Engine**: EJS
+- **User Authentication**
+  - Secure user registration and login
+  - Password reset functionality
+  - Session management
+  - Role-based access control
 
-## 📦 Features
+- **Product Management**
+  - Browse products by categories
+  - Detailed product views
+  - Product search functionality
+  - Product filtering and sorting
 
-### 👤 Users
+- **Shopping Experience**
+  - Shopping cart functionality
+  - Order management
+  - User profile management
+  - Order history tracking
 
--Profile Management (name, email, address, password)
--Browse jewelry by collection and category
--View detailed product information
--Place orders (select quantity, confirm shipping info)
--View order history from profile
--Logout
--authentication
--Upon successful order placement, the user's cart is cleared and the order is also recorded under the user's profile for history and future reference.
--can (delete /add) to cart 
+- **Internationalization**
+  - Multi-language support (English and Arabic)
+  - Dynamic language switching
+  - Localized content
 
+- **Admin Dashboard**
+  - Product management
+  - Order management
+  - User management
+  - Category management
 
-### 🛒 Orders
--Users can place orders directly from product pages
--Each order is linked to a user and product(s)
---Order data is stored in MongoDB, including customer details, product names/ID(MongoDB),
- quantity, total price, shipping address, and payment method.
--Admins can view and manage all orders 
--Orders support status tracking (e.g., pending, shipped, delivered, cancelled)
--A unique orderId is generated to ensure traceability and avoid duplication.
--Admins can view, filter, and update order status from a secure dashboard interface.
--After a successful order, the cart session is cleared to prevent duplicate submissions.
+## 🛠️ Technologies Used
 
+- **Backend**
+  - Node.js
+  - Express.js
+  - MongoDB with Mongoose
+  - Express Session for authentication
+  - bcryptjs for password hashing
 
+- **Frontend**
+  - EJS templating engine
+  - CSS for styling
+  - JavaScript for interactivity
 
-### 🔐 Admin
--Login-protected admin dashboard
--Add / Edit / Delete  products 
--Add/Delete Collections
--Upload product images (main and hover)
--Manage:Stock,Price
--View all registered users
--manage users(edit/delete)
--View customer orders
+- **Additional Features**
+  - i18n for internationalization
+  - Multer for file uploads
+  - Nodemailer for email functionality
+  - Cookie-parser for cookie management
 
+## 🚀 Getting Started
 
+### Prerequisites
 
+- Node.js (v14 or higher)
+- MongoDB
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/youssefmohussein/Jewelry-final-website.git
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file in the root directory with the following variables:
+   ```
+   PORT=3000
+   MONGO_URI=your_mongodb_connection_string
+   SECRET_KEY=your_session_secret
+   NODE_ENV=development
+   ```
+
+4. Start the development server:
+   ```bash
+   npm start
+   ```
 
 ## 📁 Project Structure
+
+```
+├── controllers/     # Route controllers
+├── models/         # Database models
+├── routes/         # Route definitions
+├── views/          # EJS templates
+├── public/         # Static files
+├── middleware/     # Custom middleware
+├── utils/          # Utility functions
+├── locales/        # Translation files
+└── index.js        # Application entry point
+```
+
+## 🔒 Security Features
+
+- Secure password hashing with bcrypt
+- Session-based authentication
+- HTTP-only cookies
+- CSRF protection
+- Secure session storage with MongoDB
+
+## 🌐 Internationalization
+
+The application supports multiple languages:
+- English (default)
+- Arabic
+
+Language can be switched using the query parameter `?lang=en` or `?lang=ar`
+
+## 📝 License
+
+This project is licensed under the ISC License.
+
+## 👥 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📧 Contact
+
+For any queries or support, please open an issue in the GitHub repository.
