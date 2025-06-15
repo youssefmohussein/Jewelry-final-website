@@ -29,7 +29,6 @@ const MongoStore = require("connect-mongo"); // Import connect-mongo
 i18n.configure({
   locales: ["en", "ar"],
   defaultLocale: "en",
-  cookie: "lang",
   queryParameter: "lang",
   directory: path.join(__dirname, "locales"),
   autoReload: true,
@@ -37,13 +36,6 @@ i18n.configure({
 });
 
 app.use(i18n.init);
-
-app.use((req, res, next) => {
-  const lang = req.query.lang || req.cookies.lang || "en";
-  res.setLocale(lang);
-  res.locals.locale = lang;
-  next();
-});
 
 app.use(
   session({

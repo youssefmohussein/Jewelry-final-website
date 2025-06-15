@@ -15,6 +15,6 @@ router.get("/refundPolicy", homepageController.refundpolicy);
 router.get("/contact-us", homepageController.contactus);
 router.post("/contact-us", homepageController.handleContactForm);
 
-router.get("/collections/:collectionName", homepageController.getCollectionPage);
+// router.get("/collections/:collectionName", homepageController.getCollectionPage);
 
 module.exports = router;
